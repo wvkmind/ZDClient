@@ -13,24 +13,24 @@ public class NetWork {
 	
 	private static UdpClient udpClient = null ;
 	protected static ConcurrentQueue<Byte[]> receive_queue =  null;
-	protected static ConcurrentQueue<Byte[]> send_queue = null;
+	//protected static ConcurrentQueue<Byte[]> send_queue = null;
 	private static Thread receive_thread = null;
-	private static Thread send_thread = null;
+	//private static Thread send_thread = null;
 	public static bool si_loop = true;
 	public static string token = null;
-	public static string gete_ip = "127.0.0.1";
+	public static string gete_ip = "192.168.91.27";
 	private static float timer = 0;
 	private static bool heartbeat = false;
 
 	public static void ClearQueue(){
 		if(receive_queue!=null)
 		receive_queue = null;
-		if(send_queue!=null)
-		send_queue = null;
+		// if(send_queue!=null)
+		// send_queue = null;
 	}
 	public static void PrepareType(){
-		//MsgPack.Serialization.MessagePackSerializer.PrepareType<MsgPack.MessagePackObject>();
-		//MsgPack.Serialization.MessagePackSerializer.PrepareType<double>();
+		MsgPack.Serialization.MessagePackSerializer.PrepareType<MsgPack.MessagePackObject>();
+		MsgPack.Serialization.MessagePackSerializer.PrepareType<double>();
 	}
 	public static void ConnectGate(){
 		NetWork.Connect(NetWork.gete_ip,6666);
@@ -42,14 +42,14 @@ public class NetWork {
 		PrepareType();
 		if(udpClient!=null)udpClient.Close();
 		if(receive_thread!=null&&receive_thread.ThreadState== ThreadState.Running)receive_thread.Abort();
-		if(send_thread!=null&&send_thread.ThreadState== ThreadState.Running)send_thread.Abort();
+		//if(send_thread!=null&&send_thread.ThreadState== ThreadState.Running)send_thread.Abort();
 		receive_queue =  new ConcurrentQueue<Byte[]>();
-		send_queue = new ConcurrentQueue<Byte[]>();
+		//send_queue = new ConcurrentQueue<Byte[]>();
 		udpClient = new UdpClient(0);
         udpClient.Connect(ip, port);
 		receive_thread = new Thread(new ParameterizedThreadStart(ReceiveLoop));
-		send_thread = new Thread(new ThreadStart(SendLoop));
-		send_thread.Start();
+		// send_thread = new Thread(new ThreadStart(SendLoop));
+		// send_thread.Start();
 		receive_thread.Start(udpClient);
 	}
 	public static void StartPing(){
@@ -70,15 +70,24 @@ public class NetWork {
 		}
 		else{
 		//[TODO]心跳失败处理
-			Debug.Log("心跳失败");
+			dic.TryGetValue("error", out tmp);
+			string error_text = tmp.AsString();
+			if(error_text.Equals("notoken"))
+			{
+				//[TODO]现在直接relogin，到时候可能需要显示重新登录的页面
+				Debug.Log("心跳失败重新登陆");
+				Login.In("test2","aklsdjfkla",(data,error) =>{Debug.Log("Login:"+data.ToString()+":"+error);});
+			}
+			else
+				Debug.Log("心跳失败");
 		}
 	}
     public static void Send(byte[] s){
-        send_queue.Enqueue(s);
+		udpClient.Send(s,s.Length);
 	}
 	public static void Send(String s){
         Byte[] sendBytes = Encoding.UTF8.GetBytes(s);
-        send_queue.Enqueue(sendBytes);
+        udpClient.Send(sendBytes,sendBytes.Length);//send_queue.Enqueue(sendBytes);
 	}
 	public static Byte[] Get(){
 		Byte[] s = null;
@@ -94,29 +103,20 @@ public class NetWork {
 
 			if(timer>=10){
 				timer = 0;
-
 				Dictionary<string, object> dic = NetWork.getSendStart();
 				dic.Add("name", "ping");
 				NetWork.Push(dic);
 
 			}
 		}
-		if(send_queue!=null&&!send_queue.IsEmpty){
-			send_thread.Resume();
-		}
+		//SendLoop();
 	}
-	public static void SendLoop(){
-		while(true){
-			byte[] s = null;
-			if(send_queue!=null&&send_queue.TryDequeue(out s))
-			{	
-				udpClient.Send(s,s.Length);
-			}
-			else{
-				send_thread.Suspend();
-			}
-		}
-	}
+	// public static void SendLoop(){
+	// 	byte[] s = null;
+	// 	while(send_queue!=null&&send_queue.TryDequeue(out s)){
+	// 		udpClient.Send(s,s.Length);
+	// 	}
+	// }
 	private static void ReceiveLoop(object data){
 		UdpClient udpClient = data as UdpClient;
 		while(si_loop){
@@ -132,8 +132,8 @@ public class NetWork {
 			udpClient.Close();
 		if(receive_thread.ThreadState== ThreadState.Running)
 			receive_thread.Abort();
-		if(send_thread.ThreadState== ThreadState.Running||send_thread.ThreadState == ThreadState.Suspended)
-			send_thread.Abort();
+		// if(send_thread.ThreadState== ThreadState.Running||send_thread.ThreadState == ThreadState.Suspended)
+		// 	send_thread.Abort();
 	}
 
 	public static Dictionary<string, object> getSendStart(){
