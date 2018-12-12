@@ -76,6 +76,7 @@ public class NetWork {
 			{
 				//[TODO]现在直接relogin，到时候可能需要显示重新登录的页面
 				Debug.Log("心跳失败重新登陆");
+				ConnectGate();
 				Login.In("test2","aklsdjfkla",(data,error) =>{Debug.Log("Login:"+data.ToString()+":"+error);});
 			}
 			else
