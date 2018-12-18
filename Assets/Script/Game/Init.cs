@@ -10,18 +10,6 @@ public class Init : MonoBehaviour {
 		//Register.In("test2","aklsdjfkla",data =>{Debug.Log("Register:"+data.ToString());});
 		Login.In("test2","aklsdjfkla",(data,error) =>{Debug.Log("Login:"+data.ToString()+":"+error);});
 	}
-	private void OnClick(){
-        if(start==false)
-		{
-			button_text.text = "停止";
-			start = true;
-		}
-		else
-		{
-			button_text.text = "开始";
-			start = false;
-		}
-    }
 	void Update () {
 		NetWork.Update();
 		NetEventDispatch.Update();

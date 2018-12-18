@@ -18,7 +18,7 @@ public class NetWork {
 	//private static Thread send_thread = null;
 	public static bool si_loop = true;
 	public static string token = null;
-	public static string gete_ip = "192.168.91.27";
+	public static string gete_ip = "wvkmind.eicp.net";
 	private static float timer = 0;
 	private static bool heartbeat = false;
 
