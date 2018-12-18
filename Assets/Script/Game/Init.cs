@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class Init : MonoBehaviour {
 
 	void Start () {
 		NetWork.ConnectGate();
 		//Register.In("test2","aklsdjfkla",data =>{Debug.Log("Register:"+data.ToString());});
-		Login.In("test2","aklsdjfkla",(data,error) =>{Debug.Log("Login:"+data.ToString()+":"+error);});
+		// Login.In("test2","aklsdjfkla",(data,error) =>{
+		// 	Debug.Log("Login:"+data.ToString()+":"+error);
+		// });
 	}
 	void Update () {
 		NetWork.Update();
