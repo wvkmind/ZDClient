@@ -11,7 +11,7 @@ using MsgPack.Serialization;
 
 public class NetWork {
 	
-	private static UdpClient udpClient = null ;
+	private static UdpClient udp_client = null ;
 	protected static ConcurrentQueue<Byte[]> receive_queue =  null;
 	//protected static ConcurrentQueue<Byte[]> send_queue = null;
 	private static Thread receive_thread = null;
@@ -40,17 +40,17 @@ public class NetWork {
 	}
 	private static void Connect(string ip,int port){
 		PrepareType();
-		if(udpClient!=null)udpClient.Close();
+		if(udp_client!=null)udp_client.Close();
 		if(receive_thread!=null&&receive_thread.ThreadState== ThreadState.Running)receive_thread.Abort();
 		//if(send_thread!=null&&send_thread.ThreadState== ThreadState.Running)send_thread.Abort();
 		receive_queue =  new ConcurrentQueue<Byte[]>();
 		//send_queue = new ConcurrentQueue<Byte[]>();
-		udpClient = new UdpClient(0);
-        udpClient.Connect(ip, port);
+		udp_client = new UdpClient(0);
+        udp_client.Connect(ip, port);
 		receive_thread = new Thread(new ParameterizedThreadStart(ReceiveLoop));
 		// send_thread = new Thread(new ThreadStart(SendLoop));
 		// send_thread.Start();
-		receive_thread.Start(udpClient);
+		receive_thread.Start(udp_client);
 	}
 	public static void StartPing(){
 		
@@ -84,11 +84,11 @@ public class NetWork {
 		}
 	}
     public static void Send(byte[] s){
-		udpClient.Send(s,s.Length);
+		udp_client.Send(s,s.Length);
 	}
 	public static void Send(String s){
         Byte[] sendBytes = Encoding.UTF8.GetBytes(s);
-        udpClient.Send(sendBytes,sendBytes.Length);//send_queue.Enqueue(sendBytes);
+        udp_client.Send(sendBytes,sendBytes.Length);//send_queue.Enqueue(sendBytes);
 	}
 	public static Byte[] Get(){
 		Byte[] s = null;
@@ -115,22 +115,22 @@ public class NetWork {
 	// public static void SendLoop(){
 	// 	byte[] s = null;
 	// 	while(send_queue!=null&&send_queue.TryDequeue(out s)){
-	// 		udpClient.Send(s,s.Length);
+	// 		udp_client.Send(s,s.Length);
 	// 	}
 	// }
 	private static void ReceiveLoop(object data){
-		UdpClient udpClient = data as UdpClient;
+		UdpClient udp_client = data as UdpClient;
 		while(si_loop){
 			IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
-			Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
+			Byte[] receiveBytes = udp_client.Receive(ref RemoteIpEndPoint);
 			receive_queue.Enqueue(receiveBytes);
 		}
 	}
 	// Update is called once per frame
 	public static void OnDestory() {
 		si_loop = false;
-		if(udpClient!=null)
-			udpClient.Close();
+		if(udp_client!=null)
+			udp_client.Close();
 		if(receive_thread.ThreadState== ThreadState.Running)
 			receive_thread.Abort();
 		// if(send_thread.ThreadState== ThreadState.Running||send_thread.ThreadState == ThreadState.Suspended)
