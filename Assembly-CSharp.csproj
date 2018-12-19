@@ -53,6 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ErrorInfo.cs" />
+     <Compile Include="Assets\LoginUI.cs" />
      <Compile Include="Assets\Script\Animation\SpriteUtils.cs" />
      <Compile Include="Assets\Script\Game\Init.cs" />
      <Compile Include="Assets\Script\Login\Login.cs" />
