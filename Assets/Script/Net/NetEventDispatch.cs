@@ -4,6 +4,9 @@ using UnityEngine;
 using System;
 using MsgPack.Serialization;
 using System.Threading;
+/**
+ * TODO 加个超时，然后超时后请求重新登录
+ */
 public class NetEventDispatch {
 	private static Dictionary<string, List<System.Action<Dictionary<string, MsgPack.MessagePackObject>>>> events = new Dictionary<string, List<System.Action<Dictionary<string, MsgPack.MessagePackObject>>>>();
 	public static void Clear(){

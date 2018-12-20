@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * TODO 加个确认后执行的函数
+ */
 public class ErrorInfo : MonoBehaviour {
 
 	public UnityEngine.UI.Button ok;

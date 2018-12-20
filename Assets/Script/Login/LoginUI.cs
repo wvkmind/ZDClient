@@ -7,11 +7,15 @@ public class LoginUI : MonoBehaviour {
 	public UnityEngine.UI.InputField account;
 	public UnityEngine.UI.InputField password;
 	public UnityEngine.UI.Button login;
+	public UnityEngine.UI.Button register;
 	// Use this for initialization
 	void Start () {
 		login.onClick.AddListener(LoginFunction);
+		register.onClick.AddListener(RegisterFunction);
 	}
-
+	void RegisterFunction(){
+		//UnityEngine.SceneManagement.SceneManager.
+	}
 	void LoginFunction(){
 		Login.In(account.text,password.text,(data,error) =>{
 			if(error!=null&&!error.Equals(""))

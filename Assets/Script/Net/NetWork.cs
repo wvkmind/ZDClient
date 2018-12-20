@@ -18,7 +18,7 @@ public class NetWork {
 	//private static Thread send_thread = null;
 	public static bool si_loop = true;
 	public static string token = null;
-	public static string gete_ip = "wvkmind.eicp.net";
+	public static string gete_ip = "127.0.0.1";
 	private static float timer = 0;
 	private static bool heartbeat = false;
 
@@ -69,12 +69,16 @@ public class NetWork {
 			Debug.Log("心跳成功");
 		}
 		else{
-		//[TODO]心跳失败处理
+			/**
+			 * TODO心跳失败处理
+			 */
 			dic.TryGetValue("error", out tmp);
 			string error_text = tmp.AsString();
 			if(error_text.Equals("notoken"))
 			{
-				//[TODO]现在直接relogin，到时候可能需要显示重新登录的页面
+				/**
+				 * TODO 现在直接relogin，到时候可能需要显示重新登录的页面
+				 */
 				Debug.Log("心跳失败重新登陆");
 				ConnectGate();
 				Login.In("test2","aklsdjfkla",(data,error) =>{Debug.Log("Login:"+data.ToString()+":"+error);});
