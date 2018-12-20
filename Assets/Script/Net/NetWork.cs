@@ -69,22 +69,20 @@ public class NetWork {
 			Debug.Log("心跳成功");
 		}
 		else{
-			/**
-			 //TODO:  心跳失败处理
-			 */
 			dic.TryGetValue("error", out tmp);
 			string error_text = tmp.AsString();
 			if(error_text.Equals("notoken"))
 			{
-				/**
-				 //TODO: 现在直接relogin，到时候可能需要显示重新登录的页面
-				 */
-				Debug.Log("心跳失败重新登陆");
-				ConnectGate();
-				Login.In("test2","aklsdjfkla",(data,error) =>{Debug.Log("Login:"+data.ToString()+":"+error);});
+				ErrorInfo.CreateUI("Logout.",()=>{
+					Login.ReLoginOut();
+				});
 			}
 			else
-				Debug.Log("心跳失败");
+			{
+				ErrorInfo.CreateUI("NetWork Error.",()=>{
+					Login.ReLoginOut();
+				});
+			}
 		}
 	}
     public static void Send(byte[] s){
@@ -150,6 +148,9 @@ public class NetWork {
 	}
 	
 	public static void Push(Dictionary<string, object> dic){
+		object name = null;
+		if(dic.TryGetValue("name",out name))
+			NetEventDispatch.TTL.Add(name as string,0);
 		var serializer = MessagePackSerializer.Get<Dictionary<string, object>>();
         byte[] pack = serializer.PackSingleObject(dic);
         NetWork.Send(pack);

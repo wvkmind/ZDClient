@@ -20,6 +20,10 @@ public class Login {
 		NetWork.ClearQueue();
 		NetWork.ConnectGate();
 	}
+	public static void ReLoginOut(){
+		LoginOut();
+		//TODO: 切换到登陆场景
+	}
 	private static void Logined(Dictionary<string, MsgPack.MessagePackObject> dic,System.Action<bool,string > f){
 		MsgPack.MessagePackObject tmp;
 		dic.TryGetValue("status", out tmp);

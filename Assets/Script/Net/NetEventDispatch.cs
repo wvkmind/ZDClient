@@ -4,14 +4,15 @@ using UnityEngine;
 using System;
 using MsgPack.Serialization;
 using System.Threading;
-/**
-  //TODO: 加个超时，然后超时后请求重新登录
- */
 public class NetEventDispatch {
+	public static Dictionary<string,float> TTL = new  Dictionary<string,float>();
 	private static Dictionary<string, List<System.Action<Dictionary<string, MsgPack.MessagePackObject>>>> events = new Dictionary<string, List<System.Action<Dictionary<string, MsgPack.MessagePackObject>>>>();
 	public static void Clear(){
 		events.Clear();
+		TTL.Clear();
+		is_timeout = false;
 	}
+	private static bool is_timeout = false;
 	public static void RegisterEvent(string name,System.Action<Dictionary<string, MsgPack.MessagePackObject>> m){
 		List<System.Action<Dictionary<string, MsgPack.MessagePackObject>>> a; 
         if(!events.TryGetValue(name, out a))
@@ -19,6 +20,14 @@ public class NetEventDispatch {
 			List<System.Action<Dictionary<string, MsgPack.MessagePackObject>>> mlist = new List<System.Action<Dictionary<string, MsgPack.MessagePackObject>>>(); 
 			mlist.Add(m);
 			events.Add(name,mlist);
+			if (events.ContainsKey(name))
+			{
+				events[name] = mlist;
+			}
+			else
+			{
+				events.Add(name, mlist);
+			}
 		}
 		else
 			a.Add(m);
@@ -26,9 +35,30 @@ public class NetEventDispatch {
 	public static void UnRegisterEvent(string name){
 		events.Remove(name);
 	}
+	private static void CheckTTL(){
+
+		Dictionary<string,float> temp = new  Dictionary<string,float>();
+		if(!is_timeout)
+		foreach(var key in TTL.Keys){
+			float ttl ;
+			if(TTL.TryGetValue(key,out ttl))
+			{
+				ttl = ttl + Time.deltaTime;
+				if(ttl>2){
+					is_timeout = true;
+					ErrorInfo.CreateUI("NetWork Error.",()=>{
+						Login.ReLoginOut();
+					});
+				}
+				temp.Add(key,ttl);
+			}
+		}
+		TTL = temp;
+	}
 	private static void Loop(){
+		CheckTTL();
 		Byte[] d = NetWork.Get();
-		while(d!=null){
+		while(!is_timeout&&d!=null){
 			NetWork.PrepareType();
 			var serializer = MessagePackSerializer.Get<Dictionary<string, MsgPack.MessagePackObject>>();
 			Dictionary<string, MsgPack.MessagePackObject> dic= serializer.UnpackSingleObject(d);
