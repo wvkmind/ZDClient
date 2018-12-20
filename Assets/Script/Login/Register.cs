@@ -6,7 +6,10 @@ public class Register  {
 	public static void In(string account,string password,System.Action<bool > f){
 		string accountHash = Md5.GetMd5Hash(account);
 		string passwrodHash = Md5.GetMd5Hash(password);
-        NetEventDispatch.RegisterEvent("register",data =>{Registered(data,f);});
+        NetEventDispatch.RegisterEvent("register",data =>{
+			NetEventDispatch.UnRegisterEvent("register");
+			Registered(data,f);
+		});
 		Dictionary<string, object> dic = NetWork.getSendStart();
 		dic.Add("account",accountHash);
 		dic.Add("password",passwrodHash);

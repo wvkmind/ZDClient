@@ -70,14 +70,14 @@ public class NetWork {
 		}
 		else{
 			/**
-			 * TODO心跳失败处理
+			 //TODO:  心跳失败处理
 			 */
 			dic.TryGetValue("error", out tmp);
 			string error_text = tmp.AsString();
 			if(error_text.Equals("notoken"))
 			{
 				/**
-				 * TODO 现在直接relogin，到时候可能需要显示重新登录的页面
+				 //TODO: 现在直接relogin，到时候可能需要显示重新登录的页面
 				 */
 				Debug.Log("心跳失败重新登陆");
 				ConnectGate();

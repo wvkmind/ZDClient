@@ -4,7 +4,10 @@ public class Login {
 	public static void In(string account,string password,System.Action<bool,string > f){
 		string accountHash = Md5.GetMd5Hash(account);
 		string passwrodHash = Md5.GetMd5Hash(password);
-        NetEventDispatch.RegisterEvent("login",data =>{Logined(data,f);});
+        NetEventDispatch.RegisterEvent("login",data =>{
+			NetEventDispatch.UnRegisterEvent("login");
+			Logined(data,f);
+		});
 		Dictionary<string, object> dic = NetWork.getSendStart();
 		dic.Add("account",accountHash);
 		dic.Add("password",passwrodHash);

@@ -18,10 +18,19 @@ public class LoginUI : MonoBehaviour {
 	}
 	void LoginFunction(){
 		Login.In(account.text,password.text,(data,error) =>{
-			if(error!=null&&!error.Equals(""))
-				ErrorInfo.error_info = error;
+			if(account.text.Equals("") || account.text.Equals(""))
+			{
+				ErrorInfo.CreateUI("Pls Check Input.");
+			}
+			else if(error!=null&&!error.Equals(""))
+				ErrorInfo.CreateUI(error,()=>{
+					account.text = "";
+					password.text = "";
+				});
 			else
-				ErrorInfo.error_info = "登陆成功";
+			{
+				//TODO: 登陆成功
+			}
 		});
 
 	}
