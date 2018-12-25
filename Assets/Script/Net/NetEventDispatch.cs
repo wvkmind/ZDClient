@@ -69,6 +69,7 @@ public class NetEventDispatch {
 			string name = a.ToString();
 			if(events.TryGetValue(name, out mlist))
 			{
+				TTL.Remove(name);
 				mlist.ForEach(delegate(System.Action<Dictionary<string, MsgPack.MessagePackObject>> e)
 				{
 					e.Invoke(dic);

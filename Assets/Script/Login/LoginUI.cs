@@ -14,7 +14,7 @@ public class LoginUI : MonoBehaviour {
 		register.onClick.AddListener(RegisterFunction);
 	}
 	void RegisterFunction(){
-		//UnityEngine.SceneManagement.SceneManager.
+		SwitchScene.NextScene("Register");
 	}
 	void LoginFunction(){
 		Login.In(account.text,password.text,(data,error) =>{
