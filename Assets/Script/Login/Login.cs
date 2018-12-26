@@ -22,7 +22,7 @@ public class Login {
 	}
 	public static void ReLoginOut(){
 		LoginOut();
-		//TODO: 切换到登陆场景
+		SwitchScene.NextScene("Init");
 	}
 	private static void Logined(Dictionary<string, MsgPack.MessagePackObject> dic,System.Action<bool,string > f){
 		MsgPack.MessagePackObject tmp;

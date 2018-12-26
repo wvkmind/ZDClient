@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class Init : MonoBehaviour {
-	public UnityEngine.Object game_data;
-	public UnityEngine.Object switch_scene;
+	public static Init instance = null;
 	void Start () {
-		GameObject.DontDestroyOnLoad(game_data);
+		if(instance!=null){
+			Destroy(this);
+			return ;
+		}
+		instance = this;
 		NetWork.ConnectGate();
+		DontDestroyOnLoad(this);
 	}
 	void Update () {
 		NetWork.Update();

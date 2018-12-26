@@ -15,8 +15,11 @@ public class SwitchScene : MonoBehaviour {
 		instance.gameObject.SetActive(true);
 	}
 	void Start() {
-		if(instance == null)
-			instance = this;
+		if(instance!=null){
+			Destroy(this);
+			return ;
+		}
+		instance = this;
 		DontDestroyOnLoad(this);
 		instance.gameObject.SetActive(false);
 	}
