@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{B6B6D8C0-EA44-18DB-66F3-A70D94D3D0DD}</ProjectGuid>
+    <ProjectGuid>{237F2788-0CE9-9BA6-FD8C-DAC372D07151}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -62,18 +62,19 @@
      <Compile Include="Assets\Script\Net\NetWork.cs" />
      <Compile Include="Assets\Script\Scene\SwitchScene.cs" />
      <Compile Include="Assets\Script\Utils\ErrorInfo.cs" />
+     <Compile Include="Assets\Script\Utils\GameCamera.cs" />
      <Compile Include="Assets\Script\Utils\Md5.cs" />
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>/Users/wvkmind/Documents/Unity/source/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>/Users/wvkmind/MyCode/gitee/ZDClient/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/Users/wvkmind/Documents/Unity/source/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/Users/wvkmind/MyCode/gitee/ZDClient/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>/Users/wvkmind/Documents/Unity/source/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>/Users/wvkmind/MyCode/gitee/ZDClient/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/Users/wvkmind/Documents/Unity/source/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/Users/wvkmind/MyCode/gitee/ZDClient/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -271,7 +272,7 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="MsgPack">
- <HintPath>/Users/wvkmind/Documents/Unity/source/Assets/Plugins/MsgPack.dll</HintPath>
+ <HintPath>/Users/wvkmind/MyCode/gitee/ZDClient/Assets/Plugins/MsgPack.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Users/wvkmind/Library/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
