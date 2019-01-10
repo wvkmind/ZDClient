@@ -601,7 +601,7 @@ GameObject:
   - component: {fileID: 2093887225}
   - component: {fileID: 2093887224}
   m_Layer: 0
-  m_Name: 2D
+  m_Name: BK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
