@@ -10,10 +10,15 @@ public class SpriteUtils : MonoBehaviour {
     void Start () {
         _ani = transform.GetComponent<Animator>();
         _ani.speed = m_speed;
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        Touch[] touches = Input.touches;
+        if(touches.Length==1&&touches[0].phase==TouchPhase.Ended){
+            int i = _ani.GetInteger("Ani0");
+            _ani.SetInteger("Ani0",1-i);
+        }
 	}
 }
