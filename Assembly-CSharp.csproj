@@ -53,6 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\2D\Position.cs" />
+     <Compile Include="Assets\Script\2D\Sprite.cs" />
+     <Compile Include="Assets\Script\2D\View.cs" />
      <Compile Include="Assets\Script\Animation\SpriteUtils.cs" />
      <Compile Include="Assets\Script\Game\Init.cs" />
      <Compile Include="Assets\Script\Login\Login.cs" />
