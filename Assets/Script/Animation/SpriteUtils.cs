@@ -10,7 +10,7 @@ public class SpriteUtils : MonoBehaviour {
     void Start () {
         _ani = transform.GetComponent<Animator>();
         _ani.speed = m_speed;
-        
+        _ani.SetInteger("Ani0",1);
     }
 	
 	// Update is called once per frame
