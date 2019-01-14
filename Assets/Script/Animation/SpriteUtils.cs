@@ -31,6 +31,7 @@ public class SpriteUtils : MonoBehaviour {
     public void SetWalk(){
         SetAction(1);
     }
+
     // Use this for initialization
     void Awake() {
         _ani = transform.GetComponent<Animator>();
@@ -50,6 +51,10 @@ public class SpriteUtils : MonoBehaviour {
         if(Input.GetKeyUp(KeyCode.F)||(touches.Length==2&&touches[0].phase==TouchPhase.Ended&&touches[1].phase==TouchPhase.Ended)){
             if(action_id==0)SetAction(1);
             else SetAction(0);
+        }
+        if(Input.GetKeyUp(KeyCode.S)){
+            direction = direction + 1;
+            if(direction==4)direction = 3;
         }
 	}
 }
