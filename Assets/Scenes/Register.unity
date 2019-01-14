@@ -232,6 +232,17 @@ Prefab:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212599258775421134, guid: 47dc603d03660418d87d5e1cf476bb11,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 781f7125c897b472b841ad2280999092,
+        type: 3}
+    - target: {fileID: 212599258775421134, guid: 47dc603d03660418d87d5e1cf476bb11,
+        type: 2}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47dc603d03660418d87d5e1cf476bb11, type: 2}
   m_IsPrefabAsset: 0
