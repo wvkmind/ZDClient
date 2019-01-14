@@ -36,25 +36,26 @@ public class SpriteUtils : MonoBehaviour {
     void Awake() {
         _ani = transform.GetComponent<Animator>();
         _ani.speed = m_speed;
-        SetRoleType("Doobu");//this is defaults
+        //this is defaults
+        SetRoleType("Doobu");
         SetAction(0);
     }
 	// Update is called once per frame
 	void Update () {
-        Touch[] touches = Input.touches;
-        if(Input.GetKeyUp(KeyCode.D)||(touches.Length==1&&touches[0].phase==TouchPhase.Ended)){
-            if(cur_role=="BanGye")cur_role="Doobu";
-            else cur_role="BanGye";
-            SetRoleType(cur_role);
-            SetAction(action_id);
-        }
-        if(Input.GetKeyUp(KeyCode.F)||(touches.Length==2&&touches[0].phase==TouchPhase.Ended&&touches[1].phase==TouchPhase.Ended)){
-            if(action_id==0)SetAction(1);
-            else SetAction(0);
-        }
-        if(Input.GetKeyUp(KeyCode.S)){
-            direction = direction + 1;
-            if(direction==4)direction = 3;
-        }
+        // Touch[] touches = Input.touches;
+        // if(Input.GetKeyUp(KeyCode.D)||(touches.Length==1&&touches[0].phase==TouchPhase.Ended)){
+        //     if(cur_role=="BanGye")cur_role="Doobu";
+        //     else cur_role="BanGye";
+        //     SetRoleType(cur_role);
+        //     SetAction(action_id);
+        // }
+        // if(Input.GetKeyUp(KeyCode.F)||(touches.Length==2&&touches[0].phase==TouchPhase.Ended&&touches[1].phase==TouchPhase.Ended)){
+        //     if(action_id==0)SetAction(1);
+        //     else SetAction(0);
+        // }
+        // if(Input.GetKeyUp(KeyCode.S)){
+        //     direction = direction + 1;
+        //     if(direction==4)direction = 3;
+        // }
 	}
 }
