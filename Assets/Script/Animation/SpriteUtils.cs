@@ -25,37 +25,47 @@ public class SpriteUtils : MonoBehaviour {
             }
         }
     }  
+
+    //!next_action == 0的时候是idle状态，不过累的的时候idle是Snoring
     public void SetIdle(){
+        _ani.SetInteger("next_action",0);
         SetAction(0);
     }
+    public void SetSnoring(){
+        _ani.SetInteger("next_action",0);
+        SetAction(7);
+    }
     public void SetWalk(){
+        _ani.SetInteger("next_action",1);
         SetAction(1);
     }
-
+    public void SetExp(int i){
+        SetAction(8+i);
+         _ani.SetInteger("next_action",0);
+    }
     // Use this for initialization
     void Awake() {
         _ani = transform.GetComponent<Animator>();
         _ani.speed = m_speed;
         //this is defaults
-        SetRoleType("Doobu");
+        SetRoleType("BanGye");
         SetAction(0);
     }
 	// Update is called once per frame
 	void Update () {
-        // Touch[] touches = Input.touches;
+        
+        Touch[] touches = Input.touches;
         // if(Input.GetKeyUp(KeyCode.D)||(touches.Length==1&&touches[0].phase==TouchPhase.Ended)){
         //     if(cur_role=="BanGye")cur_role="Doobu";
         //     else cur_role="BanGye";
         //     SetRoleType(cur_role);
         //     SetAction(action_id);
         // }
-        // if(Input.GetKeyUp(KeyCode.F)||(touches.Length==2&&touches[0].phase==TouchPhase.Ended&&touches[1].phase==TouchPhase.Ended)){
-        //     if(action_id==0)SetAction(1);
-        //     else SetAction(0);
-        // }
-        // if(Input.GetKeyUp(KeyCode.S)){
-        //     direction = direction + 1;
-        //     if(direction==4)direction = 3;
-        // }
+        if(Input.GetKeyUp(KeyCode.F)||(touches.Length==2&&touches[0].phase==TouchPhase.Ended&&touches[1].phase==TouchPhase.Ended)){
+            SetWalk();
+        }
+        if(Input.GetKeyUp(KeyCode.S)){
+            SetExp(1);
+        }
 	}
 }
