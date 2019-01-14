@@ -11,7 +11,7 @@ public class Sprite : MonoBehaviour {
     public void InitPosition(){
 		transform.position= new Vector3(transform.position.x+(2*(0.5f-anchorX)*View.wdiff),transform.position.y,transform.position.z);
     }
-	void Start(){
+	void Awake(){
 		InitPosition();
 	}
 	void Update() {
