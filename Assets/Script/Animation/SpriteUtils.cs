@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BaseData;
-
+/**
+ * *  这个是只负责角色的动画部分
+ */
 public class SpriteUtils : MonoBehaviour {
 
 	Animator _ani;
@@ -10,7 +12,7 @@ public class SpriteUtils : MonoBehaviour {
     private string cur_role = "BanGye";
     private int _ani_layer_index = 0;
     private int action_id = 0;
-    private int direction = 0;//面向前后左右
+    private int direction = 0;// * 面向前后左右
     public void SetAction(int i){
         action_id = direction*Role.RHAL+i;
         _ani.Play(Role.Actions[i],_ani_layer_index);
@@ -25,13 +27,12 @@ public class SpriteUtils : MonoBehaviour {
             }
         }
     }  
-
     //!next_action == 0的时候是idle状态，不过累的的时候idle是Snoring
-    public void SetIdle(){
+    private void SetIdle(){
         _ani.SetInteger("next_action",0);
         SetAction(0);
     }
-    public void SetSnoring(){
+    private void SetSnoring(){
         _ani.SetInteger("next_action",0);
         SetAction(7);
     }
@@ -39,33 +40,47 @@ public class SpriteUtils : MonoBehaviour {
         _ani.SetInteger("next_action",1);
         SetAction(1);
     }
-    public void SetExp(int i){
-        SetAction(8+i);
-         _ani.SetInteger("next_action",0);
+    public void SetTalk(){
+        _ani.SetInteger("next_action",0);
+        SetAction(2);
     }
-    // Use this for initialization
+    public void SetRun(){
+        _ani.SetInteger("next_action",3);
+        SetAction(3);
+    }
+    public void SetEat(){
+        _ani.SetInteger("next_action",4);
+        SetAction(4);
+    }
+    public void SetRaiseHands(){
+        _ani.SetInteger("next_action",5);
+        SetAction(5);
+    }
+    public void SetPick(){
+        _ani.SetInteger("next_action",0);
+        SetAction(6);
+    }
+    public void SetCheer(){
+        _ani.SetInteger("next_action",0);
+        SetAction(7);
+    }
+    public void SetExp(int i){
+        _ani.SetInteger("next_action",0);
+        SetAction(8+i);
+    }
+    // * Use this for initialization
     void Awake() {
         _ani = transform.GetComponent<Animator>();
         _ani.speed = m_speed;
-        //this is defaults
+        // * this is defaults
         SetRoleType("BanGye");
         SetAction(0);
     }
-	// Update is called once per frame
+    public void SetIdle(bool full_of_energy){
+        if(full_of_energy)this.SetIdle();
+        else this.SetSnoring();
+    }
 	void Update () {
-        
-        Touch[] touches = Input.touches;
-        // if(Input.GetKeyUp(KeyCode.D)||(touches.Length==1&&touches[0].phase==TouchPhase.Ended)){
-        //     if(cur_role=="BanGye")cur_role="Doobu";
-        //     else cur_role="BanGye";
-        //     SetRoleType(cur_role);
-        //     SetAction(action_id);
-        // }
-        if(Input.GetKeyUp(KeyCode.F)||(touches.Length==2&&touches[0].phase==TouchPhase.Ended&&touches[1].phase==TouchPhase.Ended)){
-            SetWalk();
-        }
-        if(Input.GetKeyUp(KeyCode.S)){
-            SetExp(1);
-        }
+
 	}
 }
