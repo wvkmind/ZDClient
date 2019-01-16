@@ -81,6 +81,8 @@ public class SpriteUtils : MonoBehaviour {
         else this.SetSnoring();
     }
 	void Update () {
-
+        if(Input.GetKeyDown(KeyCode.D)){
+            SetExp(11);
+        }
 	}
 }
