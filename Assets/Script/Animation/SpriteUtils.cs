@@ -62,19 +62,19 @@ public class SpriteUtils : MonoBehaviour {
     }
     public void SetCheer(){
         _ani.SetInteger("next_action",0);
-        SetAction(7);
+        SetAction(8);
     }
     public void SetExp(int i){
         _ani.SetInteger("next_action",0);
-        SetAction(8+i);
+        SetAction(9+i);
     }
     // * Use this for initialization
     void Awake() {
         _ani = transform.GetComponent<Animator>();
         _ani.speed = m_speed;
         // * this is defaults
-        SetRoleType("BanGye");
-        SetAction(0);
+        //SetRoleType("BanGye");
+        //SetAction(0);
     }
     public void SetIdle(bool full_of_energy){
         if(full_of_energy)this.SetIdle();
