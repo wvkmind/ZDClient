@@ -68,6 +68,7 @@
      <Compile Include="Assets\Script\Utils\ErrorInfo.cs" />
      <Compile Include="Assets\Script\Utils\GameCamera.cs" />
      <Compile Include="Assets\Script\Utils\Md5.cs" />
+     <Compile Include="Assets\SelectRole.cs" />
      <None Include="Assets\Image\角色动作\角色特效effect\PetAttackEff.spr\0.0.0.txt" />
      <None Include="Assets\Image\角色动作\角色特效effect\ConfrontEffect.spr\0.0.0.txt" />
      <None Include="Assets\Image\角色动作\魔法表情\ice\0.31.0.txt" />
