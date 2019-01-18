@@ -861,8 +861,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543a568796a8e403a8f2154694374b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game_data: {fileID: 662546919}
-  switch_scene: {fileID: 0}
 --- !u!4 &662546921
 Transform:
   m_ObjectHideFlags: 0
@@ -1635,7 +1633,7 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1240577556}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7dc619326c31c4ebbbf820db61ff1fee, type: 3}
