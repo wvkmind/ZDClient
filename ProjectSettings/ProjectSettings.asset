@@ -119,7 +119,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.1
+  bundleVersion: 0.2
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -155,8 +155,9 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.wvkmind.ZeroDown
     Standalone: com.Company.ProductName
-    iOS: com.Zerodown.yecaibuluo
-  buildNumber: {}
+    iOS: Wvkmind
+  buildNumber:
+    iOS: 1
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 24
   AndroidTargetSdkVersion: 27
