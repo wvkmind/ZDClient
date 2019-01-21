@@ -13,6 +13,9 @@ public class RegisterUI : MonoBehaviour {
 	public UnityEngine.UI.Image line1;
 	public UnityEngine.UI.Image line2;
 	public UnityEngine.UI.Image line3;
+	public UnityEngine.UI.Button bTOpenPropertyUI;
+	public UnityEngine.Canvas propertyUI;
+	public UnityEngine.UI.Button btSettingOk;
 	private int num = 5;
 	private int tra_rate = 0;
 	private int phy_str_rate = 0;
@@ -32,7 +35,15 @@ public class RegisterUI : MonoBehaviour {
 		bt4.onClick.AddListener(Bt2Down);
 		bt5.onClick.AddListener(Bt3Up);
 		bt6.onClick.AddListener(Bt3Down);
+		bTOpenPropertyUI.onClick.AddListener(OpenProperty);
+		btSettingOk.onClick.AddListener(CloseProperty);
 		FlashLine();
+	}
+	void CloseProperty(){
+		propertyUI.gameObject.SetActive(false);
+	}
+	void OpenProperty(){
+		propertyUI.gameObject.SetActive(true);
 	}
 	void Bt1Up(){
 		ChangeTra(true);
