@@ -158,7 +158,7 @@ PlayerSettings:
     iOS: Wvkmind
   buildNumber:
     iOS: 1
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 2
   AndroidMinSdkVersion: 24
   AndroidTargetSdkVersion: 27
   AndroidPreferredInstallLocation: 1

@@ -64,6 +64,7 @@
      <Compile Include="Assets\Script\Login\Register.cs" />
      <Compile Include="Assets\Script\Net\NetEventDispatch.cs" />
      <Compile Include="Assets\Script\Net\NetWork.cs" />
+     <Compile Include="Assets\Script\Register\RegisterUI.cs" />
      <Compile Include="Assets\Script\Register\SelectRole.cs" />
      <Compile Include="Assets\Script\Scene\SwitchScene.cs" />
      <Compile Include="Assets\Script\Utils\ErrorInfo.cs" />
