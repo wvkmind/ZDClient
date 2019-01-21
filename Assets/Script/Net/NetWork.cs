@@ -37,7 +37,7 @@ public class NetWork {
 		NetWork.Connect(NetWork.gete_ip,6666);
 	}
 	public static void ConnectNode(string ip ,int port){
-		NetWork.Connect(ip,port);
+		NetWork.Connect(NetWork.gete_ip,port);
 	}
 	private static void Connect(string ip,int port){
 		PrepareType();
