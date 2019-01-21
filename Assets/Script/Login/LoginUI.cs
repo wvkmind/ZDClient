@@ -17,21 +17,23 @@ public class LoginUI : MonoBehaviour {
 		SwitchScene.NextScene("Register");
 	}
 	void LoginFunction(){
-		Login.In(account.text,password.text,(data,error) =>{
-			if(account.text.Equals("") || account.text.Equals(""))
-			{
-				ErrorInfo.CreateUI("Pls Check Input.");
-			}
-			else if(error!=null&&!error.Equals(""))
+		if(account.text.Equals("") || password.text.Equals(""))
+		{
+			ErrorInfo.CreateUI("Pls Check Input.");
+		}
+		else
+			Login.In(account.text,password.text,(data,error) =>{
+				if(error!=null&&!error.Equals(""))
 				ErrorInfo.CreateUI(error,()=>{
 					account.text = "";
 					password.text = "";
+					SwitchScene.NextScene("Init");
 				});
-			else
-			{
-				//TODO: 登陆成功
-			}
-		});
+				else
+				{
+					ErrorInfo.CreateUI("登陆成功（就到这儿了，还在写）");
+				}
+			});
 
 	}
 	

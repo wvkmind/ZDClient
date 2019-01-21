@@ -5,10 +5,6 @@ using UnityEngine.UI;
 public class Init : MonoBehaviour {
 	public static Init instance = null;
 	void Start () {
-		if(instance!=null){
-			Destroy(this);
-			return ;
-		}
 		instance = this;
 		NetWork.ConnectGate();
 		DontDestroyOnLoad(this);

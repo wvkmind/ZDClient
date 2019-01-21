@@ -16,6 +16,10 @@ public class RegisterUI : MonoBehaviour {
 	public UnityEngine.UI.Button bTOpenPropertyUI;
 	public UnityEngine.Canvas propertyUI;
 	public UnityEngine.UI.Button btSettingOk;
+	public UnityEngine.UI.InputField account;
+	public UnityEngine.UI.InputField password;
+	public UnityEngine.UI.Button btOk;
+	public SelectRole role;
 	private int num = 5;
 	private int tra_rate = 0;
 	private int phy_str_rate = 0;
@@ -37,7 +41,26 @@ public class RegisterUI : MonoBehaviour {
 		bt6.onClick.AddListener(Bt3Down);
 		bTOpenPropertyUI.onClick.AddListener(OpenProperty);
 		btSettingOk.onClick.AddListener(CloseProperty);
+		btOk.onClick.AddListener(onRegister);
 		FlashLine();
+	}
+	void onRegister(){
+		if(account.text.Equals("") || password.text.Equals(""))
+		{
+			ErrorInfo.CreateUI("Pls Check Input.");
+		}
+		else
+			Register.In(account.text,password.text,role.RoleType(),tra_rate,phy_str_rate,exp_rate,(status,error) =>{
+				if(!status)
+					ErrorInfo.CreateUI(error,()=>{
+						account.text = "";
+						password.text = "";
+					});
+				else
+					ErrorInfo.CreateUI("注册成功，用户名密码已加密无法找回，请牢记。",()=>{
+						SwitchScene.NextScene("Init");
+					});
+			});
 	}
 	void CloseProperty(){
 		propertyUI.gameObject.SetActive(false);

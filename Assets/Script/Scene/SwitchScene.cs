@@ -8,17 +8,19 @@ public class SwitchScene : MonoBehaviour {
 	private AsyncOperation async = null;
 	public UnityEngine.UI.Image image; 
 	public UnityEngine.UI.Image loading; 
+	private static string next_scene_copy = null;
 	private static float timer = 0;
 	public static SwitchScene instance = null;
 	public static void NextScene(string str){
+		if(str == "Init")
+		{
+			Destroy(Init.instance.gameObject);
+		}
 		next_scene = str;
+		next_scene_copy = str;
 		instance.gameObject.SetActive(true);
 	}
 	void Start() {
-		if(instance!=null){
-			Destroy(this);
-			return ;
-		}
 		instance = this;
 		DontDestroyOnLoad(this);
 		instance.gameObject.SetActive(false);
@@ -43,7 +45,8 @@ public class SwitchScene : MonoBehaviour {
 		else if (async != null && async.isDone == true)
 		{
 			async = null;
-			instance.gameObject.SetActive(false);
+			if(next_scene_copy=="Init")Destroy(this.gameObject);
+			next_scene_copy = null;
 		}
 	}
 }

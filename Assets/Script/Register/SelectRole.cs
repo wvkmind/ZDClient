@@ -6,13 +6,18 @@ public class SelectRole : MonoBehaviour {
 	public UnityEngine.UI.Button role1;
 	public SpriteUtils role_show;
 	public AudioSource audio_source;
-	private int [] flag = {1,0,0,0,0,0,0,0,0,0,0,0};
+	private int [] flag = {0,0,0,0,0,0,0,0,0,0,0,0};
+	private int role_type = 7;
 	// Use this for initialization
+	public int RoleType(){
+		return role_type;
+	}
 	void Start () {
 		role1.onClick.AddListener(OnSelect1);
 	}
 	void OnSelect1(){
-		show1();
+		role_type = 7;
+		show7();
 		playAudio("7");
 	}
 	void playAudio(string index){
@@ -20,17 +25,17 @@ public class SelectRole : MonoBehaviour {
 		audio_source.clip = clip;
 		audio_source.Play();
 	}
-	void show1(){
+	void show7(){
 		UnityEngine.Sprite sprite  = UnityEngine.Resources.Load("Image/RegisterUI/Role/Koongya_15", typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
 		role1.GetComponent<UnityEngine.UI.Image>().sprite = sprite;
-		flag[0] = 1;
+		flag[7] = 1;
 		role_show.SetRoleType("BanGye");
 		role_show.SetExp(0);
 	}
-	void hide1(){
+	void hide7(){
 		UnityEngine.Sprite sprite  = UnityEngine.Resources.Load("Image/RegisterUI/Role/Koongya_14", typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
 		role1.GetComponent<UnityEngine.UI.Image>().sprite = sprite;
-		flag[0] = 0;
+		flag[7] = 0;
 	}
 	// Update is called once per frame
 	void Update () {
