@@ -31,6 +31,7 @@ public class NetWork {
 	public static void PrepareType(){
 		MsgPack.Serialization.MessagePackSerializer.PrepareType<MsgPack.MessagePackObject>();
 		MsgPack.Serialization.MessagePackSerializer.PrepareType<double>();
+		MsgPack.Serialization.MessagePackSerializer.PrepareType<int>();
 	}
 	public static void ConnectGate(){
 		NetWork.Connect(NetWork.gete_ip,6666);

@@ -47,6 +47,7 @@ public class SwitchScene : MonoBehaviour {
 			async = null;
 			if(next_scene_copy=="Init")Destroy(this.gameObject);
 			next_scene_copy = null;
+			this.gameObject.SetActive(false);
 		}
 	}
 }
