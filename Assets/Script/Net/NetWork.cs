@@ -80,7 +80,7 @@ public class NetWork {
 			}
 			else
 			{
-				ErrorInfo.CreateUI("NetWork Error.",()=>{
+				ErrorInfo.CreateUI("掉线啦，重登陆吧。",()=>{
 					Login.ReLoginOut();
 				});
 			}

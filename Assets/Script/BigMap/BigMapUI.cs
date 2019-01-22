@@ -25,19 +25,20 @@ public class BigMapUI : MonoBehaviour
             {
                 if(Input.touches[0].phase == TouchPhase.Moved)
                 {
+                    
                     if(is_begen_touch)
                     {
                         float ch = node.transform.position.x+Input.touches[0].deltaPosition.x;
-                        if(ch<=0&&ch>=-1480)
+                        if(ch<0&&ch>-(800*3.2*Screen.height/1920-Screen.width))
                             node.transform.position = new Vector3(ch,node.transform.position.y,node.transform.position.z);
                     }
                     is_move = true;
                 }
-                else
+                else if(Input.touches[0].phase ==TouchPhase.Ended)
                 {
                     is_move = false;
+                    is_begen_touch = false;
                 }
-                is_begen_touch = false;
             }
         }
     }
