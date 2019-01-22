@@ -15,6 +15,7 @@ public class SwitchScene : MonoBehaviour {
 		if(str == "Init")
 		{
 			Destroy(Init.instance.gameObject);
+			NetWork.ClosePing();
 		}
 		next_scene = str;
 		next_scene_copy = str;
