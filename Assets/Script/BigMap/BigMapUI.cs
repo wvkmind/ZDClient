@@ -15,9 +15,11 @@ public class BigMapUI : MonoBehaviour
         chatMap.onClick.AddListener(OpenChatHall);
     }
     void OpenChatHall(){
+        if(!is_move)
         SwitchScene.NextScene("ChatHall");
     }
     void ExitToInit(){
+        if(!is_move)
         SwitchScene.NextScene("Init");
     }
     // Update is called once per frame
@@ -27,6 +29,7 @@ public class BigMapUI : MonoBehaviour
         {
             if(Input.touches[0].phase == TouchPhase.Began)
             {
+                is_move = false;
                 is_begen_touch = true;
             }
             else
@@ -34,7 +37,7 @@ public class BigMapUI : MonoBehaviour
                 if(Input.touches[0].phase == TouchPhase.Moved)
                 {
                     
-                    if(is_begen_touch)
+                    if(is_begen_touch&&Mathf.Abs(Input.touches[0].deltaPosition.x)-20>0)
                     {
                         float ch = node.transform.position.x+Input.touches[0].deltaPosition.x;
                         if(ch<0&&ch>-(800*3.2*Screen.height/1920-Screen.width))
@@ -44,7 +47,7 @@ public class BigMapUI : MonoBehaviour
                 }
                 else if(Input.touches[0].phase ==TouchPhase.Ended)
                 {
-                    is_move = false;
+                    
                     is_begen_touch = false;
                 }
             }

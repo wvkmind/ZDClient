@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BigMap.unity
     guid: a1ac061ac125147e98f0f2068f638e40
+  - enabled: 1
+    path: Assets/Scenes/ChatHall.unity
+    guid: 56365cf34d49c4348a87e1a4282907eb
   m_configObjects: {}
