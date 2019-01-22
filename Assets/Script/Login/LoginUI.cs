@@ -31,7 +31,7 @@ public class LoginUI : MonoBehaviour {
 				});
 				else
 				{
-					ErrorInfo.CreateUI("登陆成功（就到这儿了，还在写）");
+					SwitchScene.NextScene("BigMap");
 				}
 			});
 

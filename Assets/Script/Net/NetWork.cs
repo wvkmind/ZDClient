@@ -18,7 +18,7 @@ public class NetWork {
 	//private static Thread send_thread = null;
 	public static bool si_loop = true;
 	public static string token = null;
-	public static string gete_ip = "ran1.tpddns.cn";
+	public static string gete_ip = "xn--cheryl-802jv55g.qicp.io";
 	private static float timer = 0;
 	private static bool heartbeat = false;
 
