@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Register.unity
     guid: 31896636a1e6d4e3c88fa2b6063ca4c0
+  - enabled: 1
+    path: Assets/Scenes/BigMap.unity
+    guid: a1ac061ac125147e98f0f2068f638e40
   m_configObjects: {}
