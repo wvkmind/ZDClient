@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class BigMapUI : MonoBehaviour
 {
+    public UnityEngine.UI.Button exit;
+    public UnityEngine.UI.Button chatMap;
     public UnityEngine.GameObject node;
     private bool is_begen_touch = false;
     private bool is_move = false;
     void Start()
     {
-        
+        exit.onClick.AddListener(ExitToInit);
+        chatMap.onClick.AddListener(OpenChatHall);
     }
-
+    void OpenChatHall(){
+        SwitchScene.NextScene("ChatHall");
+    }
+    void ExitToInit(){
+        SwitchScene.NextScene("Init");
+    }
     // Update is called once per frame
     void Update()
     {
