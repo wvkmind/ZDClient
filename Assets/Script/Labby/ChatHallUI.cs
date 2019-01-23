@@ -12,6 +12,7 @@ public class ChatHallUI : MonoBehaviour
     public UnityEngine.UI.Image [] roomMapList;
     public UnityEngine.UI.Text [] roomNameList;
     public UnityEngine.UI.Text sum;
+    private static float timer = 0;
     private int [] maps_ids = {-1,-1,-1,-1,-1,-1};
     private string [] rooms_title = {"空","空","空","空","空","空"};
     private int cur_page = 1;
@@ -106,6 +107,10 @@ public class ChatHallUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+		if(timer>=10){
+			timer = 0;
+             GetFromServer();
+		}
     }
 }
