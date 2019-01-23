@@ -33,7 +33,7 @@ public class ChatHallUI : MonoBehaviour
                 sum_page = tmp.AsInt32();
                 data.TryGetValue("cur_page", out tmp);
                 cur_page = tmp.AsInt32();
-                data.TryGetValue("ret", out tmp);
+                data.TryGetValue("list", out tmp);
                 list = tmp.AsList();
                 int cur_i =0;
                 foreach (MsgPack.MessagePackObject item in list)
