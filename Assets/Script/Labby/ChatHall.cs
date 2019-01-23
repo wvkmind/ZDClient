@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ChatHall : MonoBehaviour
 {
-    public UnityEngine.UI.Button createRoom;
-    public UnityEngine.UI.Button Exit;
-    public UnityEngine.UI.Button SendLobby;
+    public UnityEngine.UI.Button _createRoom;
+    public UnityEngine.UI.Button _exit;
+    public UnityEngine.UI.Button _sendLobby;
 
     // Start is called before the first frame update
     void Start()
     {
-        Exit.onClick.AddListener(ExitToBigMap);
+        _exit.onClick.AddListener(ExitToBigMap);
     }
     void ExitToBigMap()
     {
