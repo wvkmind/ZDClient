@@ -4,53 +4,56 @@ using UnityEngine;
 
 public class BigMapUI : MonoBehaviour
 {
+    public UnityEngine.UI.Button nextPage;
+    public UnityEngine.UI.Button beforePage;
     public UnityEngine.UI.Button exit;
     public UnityEngine.UI.Button chatMap;
     public UnityEngine.GameObject node;
-    private bool is_begen_touch = false;
-    private bool is_move = false;
+    private int page = 0;
+    private float time = 0.0f;
+    private float per_page = -(800.0f*3.2f*Screen.height/1920.0f-Screen.width)/2.0f;
     void Start()
     {
         exit.onClick.AddListener(ExitToInit);
         chatMap.onClick.AddListener(OpenChatHall);
+        nextPage.onClick.AddListener(_NextPage);
+        beforePage.onClick.AddListener(_BeforePage);
+        FlushPage();
     }
-    void OpenChatHall(){
-        if(!is_move)
+    void FlushPage()
+    {
+        beforePage.gameObject.SetActive(page!=0);
+        nextPage.gameObject.SetActive(page!=2);
+        
+    }
+    void _NextPage()
+    {
+        if(page!=2)page = page + 1;
+        FlushPage();
+    }
+    void _BeforePage()
+    {
+        if(page!=0)page = page - 1;
+        FlushPage();
+    }
+    void OpenChatHall()
+    {
         SwitchScene.NextScene("ChatHall");
     }
-    void ExitToInit(){
-        if(!is_move)
+    void ExitToInit()
+    {
         SwitchScene.NextScene("Init");
     }
     // Update is called once per frame
     void Update()
     {
-        if(Input.touchCount == 1)
-        {
-            if(Input.touches[0].phase == TouchPhase.Began)
-            {
-                is_move = false;
-                is_begen_touch = true;
-            }
-            else
-            {
-                if(Input.touches[0].phase == TouchPhase.Moved)
-                {
-                    
-                    if(is_begen_touch&&Mathf.Abs(Input.touches[0].deltaPosition.x)-20>0)
-                    {
-                        float ch = node.transform.position.x+Input.touches[0].deltaPosition.x;
-                        if(ch<0&&ch>-(800*3.2*Screen.height/1920-Screen.width))
-                            node.transform.position = new Vector3(ch,node.transform.position.y,node.transform.position.z);
-                    }
-                    is_move = true;
-                }
-                else if(Input.touches[0].phase ==TouchPhase.Ended)
-                {
-                    
-                    is_begen_touch = false;
-                }
-            }
-        }
+        time = time + Time.deltaTime;
+        float s = page*per_page-node.transform.position.x;
+        if(s == 0 )time = 0.0f;
+        float cur_speed = 0.0f;
+        if(s != 0 )
+            cur_speed = s / time*(0.1f);
+        node.transform.position = new Vector3(node.transform.position.x+time*cur_speed,node.transform.position.y,node.transform.position.z);
+
     }
 }
