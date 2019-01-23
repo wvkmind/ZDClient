@@ -57,6 +57,7 @@
      <Compile Include="Assets\Script\2D\Sprite.cs" />
      <Compile Include="Assets\Script\2D\View.cs" />
      <Compile Include="Assets\Script\Animation\SpriteUtils.cs" />
+     <Compile Include="Assets\Script\BaseData\Map.cs" />
      <Compile Include="Assets\Script\BaseData\Role.cs" />
      <Compile Include="Assets\Script\BigMap\BigMapUI.cs" />
      <Compile Include="Assets\Script\Game\Init.cs" />
