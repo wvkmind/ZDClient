@@ -18,7 +18,7 @@ public class RegisterUI : MonoBehaviour {
 	public UnityEngine.UI.Button btSettingOk;
 	public UnityEngine.UI.InputField account;
 	public UnityEngine.UI.InputField password;
-	public UnityEngine.UI.InputField name;
+	public UnityEngine.UI.InputField userName;
 	public UnityEngine.UI.Button btOk;
 	public SelectRole role;
 	private int num = 5;
@@ -46,12 +46,12 @@ public class RegisterUI : MonoBehaviour {
 		FlashLine();
 	}
 	void onRegister(){
-		if(account.text.Equals("") || password.text.Equals("")||name.text.Equals(""))
+		if(account.text.Equals("") || password.text.Equals("")||userName.text.Equals(""))
 		{
 			ErrorInfo.CreateUI("你是否输入的信息有问题呢");
 		}
 		else
-			Register.In(account.text,password.text,name.text,role.RoleType(),tra_rate,phy_str_rate,exp_rate,(status,error) =>{
+			Register.In(account.text,password.text,userName.text,role.RoleType(),tra_rate,phy_str_rate,exp_rate,(status,error) =>{
 				if(!status)
 					ErrorInfo.CreateUI(error,()=>{
 						account.text = "";

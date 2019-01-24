@@ -2954,7 +2954,7 @@ MonoBehaviour:
   btSettingOk: {fileID: 474672594}
   account: {fileID: 1983213909}
   password: {fileID: 1354538426}
-  name: {fileID: 2140394195}
+  userName: {fileID: 2140394195}
   btOk: {fileID: 325497399}
   role: {fileID: 503705282}
 --- !u!4 &1399282401
