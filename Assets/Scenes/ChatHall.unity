@@ -1436,6 +1436,8 @@ MonoBehaviour:
   - {fileID: 987309957}
   - {fileID: 768421370}
   - {fileID: 1098243117}
+  room_name: {fileID: 383140780}
+  password: {fileID: 1205416942}
 --- !u!1 &326798837
 GameObject:
   m_ObjectHideFlags: 0

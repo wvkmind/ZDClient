@@ -19,6 +19,14 @@ public class CreateRoomUI : MonoBehaviour
                 ErrorInfo.CreateUI("请输入房间名字");
                 return;
             }
+            if(sellect_index==-1){
+                ErrorInfo.CreateUI("请选择房间");
+                return;
+            }
+            if(sellect_index!=0){
+                ErrorInfo.CreateUI("不好意思现在只有第一张地图可以选择");
+                return;
+            }
             string passrod_str = password.text;
             string map_name = Map.MapName[sellect_index];
             NetEventDispatch.RegisterEvent("create_room",data =>{
@@ -27,8 +35,14 @@ public class CreateRoomUI : MonoBehaviour
                 data.TryGetValue("status", out tmp);
                 int status = tmp.AsInt32();
                 if(status == 0){
-                    //TODO 进入房间
-                    ErrorInfo.CreateUI("创建房间成功");
+                    try
+                    {
+                        SwitchScene.NextScene(Map.subMapName[sellect_index][0]);
+                    }
+                    catch (System.Exception)
+                    {
+                        ErrorInfo.CreateUI("房间创建失败:我也不知道发生了啥哦");
+                    }
                 }else{
                     data.TryGetValue("error", out tmp);
                     string error = tmp.AsString();
