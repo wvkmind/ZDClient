@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Register  {
-	public static void In(string account,string password,int type,int tra,int phy,int exp,System.Action<bool ,string> f){
+	public static void In(string account,string password,string name,int type,int tra,int phy,int exp,System.Action<bool ,string> f){
 		string accountHash = Md5.GetMd5Hash(account);
 		string passwrodHash = Md5.GetMd5Hash(password);
         NetEventDispatch.RegisterEvent("register",data =>{
@@ -13,6 +13,7 @@ public class Register  {
 		Dictionary<string, object> dic = NetWork.getSendStart();
 		dic.Add("account",accountHash);
 		dic.Add("password",passwrodHash);
+		dic.Add("user_name",name);
 		dic.Add("type",type);
 		dic.Add("tra_rate",tra);
 		dic.Add("phy_str_rate",phy);
@@ -29,7 +30,7 @@ public class Register  {
 			f.Invoke(true,"");
 		}else{
 			dic.TryGetValue("error", out tmp);
-			string error = tmp.AsString();
+			string error = tmp.AsStringUtf8();
 			f.Invoke(false,error);
 		}
 	}

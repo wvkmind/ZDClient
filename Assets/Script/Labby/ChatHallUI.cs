@@ -41,20 +41,19 @@ public class ChatHallUI : MonoBehaviour
                 foreach (MsgPack.MessagePackObject item in list)
                 {
                     if(cur_i>5)break;
-                    var serializer = MessagePackSerializer.Get<Dictionary<string, MsgPack.MessagePackObject>>();
 			        MsgPack.MessagePackObjectDictionary room_info_dic= item.AsDictionary();
                     MsgPack.MessagePackObject room_info;
                     room_info_dic.TryGetValue("title",out room_info);
-                    rooms_title[cur_i]=room_info.AsString();
+                    rooms_title[cur_i]=room_info.AsStringUtf8();
                     room_info_dic.TryGetValue("map_name",out room_info);
-                    maps_ids[cur_i]=Map.GetMapIndex(room_info.AsString());
+                    maps_ids[cur_i]=Map.GetMapIndex(room_info.AsStringUtf8());
                     cur_i = cur_i + 1;
                 }
                 FlushHall();
                 Debug.Log("大厅刷新成功");
             }else{
                 data.TryGetValue("error", out tmp);
-                string error = tmp.AsString();
+                string error = tmp.AsStringUtf8();
                 ErrorInfo.CreateUI("大厅刷新失败:"+error);
             }
 		});

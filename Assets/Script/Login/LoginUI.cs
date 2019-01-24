@@ -19,7 +19,7 @@ public class LoginUI : MonoBehaviour {
 	void LoginFunction(){
 		if(account.text.Equals("") || password.text.Equals(""))
 		{
-			ErrorInfo.CreateUI("Pls Check Input.");
+			ErrorInfo.CreateUI("你是否输入的信息有问题呢");
 		}
 		else
 			Login.In(account.text,password.text,(data,error) =>{

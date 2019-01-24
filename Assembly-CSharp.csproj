@@ -60,11 +60,13 @@
      <Compile Include="Assets\Script\BaseData\Map.cs" />
      <Compile Include="Assets\Script\BaseData\Role.cs" />
      <Compile Include="Assets\Script\BigMap\BigMapUI.cs" />
+     <Compile Include="Assets\Script\DataModel\User.cs" />
      <Compile Include="Assets\Script\Game\Init.cs" />
      <Compile Include="Assets\Script\Labby\ChatHallUI.cs" />
      <Compile Include="Assets\Script\Labby\CreateRoomUI.cs" />
      <Compile Include="Assets\Script\Login\Login.cs" />
      <Compile Include="Assets\Script\Login\LoginUI.cs" />
+     <Compile Include="Assets\Script\Map\MapPosition.cs" />
      <Compile Include="Assets\Script\Net\NetEventDispatch.cs" />
      <Compile Include="Assets\Script\Net\NetWork.cs" />
      <Compile Include="Assets\Script\Register\Register.cs" />

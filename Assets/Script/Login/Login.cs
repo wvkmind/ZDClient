@@ -1,6 +1,7 @@
 ﻿using MsgPack.Serialization;
 using System.Collections.Generic;
 using UnityEngine;
+using DataModel;
 public class Login {
 	public static void In(string account,string password,System.Action<bool,string > f){
 		string accountHash = Md5.GetMd5Hash(account);
@@ -32,19 +33,21 @@ public class Login {
 		if(status == 0){
 			
 			dic.TryGetValue("ip", out tmp);
-			string ip = tmp.AsString();
+			string ip = tmp.AsStringUtf8();
 			dic.TryGetValue("port", out tmp);
 			int port = tmp.AsInt32();
 			NetWork.ConnectNode(ip,port);
 			dic.TryGetValue("token", out tmp);
-			string token = tmp.AsString();
+			string token = tmp.AsStringUtf8();
+			dic.TryGetValue("user", out tmp);
+			Init.user_info = (new User()).UnPack(tmp);
 			NetWork.token = token;
 			NetWork.StartPing();
 			f.Invoke(true,"");
 		}
 		else{
 			dic.TryGetValue("error", out tmp);
-			string error = tmp.AsString();
+			string error = tmp.AsStringUtf8();
 			f.Invoke(false,error);
 		}
 	}

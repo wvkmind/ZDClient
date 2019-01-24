@@ -46,7 +46,7 @@ public class NetEventDispatch {
 				ttl = ttl + Time.deltaTime;
 				if(ttl>2){
 					is_timeout = true;
-					ErrorInfo.CreateUI("NetWork Error.",()=>{
+					ErrorInfo.CreateUI("跟村子丢失连接啦",()=>{
 						Login.ReLoginOut();
 					});
 				}

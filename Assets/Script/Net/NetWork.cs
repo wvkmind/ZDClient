@@ -71,16 +71,16 @@ public class NetWork {
 		}
 		else{
 			dic.TryGetValue("error", out tmp);
-			string error_text = tmp.AsString();
+			string error_text = tmp.AsStringUtf8();
 			if(error_text.Equals("notoken"))
 			{
-				ErrorInfo.CreateUI("Logout.",()=>{
+				ErrorInfo.CreateUI("跟村子丢失连接啦",()=>{
 					Login.ReLoginOut();
 				});
 			}
 			else
 			{
-				ErrorInfo.CreateUI("掉线啦，重登陆吧。",()=>{
+				ErrorInfo.CreateUI("跟村子丢失连接啦",()=>{
 					Login.ReLoginOut();
 				});
 			}

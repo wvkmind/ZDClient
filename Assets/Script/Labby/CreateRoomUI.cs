@@ -45,7 +45,7 @@ public class CreateRoomUI : MonoBehaviour
                     }
                 }else{
                     data.TryGetValue("error", out tmp);
-                    string error = tmp.AsString();
+                    string error = tmp.AsStringUtf8();
                     ErrorInfo.CreateUI("房间创建失败:"+error);
                 }
             });
