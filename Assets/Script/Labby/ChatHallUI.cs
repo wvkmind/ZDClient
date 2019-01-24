@@ -12,6 +12,7 @@ public class ChatHallUI : MonoBehaviour
     public UnityEngine.UI.Image [] roomMapList;
     public UnityEngine.UI.Text [] roomNameList;
     public UnityEngine.UI.Text sum;
+    public UnityEngine.GameObject createRoomUI;
     private static float timer = 0;
     private int [] maps_ids = {-1,-1,-1,-1,-1,-1};
     private string [] rooms_title = {"空","空","空","空","空","空"};
@@ -20,7 +21,7 @@ public class ChatHallUI : MonoBehaviour
     private IList<MsgPack.MessagePackObject> list;
     // Start is called before the first frame update
     void Awake() {
-       GetFromServer();
+      GetFromServer();
     }
     void GetFromServer()
     {
@@ -86,9 +87,14 @@ public class ChatHallUI : MonoBehaviour
     }
     void Start()
     {
+        _createRoom.onClick.AddListener(OpenCreateRoomUI);
         _exit.onClick.AddListener(ExitToBigMap);
         next.onClick.AddListener(NextPage);
         before.onClick.AddListener(Before);
+    }
+    void OpenCreateRoomUI()
+    {
+        createRoomUI.gameObject.SetActive(true);
     }
     void NextPage()
     {
