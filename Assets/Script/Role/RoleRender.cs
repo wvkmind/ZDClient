@@ -5,7 +5,7 @@ using BaseData;
 /**
  * *  这个是只负责角色的动画部分
  */
-public class SpriteUtils : MonoBehaviour {
+public class RoleRender : MonoBehaviour {
 
 	Animator _ani;
     public float m_speed = 0.5f;

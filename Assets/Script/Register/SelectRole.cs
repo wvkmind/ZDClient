@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SelectRole : MonoBehaviour {
 	public UnityEngine.UI.Button role1;
-	public SpriteUtils role_show;
+	public RoleRender role_show;
 	public AudioSource audio_source;
 	private int [] flag = {0,0,0,0,0,0,0,0,0,0,0,0};
 	private int role_type = 7;

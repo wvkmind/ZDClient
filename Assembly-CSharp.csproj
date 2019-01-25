@@ -75,7 +75,7 @@
      <Compile Include="Assets\Script\Register\SelectRole.cs" />
      <Compile Include="Assets\Script\Role\RoleData.cs" />
      <Compile Include="Assets\Script\Role\RolePos.cs" />
-     <Compile Include="Assets\Script\Role\SpriteUtils.cs" />
+     <Compile Include="Assets\Script\Role\RoleRender.cs" />
      <Compile Include="Assets\Script\Scene\SwitchScene.cs" />
      <Compile Include="Assets\Script\Utils\ErrorInfo.cs" />
      <Compile Include="Assets\Script\Utils\GameCamera.cs" />
