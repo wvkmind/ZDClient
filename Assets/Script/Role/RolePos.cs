@@ -63,7 +63,7 @@ public class RolePos : MonoBehaviour
                 }
             }
         }
-        if(Mathf.Abs(before_x-transform.position.x)<0.001&&Mathf.Abs(before_y-transform.position.y)<0.001){
+        if(Mathf.Abs(before_x-transform.position.x)<0.005&&Mathf.Abs(before_y-transform.position.y)<0.005){
             Clear();
             roleRender.SetIdle(true);
         }
