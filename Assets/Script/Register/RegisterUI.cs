@@ -40,7 +40,7 @@ public class RegisterUI : MonoBehaviour {
 		bt4.onClick.AddListener(Bt2Down);
 		bt5.onClick.AddListener(Bt3Up);
 		bt6.onClick.AddListener(Bt3Down);
-		bTOpenPropertyUI.onClick.AddListener(OpenProperty);
+		bTOpenPropertyUI.onClick.AddListener(OpenProperty); 
 		btSettingOk.onClick.AddListener(CloseProperty);
 		btOk.onClick.AddListener(onRegister);
 		FlashLine();

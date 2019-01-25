@@ -40,7 +40,7 @@ public class Login {
 			dic.TryGetValue("token", out tmp);
 			string token = tmp.AsStringUtf8();
 			dic.TryGetValue("user", out tmp);
-			Init.user_info = (new User()).UnPack(tmp);
+			Init.userInfo = (new User()).UnPack(tmp);
 			NetWork.token = token;
 			NetWork.StartPing();
 			f.Invoke(true,"");

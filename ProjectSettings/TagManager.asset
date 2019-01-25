@@ -14,8 +14,8 @@ TagManager:
   - 
   - 
   - Error
-  - 
-  - 
+  - MapThings
+  - Map
   - 
   - 
   - 
@@ -43,6 +43,12 @@ TagManager:
     locked: 0
   - name: Bk
     uniqueID: 1976345459
+    locked: 0
+  - name: Map
+    uniqueID: 432748461
+    locked: 0
+  - name: MapThings
+    uniqueID: 1050147569
     locked: 0
   - name: UI
     uniqueID: 1776955961

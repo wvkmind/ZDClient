@@ -2,7 +2,7 @@
 {
     public class User
     {
-        public int status;
+        public int status = -1;
         public int id;
         public string name;
         public int type;
@@ -12,6 +12,8 @@
         public int level;
         public int zhanyang;
         public int buliang;
+        public float x;
+        public float y;
         public  User UnPack(MsgPack.MessagePackObject net_user){
             MsgPack.MessagePackObjectDictionary user_dic= net_user.AsDictionary();
             MsgPack.MessagePackObject temp;

@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DataModel;
 
-public class MapPosition : MonoBehaviour
+public class MapInit : MonoBehaviour
 {
-    void Awake() {
-        
-    }
+    public UnityEngine.GameObject Things;
+    
     void Start()
     {
         

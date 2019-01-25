@@ -6,7 +6,8 @@ using DataModel;
 public class Init : MonoBehaviour {
 	public static Init instance = null;
 	//User信息
-	public static User user_info = null;
+	public static User userInfo = null;
+	public static User [] otherUsersInCurMap = new User[9]; 
 	void Start () {
 		instance = this;
 		NetWork.ConnectGate();
