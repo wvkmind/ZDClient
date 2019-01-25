@@ -18,9 +18,19 @@ public class UserInput : MonoBehaviour
     {
         
     }
-    //这个WorkTo是外部输入或者网络进来调的WorkTo
+    //这个WorkTo是外部输入调的WorkTo
     public void WorkTo(float x,float y)
     {
+        rolePos.WorkTo(x,y);
+    }
+    //这个Action是外部输入调的Action
+    public void Action(int i){
+        roleRender.SetAction(i);
+    }
+    //这个WorkTo是外部输入调的WorkTo
+    public void WorkTo(float x,float y,int direction,float tox,float toy)
+    {
+        rolePos.ToPosImmediately(x,y);
         rolePos.WorkTo(x,y);
     }
     //这个Action是网络进来调用
