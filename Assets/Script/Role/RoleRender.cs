@@ -12,10 +12,16 @@ public class RoleRender : MonoBehaviour {
     private string cur_role = "BanGye";
     private int _ani_layer_index = 0;
     private int action_id = 0;
+    private int real_action_id = 0;
     private int direction = 0;// * 面向前后左右
+    public void SetFront(){direction=0;_ani.SetInteger("direction",direction);SetAction(real_action_id);}
+    public void SetBack(){direction=1;_ani.SetInteger("direction",direction);SetAction(real_action_id);}
+    public void SetLeft(){direction=2;_ani.SetInteger("direction",direction);SetAction(real_action_id);}
+    public void SetRight(){direction=3;_ani.SetInteger("direction",direction);SetAction(real_action_id);}
     public void SetAction(int i){
         action_id = direction*Role.RHAL+i;
-        _ani.Play(Role.Actions[i],_ani_layer_index);
+        real_action_id = i;
+        _ani.Play(Role.Actions[action_id],_ani_layer_index);
     }
     public void SetRoleType(string type){
         cur_role = type;
@@ -81,8 +87,6 @@ public class RoleRender : MonoBehaviour {
         else this.SetSnoring();
     }
 	void Update () {
-        if(Input.GetKeyDown(KeyCode.D)){
-            SetExp(11);
-        }
+        
 	}
 }
