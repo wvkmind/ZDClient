@@ -81,6 +81,7 @@
      <Compile Include="Assets\Script\Utils\ErrorInfo.cs" />
      <Compile Include="Assets\Script\Utils\GameCamera.cs" />
      <Compile Include="Assets\Script\Utils\Md5.cs" />
+     <Compile Include="Assets\Script\Utils\PositionTransform.cs" />
      <None Include="Assets\Resources\Image\角色动作\角色特效effect\PetAttackEff.spr\0.0.0.txt" />
      <None Include="Assets\Resources\Image\角色动作\角色特效effect\ConfrontEffect.spr\0.0.0.txt" />
      <None Include="Assets\Resources\Image\Map\警察局\Police2.spr\0,4-31,50-58,64-82：0.0.0.txt" />

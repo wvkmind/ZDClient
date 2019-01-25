@@ -10,6 +10,7 @@ public class Init : MonoBehaviour {
 	public static User [] otherUsersInCurMap = new User[9]; //房间里别人的信息
 	public static UnityEngine.GameObject me = null;//房间里我的角色
 	public static Dictionary<int, UnityEngine.GameObject> other = new Dictionary<int, UnityEngine.GameObject>();//房间里别人的角色
+	public static UnityEngine.GameObject map = null;
 	void Start () {
 		instance = this;
 		NetWork.ConnectGate();

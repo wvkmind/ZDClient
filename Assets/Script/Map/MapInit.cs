@@ -4,15 +4,16 @@ using UnityEngine;
 using DataModel;
 
 public class MapInit : MonoBehaviour
-{
-    public UnityEngine.GameObject Things;
-    
+{   
     void Start()
     {
-        
+        Init.map = this.gameObject;
     }
     void Update()
     {
         
+    }
+    void OnDestroy() {
+        Init.map = null;
     }
 }
