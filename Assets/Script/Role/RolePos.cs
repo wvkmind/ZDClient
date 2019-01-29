@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Utils;
 public class RolePos : MonoBehaviour
 {
     private Vector3 start_position;
-    private Vector3 end_position;
+    private Vector3 tartget_end_position;
+    private bool move_flag = false;
     private float before_x;
     private float before_y;
     public float speed;
@@ -22,11 +23,11 @@ public class RolePos : MonoBehaviour
     {
         before_x = transform.position.x;
         before_y = transform.position.y;
-        end_position.x = transform.position.x;
-        end_position.y = transform.position.y;
+        move_flag = false;
     }
     public void WorkTo(float x,float y){
-        end_position = new Vector3(x,y,UpdateZ(y));
+        move_flag = true;
+        tartget_end_position = new Vector3(x,y,UpdateZ(y));
         roleRender.SetWalk();
     }
     public void ToPosImmediately(float x,float y){
@@ -38,9 +39,12 @@ public class RolePos : MonoBehaviour
     }
     void Update()
     {
-        if(transform.position.x!=end_position.x||transform.position.y!=end_position.y)
+        Vector3 end_position = (Init.map.transform.position + tartget_end_position);
+
+        if(move_flag&& (transform.position.x!=end_position.x||transform.position.y!=end_position.y))
         {
             transform.position=Vector3.MoveTowards(transform.position,end_position,speed*Time.deltaTime);
+            
             if(Mathf.Abs(end_position.x-transform.position.x)>Mathf.Abs(end_position.y-transform.position.y))
             {
                 if(end_position.x>transform.position.x)
