@@ -29,13 +29,9 @@ public class MapProcess : MonoBehaviour
                 touchEnd = false;
                 float real_screen_x = Input.touches[0].position.x;
                 float real_screen_y = Input.touches[0].position.y;
-                float design_x = (real_screen_x)/proportion/100.0f;
-                float design_y = (real_screen_y)/proportion/100.0f;
-                Debug.Log("real_screen_x:"+real_screen_x);
-                Debug.Log("real_screen_y:"+real_screen_y);
-                Vector3 pos = PositionTransform.ScreenToWorld(Input.touches[0].position,gameObject.transform);
-                Debug.Log("pos_x:"+pos.x);
-                Debug.Log("pos_y:"+pos.y);
+                float design_x = (real_screen_x-Screen.width/2.0f)/proportion/100.0f;
+                float design_y = (real_screen_y-Screen.height/2.0f)/proportion/100.0f;
+                Vector3 pos = new Vector3(design_x,design_y,1.0f) - gameObject.transform.localPosition/3.2f;
                 Init.me.GetComponent<UserInput>().WorkTo(pos.x,pos.y);
             }
         }else if(touchEnd&&Input.touchCount == 1 && Input.touches[0].phase == TouchPhase.Moved){

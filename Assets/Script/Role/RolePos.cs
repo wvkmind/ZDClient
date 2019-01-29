@@ -5,7 +5,7 @@ using Utils;
 public class RolePos : MonoBehaviour
 {
     private Vector3 start_position;
-    private Vector3 tartget_end_position;
+    private Vector3 end_position;
     private bool move_flag = false;
     private float before_x;
     private float before_y;
@@ -27,7 +27,7 @@ public class RolePos : MonoBehaviour
     }
     public void WorkTo(float x,float y){
         move_flag = true;
-        tartget_end_position = new Vector3(x,y,UpdateZ(y));
+        end_position = new Vector3(x,y,UpdateZ(y));
         roleRender.SetWalk();
     }
     public void ToPosImmediately(float x,float y){
@@ -39,15 +39,15 @@ public class RolePos : MonoBehaviour
     }
     void Update()
     {
-        Vector3 end_position = (Init.map.transform.position + tartget_end_position);
-
-        if(move_flag&& (transform.position.x!=end_position.x||transform.position.y!=end_position.y))
+        
+        
+        if(move_flag&& (transform.localPosition.x!=end_position.x||transform.localPosition.y!=end_position.y))
         {
-            transform.position=Vector3.MoveTowards(transform.position,end_position,speed*Time.deltaTime);
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition,end_position,speed*Time.deltaTime);
             
-            if(Mathf.Abs(end_position.x-transform.position.x)>Mathf.Abs(end_position.y-transform.position.y))
+            if(Mathf.Abs(end_position.x-transform.localPosition.x)>Mathf.Abs(end_position.y-transform.localPosition.y))
             {
-                if(end_position.x>transform.position.x)
+                if(end_position.x>transform.localPosition.x)
                 {
                     roleRender.SetRight();
                 }
@@ -57,7 +57,7 @@ public class RolePos : MonoBehaviour
                 }
             }else
             {
-                if(end_position.y<=transform.position.y)
+                if(end_position.y<=transform.localPosition.y)
                 {
                     roleRender.SetFront();
                 }
@@ -67,11 +67,11 @@ public class RolePos : MonoBehaviour
                 }
             }
         }
-        if(Mathf.Abs(before_x-transform.position.x)<0.005&&Mathf.Abs(before_y-transform.position.y)<0.005){
+        if(Mathf.Abs(before_x-transform.localPosition.x)<0.005&&Mathf.Abs(before_y-transform.localPosition.y)<0.005){
             Clear();
             roleRender.SetIdle(true);
         }
-        before_x = transform.position.x;
-        before_y = transform.position.y;
+        before_x = transform.localPosition.x;
+        before_y = transform.localPosition.y;
     }
 }
