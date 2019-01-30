@@ -65,9 +65,11 @@
      <Compile Include="Assets\Script\Labby\CreateRoomUI.cs" />
      <Compile Include="Assets\Script\Login\Login.cs" />
      <Compile Include="Assets\Script\Login\LoginUI.cs" />
+     <Compile Include="Assets\Script\Map\ChatInput.cs" />
      <Compile Include="Assets\Script\Map\MapInit.cs" />
      <Compile Include="Assets\Script\Map\MapProcess.cs" />
      <Compile Include="Assets\Script\Map\MapThings.cs" />
+     <Compile Include="Assets\Script\Map\OpenChatBox.cs" />
      <Compile Include="Assets\Script\Net\NetEventDispatch.cs" />
      <Compile Include="Assets\Script\Net\NetWork.cs" />
      <Compile Include="Assets\Script\Register\Register.cs" />

@@ -8,6 +8,7 @@ public class MapInit : MonoBehaviour
     void Start()
     {
         Init.map = this.gameObject;
+        
     }
     void Update()
     {
