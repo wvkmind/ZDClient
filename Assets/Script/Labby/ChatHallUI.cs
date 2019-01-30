@@ -35,6 +35,7 @@ public class ChatHallUI : MonoBehaviour
             data.TryGetValue("status", out tmp);
             int status = tmp.AsInt32();
             if(status == 0){
+                rooms_info.Clear();
                 data.TryGetValue("page_sum", out tmp);
                 sum_page = tmp.AsInt32();
                 data.TryGetValue("cur_page", out tmp);

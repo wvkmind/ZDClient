@@ -168,6 +168,9 @@ MonoBehaviour:
   - {fileID: 1530918979}
   - {fileID: 936144181}
   - {fileID: 134043074}
+  enterRoomUI: {fileID: 1599610658}
+  enterRoomUIButton: {fileID: 1435917839}
+  enterRoomUIInput: {fileID: 1132361200}
 --- !u!4 &20436033
 Transform:
   m_ObjectHideFlags: 0
