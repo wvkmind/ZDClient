@@ -6,6 +6,7 @@ public class MapThings : MonoBehaviour
 {
     public UnityEngine.GameObject UserSpwanPos;
     public UnityEngine.GameObject prefab;
+    private static float timer = 0;
     void InitRoles(){
         for(int i =0;i<Init.otherUsersInCurMap.Count-1;i++){
             User u = Init.otherUsersInCurMap[i] as User;
@@ -89,6 +90,10 @@ public class MapThings : MonoBehaviour
     }
     void Update()
     {
-        
+        timer += Time.deltaTime;
+		if(timer>=20){
+			timer = 0;
+			FlushOther();
+		}
     }
 }
