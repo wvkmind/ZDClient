@@ -8,6 +8,7 @@ namespace DataModel
         public string map_name;
         public string title;
         public string user_number;
+        public bool has_password;
         public ArrayList type_list = new ArrayList();
         public  Room UnPack(MsgPack.MessagePackObject net_info){
             MsgPack.MessagePackObjectDictionary room_dic= net_info.AsDictionary();
@@ -20,6 +21,8 @@ namespace DataModel
             title = temp.AsStringUtf8();
             room_dic.TryGetValue("user_number",out temp);
             user_number = temp.AsStringUtf8();
+            room_dic.TryGetValue("has_password",out temp);
+            has_password = temp.AsBoolean();
             room_dic.TryGetValue("user_list",out temp);
             IList<MsgPack.MessagePackObject> _type_list = temp.AsList();
             foreach (MsgPack.MessagePackObject item in _type_list)

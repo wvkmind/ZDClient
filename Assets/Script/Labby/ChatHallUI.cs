@@ -14,6 +14,10 @@ public class ChatHallUI : MonoBehaviour
     public UnityEngine.UI.Text [] roomNameList;
     public UnityEngine.UI.Text sum;
     public UnityEngine.GameObject createRoomUI;
+    public UnityEngine.UI.Button [] roomsButton;
+    public UnityEngine.GameObject enterRoomUI;
+    public UnityEngine.UI.Button enterRoomUIButton;
+    public UnityEngine.UI.InputField enterRoomUIInput;
     private static float timer = 0;
     private int cur_page = 1;
     private int sum_page = 1;
@@ -56,6 +60,38 @@ public class ChatHallUI : MonoBehaviour
 		dic.Add("name", "hall_list");
 		NetWork.Push(dic);
     }
+    void EnterRoom(int i,string password = null){
+        Room cur = rooms_info[i] as Room;
+        NetEventDispatch.RegisterEvent("to_map",data =>{
+            NetEventDispatch.UnRegisterEvent("to_map");
+			MsgPack.MessagePackObject tmp;
+            data.TryGetValue("status", out tmp);
+            int status = tmp.AsInt32();
+            if(status == 0){
+                Init.otherUsersInCurMap.Clear();
+                Init.otherIdsInCurMap.Clear();
+                data.TryGetValue("other_user", out tmp);
+                foreach (var item in tmp.AsList())
+                {
+                    User other_user = (new User()).UnPack(item);
+                    Init.otherUsersInCurMap.Add(other_user);
+                    Init.otherIdsInCurMap.Add(other_user.id);
+                }
+                SwitchScene.NextScene(Map.subMapName[Map.GetMapIndex(cur.map_name)][0]);
+            }else{
+                data.TryGetValue("error", out tmp);
+                string error = tmp.AsStringUtf8();
+                ErrorInfo.CreateUI("加入房间失败:"+error);
+            }
+		});
+		Dictionary<string, object> dic = NetWork.getSendStart();
+		dic.Add("room_id",cur.id);
+        dic.Add("map_name",cur.map_name);
+        if(password!=null)
+        dic.Add("password",password);
+		dic.Add("name", "to_map");
+		NetWork.Push(dic);
+    }
     void FlushHall()
     {
         sum.text = cur_page+"/"+sum_page;
@@ -80,6 +116,27 @@ public class ChatHallUI : MonoBehaviour
         _exit.onClick.AddListener(ExitToBigMap);
         next.onClick.AddListener(NextPage);
         before.onClick.AddListener(Before);
+        
+        for(int i = 0;i<6;i++){
+            roomsButton[i].onClick.AddListener(()=>{
+                if(i<rooms_info.Count){
+                    Room cur = rooms_info[i] as Room;
+                    if(cur.has_password){
+                        enterRoomUI.gameObject.SetActive(true);
+                        enterRoomUIButton.onClick.AddListener(()=>{
+                            if(enterRoomUIInput.text=="")
+                                ErrorInfo.CreateUI("你没输入密码呀");
+                            else
+                                EnterRoom(i,enterRoomUIInput.text);
+                        });
+                    }
+                    else
+                    {
+                        EnterRoom(i);
+                    }
+                }
+            });
+        }
     }
     void OpenCreateRoomUI()
     {

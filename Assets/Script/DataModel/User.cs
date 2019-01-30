@@ -12,8 +12,11 @@
         public int level;
         public int zhanyang;
         public int buliang;
-        public float x;
-        public float y;
+        public float cur_x;
+        public float cur_y;
+        public int direction;
+        public float target_x;
+        public float target_y;
         public  User UnPack(MsgPack.MessagePackObject net_user){
             MsgPack.MessagePackObjectDictionary user_dic= net_user.AsDictionary();
             MsgPack.MessagePackObject temp;
@@ -37,6 +40,12 @@
             zhanyang = temp.AsInt32();
             user_dic.TryGetValue("buliang",out temp);
             buliang = temp.AsInt32();
+            user_dic.TryGetValue("room_pos",out temp);
+            cur_x = (float)temp.AsList()[0].AsDouble();
+            cur_y = (float)temp.AsList()[1].AsDouble();
+            direction = (int)temp.AsList()[2].AsDouble();
+            target_x = (float)temp.AsList()[3].AsDouble();
+            target_y = (float)temp.AsList()[4].AsDouble();
             return this;
         }
     }
