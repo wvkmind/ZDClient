@@ -7,8 +7,8 @@ public class MapThings : MonoBehaviour
     public UnityEngine.GameObject UserSpwanPos;
     public UnityEngine.GameObject prefab;
     void InitRoles(){
-        for(int i =0;i<9;i++){
-            User u = Init.otherUsersInCurMap[i];
+        for(int i =0;i<Init.otherUsersInCurMap.Count-1;i++){
+            User u = Init.otherUsersInCurMap[i] as User;
             if(u!=null&&u.status==0){
                 UnityEngine.GameObject user = (UnityEngine.GameObject) Instantiate(prefab, new Vector3(u.x, u.y, 0), Quaternion.identity,this.transform);
                 user.transform.localScale = new Vector3(1,1,1);

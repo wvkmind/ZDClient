@@ -7,7 +7,7 @@ public class Init : MonoBehaviour {
 	public static Init instance = null;
 	//User信息
 	public static User userInfo = null;//自己的信息
-	public static User [] otherUsersInCurMap = new User[9]; //房间里别人的信息
+	public static ArrayList  otherUsersInCurMap = new ArrayList(); //房间里别人的信息
 	public static UnityEngine.GameObject me = null;//房间里我的角色
 	public static Dictionary<int, UnityEngine.GameObject> other = new Dictionary<int, UnityEngine.GameObject>();//房间里别人的角色
 	public static UnityEngine.GameObject map = null;
