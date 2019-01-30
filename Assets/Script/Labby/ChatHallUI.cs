@@ -96,7 +96,7 @@ public class ChatHallUI : MonoBehaviour
     void FlushHall()
     {
         sum.text = cur_page+"/"+sum_page;
-        for(int i = 0;i<rooms_info.Count-1;i++)
+        for(int i = 0;i<rooms_info.Count;i++)
         {
             Room cur = rooms_info[i] as Room;
             int id = Map.GetMapIndex(cur.map_name);

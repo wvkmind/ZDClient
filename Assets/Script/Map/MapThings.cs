@@ -8,7 +8,7 @@ public class MapThings : MonoBehaviour
     public UnityEngine.GameObject prefab;
     private static float timer = 0;
     void InitRoles(){
-        for(int i =0;i<Init.otherUsersInCurMap.Count-1;i++){
+        for(int i =0;i<Init.otherUsersInCurMap.Count;i++){
             User u = Init.otherUsersInCurMap[i] as User;
             if(u!=null&&u.status==0){
                 NewOhter(u);
