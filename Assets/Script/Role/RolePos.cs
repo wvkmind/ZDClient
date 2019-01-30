@@ -16,13 +16,13 @@ public class RolePos : MonoBehaviour
         return -1-(y+3)/20.0f;
     }
     void Awake() {
-        transform.position = new Vector3(transform.position.x,transform.position.y,UpdateZ(transform.position.y));
+        transform.localPosition = new Vector3(transform.localPosition.x,transform.localPosition.y,UpdateZ(transform.localPosition.y));
         Clear();
     }
     void Clear()
     {
-        before_x = transform.position.x;
-        before_y = transform.position.y;
+        before_x = transform.localPosition.x;
+        before_y = transform.localPosition.y;
         move_flag = false;
     }
     public void WorkTo(float x,float y){
@@ -31,7 +31,7 @@ public class RolePos : MonoBehaviour
         roleRender.SetWalk();
     }
     public void ToPosImmediately(float x,float y){
-        transform.position = new Vector3(x,y,UpdateZ(y));
+        transform.localPosition = new Vector3(x,y,UpdateZ(y));
     }
     void Start()
     {

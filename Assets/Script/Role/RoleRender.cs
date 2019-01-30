@@ -18,6 +18,8 @@ public class RoleRender : MonoBehaviour {
     public void SetBack(){direction=1;_ani.SetInteger("direction",direction);SetAction(real_action_id);}
     public void SetLeft(){direction=2;_ani.SetInteger("direction",direction);SetAction(real_action_id);}
     public void SetRight(){direction=3;_ani.SetInteger("direction",direction);SetAction(real_action_id);}
+    public void SetDirection(int d){direction = d;}
+    public int GetDirection(){return direction;}
     public void SetAction(int i){
         action_id = direction*Role.RHAL+i;
         real_action_id = i;

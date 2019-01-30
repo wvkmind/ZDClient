@@ -30,12 +30,14 @@ public class UserInput : MonoBehaviour
     //这个WorkTo是外部输入调的WorkTo
     public void WorkTo(float x,float y,int direction,float tox,float toy)
     {
+        roleRender.SetDirection(direction);
         rolePos.ToPosImmediately(x,y);
         rolePos.WorkTo(x,y);
     }
     //这个Action是网络进来调用
     public void Action(float x,float y,int direction,int i)
     {
+        roleRender.SetDirection(direction);
         rolePos.ToPosImmediately(x,y);
         roleRender.SetAction(i);
     }

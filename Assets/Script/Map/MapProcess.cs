@@ -20,7 +20,27 @@ public class MapProcess : MonoBehaviour
         unit = Screen.height/2.0f/Camera.main.orthographicSize;
         sc = unit;
         limit = (400.0f-Screen.width/(Screen.height/600.0f)/2.0f)*3.2f/100.0f;
+        NetEventDispatch.RegisterEvent("cp",data =>{
+			UpdatePos(data);
+		});
     }
+    private static void UpdatePos(Dictionary<string, MsgPack.MessagePackObject> dic){
+		MsgPack.MessagePackObject tmp;
+		dic.TryGetValue("id",out tmp);
+        int id = tmp.AsInt32();
+        dic.TryGetValue("cp_data",out tmp);
+        float cur_x = (float)tmp.AsList()[0].AsDouble();
+        float cur_y = (float)tmp.AsList()[1].AsDouble();
+        int direction = (int)tmp.AsList()[2].AsDouble();
+        float target_x = (float)tmp.AsList()[3].AsDouble();
+        float target_y = (float)tmp.AsList()[4].AsDouble();
+        if(id==Init.userInfo.id)
+            Init.me.GetComponent<UserInput>().WorkTo(target_x,target_y);
+        else
+        {
+            Init.GetRoleObjecWithId(id).GetComponent<UserInput>().WorkTo(cur_x,cur_y,direction,target_x,target_y);
+        }
+	}
     void Update()
     {
         if(Input.touchCount == 1 )
@@ -39,7 +59,7 @@ public class MapProcess : MonoBehaviour
                         float design_x = (real_screen_x-Screen.width/2.0f)/proportion/100.0f;
                         float design_y = (real_screen_y-Screen.height/2.0f)/proportion/100.0f;
                         Vector3 pos = new Vector3(design_x,design_y,1.0f) - gameObject.transform.localPosition/3.2f;
-                        Init.me.GetComponent<UserInput>().WorkTo(pos.x,pos.y);
+                        SendMyTouch(Init.me.transform.localPosition.x,Init.me.transform.localPosition.y,Init.me.GetComponent<RoleRender>().GetDirection(),pos.x,pos.y);
                     }
                 }else if(touchEnd && Input.touches[0].phase == TouchPhase.Moved){
                     Vector3 delta_pos =  Input.touches[0].deltaPosition;
@@ -51,5 +71,15 @@ public class MapProcess : MonoBehaviour
                 }
             }
         }
+    }
+    void SendMyTouch(float cur_x,float cur_y,int direction,float target_x,float tartge_y){
+        Dictionary<string, object> dic = NetWork.getSendStart();
+        float [] cp_data = {cur_x,cur_y,direction,target_x,tartge_y};
+		dic.Add("cp_data",cp_data);
+		dic.Add("name", "cp");
+		NetWork.Push(dic);
+    }
+    private void OnDestroy() {
+        NetEventDispatch.UnRegisterEvent("cp");
     }
 }
