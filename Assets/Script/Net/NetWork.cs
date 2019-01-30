@@ -67,7 +67,6 @@ public class NetWork {
 		dic.TryGetValue("status", out tmp);
 		int status = tmp.AsInt32();
 		if(status == 0){
-			Debug.Log("心跳成功");
 		}
 		else{
 			dic.TryGetValue("error", out tmp);

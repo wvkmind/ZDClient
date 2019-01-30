@@ -1,4 +1,6 @@
-﻿namespace DataModel
+﻿using System.Collections.Generic;
+using System.Collections;
+namespace DataModel
 {
     public class Room
     {
@@ -6,7 +8,7 @@
         public string map_name;
         public string title;
         public string user_number;
-        public int [] user_list;
+        public ArrayList type_list = new ArrayList();
         public  Room UnPack(MsgPack.MessagePackObject net_info){
             MsgPack.MessagePackObjectDictionary room_dic= net_info.AsDictionary();
             MsgPack.MessagePackObject temp;
@@ -18,7 +20,12 @@
             title = temp.AsStringUtf8();
             room_dic.TryGetValue("user_number",out temp);
             user_number = temp.AsStringUtf8();
-
+            room_dic.TryGetValue("user_list",out temp);
+            IList<MsgPack.MessagePackObject> _type_list = temp.AsList();
+            foreach (MsgPack.MessagePackObject item in _type_list)
+            {
+                type_list.Add(item.AsInt32());
+            }
             return this;
         }
     }

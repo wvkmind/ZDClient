@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BaseData;
 using MsgPack.Serialization;
+using DataModel;
 public class ChatHallUI : MonoBehaviour
 {
     public UnityEngine.UI.Button _createRoom;
@@ -14,11 +15,10 @@ public class ChatHallUI : MonoBehaviour
     public UnityEngine.UI.Text sum;
     public UnityEngine.GameObject createRoomUI;
     private static float timer = 0;
-    private int [] maps_ids = {-1,-1,-1,-1,-1,-1};
-    private string [] rooms_title = {"空","空","空","空","空","空"};
     private int cur_page = 1;
     private int sum_page = 1;
     private IList<MsgPack.MessagePackObject> list;
+    private ArrayList rooms_info = new ArrayList();
     // Start is called before the first frame update
     void Awake() {
       GetFromServer();
@@ -41,16 +41,10 @@ public class ChatHallUI : MonoBehaviour
                 foreach (MsgPack.MessagePackObject item in list)
                 {
                     if(cur_i>5)break;
-			        MsgPack.MessagePackObjectDictionary room_info_dic= item.AsDictionary();
-                    MsgPack.MessagePackObject room_info;
-                    room_info_dic.TryGetValue("title",out room_info);
-                    rooms_title[cur_i]=room_info.AsStringUtf8();
-                    room_info_dic.TryGetValue("map_name",out room_info);
-                    maps_ids[cur_i]=Map.GetMapIndex(room_info.AsStringUtf8());
+                    rooms_info.Add((new Room()).UnPack(item));
                     cur_i = cur_i + 1;
                 }
                 FlushHall();
-                Debug.Log("大厅刷新成功");
             }else{
                 data.TryGetValue("error", out tmp);
                 string error = tmp.AsStringUtf8();
@@ -65,23 +59,19 @@ public class ChatHallUI : MonoBehaviour
     void FlushHall()
     {
         sum.text = cur_page+"/"+sum_page;
-        for(int i = 0;i<6;i++)
+        for(int i = 0;i<rooms_info.Count-1;i++)
         {
-            int id = maps_ids[i];
-            string name = rooms_title[i];
-            if(id==-1)
-            {
-                roomMapList[i].gameObject.SetActive(false);
-                roomNameList[i].text = "空";
-            }
-            else
-            {
-                Debug.Log(Map.MapSmallPath(id));
-                UnityEngine.Sprite sprite  = UnityEngine.Resources.Load(Map.MapSmallPath(id), typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
-			    roomMapList[i].sprite = sprite;
-                roomMapList[i].gameObject.SetActive(true);
-                roomNameList[i].text = name;
-            }
+            Room cur = rooms_info[i] as Room;
+            int id = Map.GetMapIndex(cur.map_name);
+            string name = cur.title;
+            UnityEngine.Sprite sprite  = UnityEngine.Resources.Load(Map.MapSmallPath(id), typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
+			roomMapList[i].sprite = sprite;
+            roomMapList[i].gameObject.SetActive(true);
+            roomNameList[i].text = name;
+        }
+        for(int i = rooms_info.Count;i<6;i++){
+            roomMapList[i].gameObject.SetActive(false);
+            roomNameList[i].text = "空";
         }
     }
     void Start()

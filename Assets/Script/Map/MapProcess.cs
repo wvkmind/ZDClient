@@ -47,7 +47,6 @@ public class MapProcess : MonoBehaviour
         {
             if(EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
-                Debug.Log("UI");
             }else{
                 if(Input.touches[0].phase == TouchPhase.Began)
                 {
