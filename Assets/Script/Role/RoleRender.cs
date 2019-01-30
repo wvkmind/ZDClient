@@ -20,6 +20,8 @@ public class RoleRender : MonoBehaviour {
     public void SetRight(){direction=3;_ani.SetInteger("direction",direction);SetAction(real_action_id);}
     public void SetDirection(int d){direction = d;}
     public int GetDirection(){return direction;}
+    public UnityEngine.TextMesh user_name;
+    public UnityEngine.GameObject user_level;
     public void SetAction(int i){
         action_id = direction*Role.RHAL+i;
         real_action_id = i;
@@ -83,6 +85,14 @@ public class RoleRender : MonoBehaviour {
         // * this is defaults
         //SetRoleType("BanGye");
         //SetAction(0);
+    }
+    public void SetName(string name)
+    {
+       user_name.text = name;
+    }
+    public void SetLevel(int i)
+    {
+        user_level.GetComponent<SpriteRenderer>().size = new Vector2(i,1);
     }
     public void SetIdle(bool full_of_energy){
         if(full_of_energy)this.SetIdle();
