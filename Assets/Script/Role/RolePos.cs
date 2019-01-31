@@ -28,9 +28,13 @@ public class RolePos : MonoBehaviour
         MapProcess.SendMyTouch(before_x,before_y,roleRender.GetDirection(),before_x,before_y);
     }
     public void WorkTo(float x,float y){
-        move_flag = true;
-        end_position = new Vector3(x,y,UpdateZ(y));
-        roleRender.SetWalk();
+        
+        if(Mathf.Abs(before_x-x)<0.0005&&Mathf.Abs(before_y-y)<0.0005)
+        {
+            move_flag = true;
+            end_position = new Vector3(x,y,UpdateZ(y));
+            roleRender.SetWalk();
+        }
     }
     public void ToPosImmediately(float x,float y){
         transform.localPosition = new Vector3(x,y,UpdateZ(y));

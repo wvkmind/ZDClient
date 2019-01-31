@@ -115,5 +115,6 @@ public class MapThings : MonoBehaviour
 
     private void OnDestroy() {
         NetEventDispatch.UnRegisterEvent("new_one");
+        NetEventDispatch.UnRegisterEvent("out_one");
     }
 }

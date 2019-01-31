@@ -45,6 +45,7 @@ public class MapProcess : MonoBehaviour
 	}
     void Update()
     {
+        //for ios and android
         if(Input.touchCount == 1 )
         {
             if(EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
@@ -71,6 +72,15 @@ public class MapProcess : MonoBehaviour
                     touchEnd = true;
                 }
             }
+        }
+        //for pc test
+        if(Input.GetMouseButtonDown(0)){
+            float real_screen_x = Input.mousePosition.x;
+            float real_screen_y = Input.mousePosition.y;
+            float design_x = (real_screen_x-Screen.width/2.0f)/proportion/100.0f;
+            float design_y = (real_screen_y-Screen.height/2.0f)/proportion/100.0f;
+            Vector3 pos = new Vector3(design_x,design_y,1.0f) - gameObject.transform.localPosition/3.2f;
+            SendMyTouch(Init.me.transform.localPosition.x,Init.me.transform.localPosition.y,Init.me.GetComponent<RoleRender>().GetDirection(),pos.x,pos.y);
         }
     }
     public static void SendMyTouch(float cur_x,float cur_y,int direction,float target_x,float tartge_y){
