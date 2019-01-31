@@ -76,7 +76,7 @@ public class RoleRender : MonoBehaviour {
     }
     public void SetExp(int i){
         _ani.SetInteger("next_action",0);
-        SetAction(9+i);
+        SetAction(8+i);
     }
     // * Use this for initialization
     void Awake() {
