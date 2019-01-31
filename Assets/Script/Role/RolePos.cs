@@ -8,6 +8,7 @@ public class RolePos : MonoBehaviour
     private Vector3 start_position;
     private Vector3 end_position;
     private bool move_flag = false;
+    private bool aready_routing = false;
     private float before_x;
     private float before_y;
     public float speed;
@@ -27,6 +28,7 @@ public class RolePos : MonoBehaviour
         before_x = transform.localPosition.x;
         before_y = transform.localPosition.y;
         move_flag = false;
+        aready_routing = false;
         if(me)
         MapProcess.SendMyTouch(before_x,before_y,roleRender.GetDirection(),before_x,before_y);
     }
@@ -60,28 +62,31 @@ public class RolePos : MonoBehaviour
 
             transform.localPosition = new Vector3(pos.x,pos.y,pos.z);
             
-
-            if(Mathf.Abs(end_position.x-transform.localPosition.x)>Mathf.Abs(end_position.y-transform.localPosition.y))
+            if(!aready_routing)
             {
-                if(end_position.x>transform.localPosition.x)
+                if(Mathf.Abs(end_position.x-transform.localPosition.x)>Mathf.Abs(end_position.y-transform.localPosition.y))
                 {
-                    roleRender.SetRight();
-                }
-                else
+                    if(end_position.x>transform.localPosition.x)
+                    {
+                        roleRender.SetRight();
+                    }
+                    else
+                    {
+                        roleRender.SetLeft();
+                    }
+                }else
                 {
-                    roleRender.SetLeft();
-                }
-            }else
-            {
-                if(end_position.y<=transform.localPosition.y)
-                {
-                    roleRender.SetFront();
-                }
-                else
-                {
-                    roleRender.SetBack();
+                    if(end_position.y<=transform.localPosition.y)
+                    {
+                        roleRender.SetFront();
+                    }
+                    else
+                    {
+                        roleRender.SetBack();
+                    }
                 }
             }
+            aready_routing = true;
         }
         if(move_flag && Mathf.Abs(before_x-transform.localPosition.x)<0.0005&&Mathf.Abs(before_y-transform.localPosition.y)<0.0005){
             Clear();
