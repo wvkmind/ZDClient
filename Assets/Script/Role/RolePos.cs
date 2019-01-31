@@ -23,7 +23,7 @@ public class RolePos : MonoBehaviour
         transform.localPosition = new Vector3(transform.localPosition.x,transform.localPosition.y,UpdateZ(transform.localPosition.y));
         Clear();
     }
-    void Clear()
+    public void Clear(bool is_exp = false)
     {
         before_x = transform.localPosition.x;
         before_y = transform.localPosition.y;

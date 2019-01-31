@@ -40,42 +40,53 @@ public class RoleRender : MonoBehaviour {
     //!next_action == 0的时候是idle状态，不过累的的时候idle是Snoring
     private void SetIdle(){
         _ani.SetInteger("next_action",0);
+        _ani.SetBool("sleep",false);
         SetAction(0);
     }
     private void SetSnoring(){
         _ani.SetInteger("next_action",0);
+        _ani.SetBool("sleep",false);
         SetAction(7);
     }
     public void SetWalk(){
         _ani.SetInteger("next_action",1);
+        _ani.SetBool("sleep",false);
         SetAction(1);
     }
     public void SetTalk(){
         _ani.SetInteger("next_action",0);
+        _ani.SetBool("sleep",false);
         SetAction(2);
     }
     public void SetRun(){
         _ani.SetInteger("next_action",3);
+        _ani.SetBool("sleep",false);
         SetAction(3);
     }
     public void SetEat(){
         _ani.SetInteger("next_action",4);
+        _ani.SetBool("sleep",false);
         SetAction(4);
     }
     public void SetRaiseHands(){
         _ani.SetInteger("next_action",5);
+        _ani.SetBool("sleep",false);
         SetAction(5);
     }
     public void SetPick(){
         _ani.SetInteger("next_action",0);
+        _ani.SetBool("sleep",false);
         SetAction(6);
     }
     public void SetCheer(){
         _ani.SetInteger("next_action",0);
+        _ani.SetBool("sleep",false);
         SetAction(8);
     }
     public void SetExp(int i){
         _ani.SetInteger("next_action",0);
+        if(i==19)_ani.SetBool("sleep",true);
+        else _ani.SetBool("sleep",false);
         SetAction(8+i);
     }
     // * Use this for initialization

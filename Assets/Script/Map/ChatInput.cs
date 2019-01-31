@@ -10,7 +10,7 @@ public class ChatInput : MonoBehaviour
     private Vector2 _adaptPanelOriginPos;
     private RectTransform _adaptPanelRt;
     private float RESOULUTION_HEIGHT = 1920F;
-    
+    // public UnityEngine.UI.
     void Start()
     {
         _inputField = this.GetComponent<UnityEngine.UI.InputField>();
