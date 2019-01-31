@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
+using DataModel;
 public class RolePos : MonoBehaviour
 {
     private Vector3 start_position;
@@ -11,9 +12,10 @@ public class RolePos : MonoBehaviour
     private float before_y;
     public float speed;
     private RoleRender roleRender;
+    private bool me = false;
     float UpdateZ(float y)
     {
-        return -1-(y+3)/20.0f;
+        return -2+(y+3)/20.0f;
     }
     void Awake() {
         roleRender = gameObject.GetComponent<RoleRender>();
@@ -25,6 +27,7 @@ public class RolePos : MonoBehaviour
         before_x = transform.localPosition.x;
         before_y = transform.localPosition.y;
         move_flag = false;
+        if(me)
         MapProcess.SendMyTouch(before_x,before_y,roleRender.GetDirection(),before_x,before_y);
     }
     public void WorkTo(float x,float y){
@@ -45,7 +48,8 @@ public class RolePos : MonoBehaviour
     }
     void Start()
     {
-        
+        User data = gameObject.GetComponent<RoleData>().data;
+        me = data.id == Init.userInfo.id;
     }
     void Update()
     {
