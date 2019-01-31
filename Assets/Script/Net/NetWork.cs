@@ -154,7 +154,10 @@ public class NetWork {
 	public static void Push(Dictionary<string, object> dic){
 		object name = null;
 		if(dic.TryGetValue("name",out name))
+		{
+			NetEventDispatch.TTL.Remove(name as string);
 			NetEventDispatch.TTL.Add(name as string,0);
+		}
 		var serializer = MessagePackSerializer.Get<Dictionary<string, object>>();
         byte[] pack = serializer.PackSingleObject(dic);
         NetWork.Send(pack);

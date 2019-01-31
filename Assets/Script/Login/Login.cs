@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using DataModel;
 public class Login {
+	public static string _account ;
+	public static string _password ;
 	public static void In(string account,string password,System.Action<bool,string > f){
 		string accountHash = Md5.GetMd5Hash(account);
 		string passwrodHash = Md5.GetMd5Hash(password);
+		_account = account;
+		_password = password;
         NetEventDispatch.RegisterEvent("login",data =>{
 			NetEventDispatch.UnRegisterEvent("login");
 			Logined(data,f);
@@ -24,7 +28,16 @@ public class Login {
 	}
 	public static void ReLoginOut(){
 		LoginOut();
-		SwitchScene.NextScene("Init");
+		Login.In(_account,_password,(data,error) =>{
+			if(error!=null&&!error.Equals(""))
+			ErrorInfo.CreateUI(error,()=>{
+				SwitchScene.NextScene("Init");
+			});
+			else
+			{
+				SwitchScene.NextScene("BigMap");
+			}
+		});
 	}
 	private static void Logined(Dictionary<string, MsgPack.MessagePackObject> dic,System.Action<bool,string > f){
 		MsgPack.MessagePackObject tmp;

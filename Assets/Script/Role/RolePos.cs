@@ -31,6 +31,10 @@ public class RolePos : MonoBehaviour
         
         if(Mathf.Abs(before_x-x)<0.0005&&Mathf.Abs(before_y-y)<0.0005)
         {
+            
+        }
+        else
+        {
             move_flag = true;
             end_position = new Vector3(x,y,UpdateZ(y));
             roleRender.SetWalk();
