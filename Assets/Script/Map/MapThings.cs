@@ -22,13 +22,6 @@ public class MapThings : MonoBehaviour
         Init.me.GetComponent<RoleData>().data = Init.userInfo;
         Init.me.GetComponent<RoleRender>().SetName(Init.userInfo.name);
         Init.me.GetComponent<RoleRender>().SetLevel(Init.userInfo.level);
-
-        Dictionary<string, object> dic = NetWork.getSendStart();
-        float [] cp_data = {UserSpwanPos.transform.localRotation.x,UserSpwanPos.transform.localRotation.y,0,UserSpwanPos.transform.localRotation.x,UserSpwanPos.transform.localRotation.y};
-		dic.Add("cp_data",cp_data);
-		dic.Add("name", "cp");
-		NetWork.Push(dic);
-
     }
     void NewOhter(User u){
         UnityEngine.GameObject user = (UnityEngine.GameObject) Instantiate(prefab, new Vector3(u.cur_x, u.cur_y, 0), Quaternion.identity,this.transform);
@@ -46,9 +39,8 @@ public class MapThings : MonoBehaviour
             data.TryGetValue("status", out tmp);
             int status = tmp.AsInt32();
             if(status == 0){
-                Init.otherUsersInCurMap.Clear();
-                Init.otherIdsInCurMap.Clear();
                 data.TryGetValue("other_user", out tmp);
+                ArrayList have_ids = new ArrayList();
                 foreach (var item in tmp.AsList())
                 {
                     User other_user = (new User()).UnPack(item);
@@ -56,13 +48,12 @@ public class MapThings : MonoBehaviour
                     {
                         NewOhter(other_user);
                     }
-                    Init.otherUsersInCurMap.Add(other_user);
-                    Init.otherIdsInCurMap.Add(other_user.id);
+                    have_ids.Add(other_user.id);
                 }
                 ArrayList del_ids = new ArrayList();
                 foreach (int id in Init.other.Keys)
                 {
-                    if(Init.otherIdsInCurMap.IndexOf(id)==-1)
+                    if(have_ids.IndexOf(id)==-1)
                     {
                         del_ids.Add(id);
                     }
@@ -86,7 +77,27 @@ public class MapThings : MonoBehaviour
     }    
     void Start()
     {
-        
+        NetEventDispatch.RegisterEvent("new_one",data =>{
+			NewOne(data);
+		});
+        NetEventDispatch.RegisterEvent("out_one",data =>{
+			OutOne(data);
+		});
+    }
+    void NewOne(Dictionary<string, MsgPack.MessagePackObject> dic){
+        MsgPack.MessagePackObject tmp;
+        dic.TryGetValue("new_one", out tmp);
+        User newone = (new User()).UnPack(tmp);
+        if(Init.GetRoleObjecWithId(newone.id)==null)
+        {
+            NewOhter(newone);
+        }
+    }
+    void OutOne(Dictionary<string, MsgPack.MessagePackObject> dic){
+        MsgPack.MessagePackObject tmp;
+        dic.TryGetValue("out_one", out tmp);
+        User newone = (new User()).UnPack(tmp);
+        Init.RemoveRoleObjectWithId(newone.id);
     }
     void Update()
     {
@@ -95,5 +106,9 @@ public class MapThings : MonoBehaviour
 			timer = 0;
 			FlushOther();
 		}
+    }
+
+    private void OnDestroy() {
+        NetEventDispatch.UnRegisterEvent("new_one");
     }
 }

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6260820578051161001}
   - component: {fileID: 2223427769832818957}
   - component: {fileID: 6107419880757277248}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RoleShow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 699119838012627745}
   - component: {fileID: 4258170638969963152}
   - component: {fileID: 4559762462291505623}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8789796109944844746}
   - component: {fileID: 9202901491692011394}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}

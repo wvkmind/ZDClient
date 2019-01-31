@@ -7,7 +7,7 @@ public class UserInput : MonoBehaviour
     private RolePos rolePos;
     private RoleRender roleRender;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rolePos = gameObject.GetComponent<RolePos>();
         roleRender = gameObject.GetComponent<RoleRender>();
@@ -32,7 +32,7 @@ public class UserInput : MonoBehaviour
     {
         roleRender.SetDirection(direction);
         rolePos.ToPosImmediately(x,y);
-        rolePos.WorkTo(x,y);
+        rolePos.WorkTo(tox,toy);
     }
     //这个Action是网络进来调用
     public void Action(float x,float y,int direction,int i)

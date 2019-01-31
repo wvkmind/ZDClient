@@ -70,13 +70,11 @@ public class ChatHallUI : MonoBehaviour
             int status = tmp.AsInt32();
             if(status == 0){
                 Init.otherUsersInCurMap.Clear();
-                Init.otherIdsInCurMap.Clear();
                 data.TryGetValue("other_user", out tmp);
                 foreach (var item in tmp.AsList())
                 {
                     User other_user = (new User()).UnPack(item);
                     Init.otherUsersInCurMap.Add(other_user);
-                    Init.otherIdsInCurMap.Add(other_user.id);
                 }
                 SwitchScene.NextScene(Map.subMapName[Map.GetMapIndex(cur.map_name)][0]);
             }else{
@@ -117,26 +115,33 @@ public class ChatHallUI : MonoBehaviour
         _exit.onClick.AddListener(ExitToBigMap);
         next.onClick.AddListener(NextPage);
         before.onClick.AddListener(Before);
-        
-        for(int i = 0;i<6;i++){
-            roomsButton[i].onClick.AddListener(()=>{
-                if(i<rooms_info.Count){
-                    Room cur = rooms_info[i] as Room;
-                    if(cur.has_password){
-                        enterRoomUI.gameObject.SetActive(true);
-                        enterRoomUIButton.onClick.AddListener(()=>{
-                            if(enterRoomUIInput.text=="")
-                                ErrorInfo.CreateUI("你没输入密码呀");
-                            else
-                                EnterRoom(i,enterRoomUIInput.text);
-                        });
-                    }
-                    else
-                    {
-                        EnterRoom(i);
-                    }
-                }
+        int i = 0;
+        foreach (UnityEngine.UI.Button item in roomsButton)
+        {
+            int a = i;
+            item.onClick.AddListener(()=>{
+                ProcessPassowrdRoom(a);
             });
+            i = i + 1;
+        }
+    }
+    void ProcessPassowrdRoom(int a)
+    {
+        if(a<rooms_info.Count){
+            Room cur = rooms_info[a] as Room;
+            if(cur.has_password){
+                enterRoomUI.gameObject.SetActive(true);
+                enterRoomUIButton.onClick.AddListener(()=>{
+                    if(enterRoomUIInput.text=="")
+                        ErrorInfo.CreateUI("你没输入密码呀");
+                    else
+                        EnterRoom(a,enterRoomUIInput.text);
+                });
+            }
+            else
+            {
+                EnterRoom(a);
+            }
         }
     }
     void OpenCreateRoomUI()

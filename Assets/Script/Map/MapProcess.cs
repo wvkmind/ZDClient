@@ -38,7 +38,9 @@ public class MapProcess : MonoBehaviour
             Init.me.GetComponent<UserInput>().WorkTo(target_x,target_y);
         else
         {
-            Init.GetRoleObjecWithId(id).GetComponent<UserInput>().WorkTo(cur_x,cur_y,direction,target_x,target_y);
+            UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
+            if(other!=null)
+                other.GetComponent<UserInput>().WorkTo(cur_x,cur_y,direction,target_x,target_y);
         }
 	}
     void Update()
@@ -71,7 +73,7 @@ public class MapProcess : MonoBehaviour
             }
         }
     }
-    void SendMyTouch(float cur_x,float cur_y,int direction,float target_x,float tartge_y){
+    public static void SendMyTouch(float cur_x,float cur_y,int direction,float target_x,float tartge_y){
         Dictionary<string, object> dic = NetWork.getSendStart();
         float [] cp_data = {cur_x,cur_y,direction,target_x,tartge_y};
 		dic.Add("cp_data",cp_data);

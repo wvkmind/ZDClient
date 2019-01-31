@@ -16,6 +16,7 @@ public class RolePos : MonoBehaviour
         return -1-(y+3)/20.0f;
     }
     void Awake() {
+        roleRender = gameObject.GetComponent<RoleRender>();
         transform.localPosition = new Vector3(transform.localPosition.x,transform.localPosition.y,UpdateZ(transform.localPosition.y));
         Clear();
     }
@@ -24,6 +25,7 @@ public class RolePos : MonoBehaviour
         before_x = transform.localPosition.x;
         before_y = transform.localPosition.y;
         move_flag = false;
+        MapProcess.SendMyTouch(before_x,before_y,roleRender.GetDirection(),before_x,before_y);
     }
     public void WorkTo(float x,float y){
         move_flag = true;
@@ -35,16 +37,18 @@ public class RolePos : MonoBehaviour
     }
     void Start()
     {
-        roleRender = gameObject.GetComponent<RoleRender>();
+        
     }
     void Update()
     {
-        
-        
         if(move_flag&& (transform.localPosition.x!=end_position.x||transform.localPosition.y!=end_position.y))
         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition,end_position,speed*Time.deltaTime);
+            float t = speed*Time.deltaTime;
+            Vector3 pos = Vector3.MoveTowards(transform.localPosition,end_position,t);
+
+            transform.localPosition = new Vector3(pos.x,pos.y,pos.z);
             
+
             if(Mathf.Abs(end_position.x-transform.localPosition.x)>Mathf.Abs(end_position.y-transform.localPosition.y))
             {
                 if(end_position.x>transform.localPosition.x)
@@ -67,7 +71,7 @@ public class RolePos : MonoBehaviour
                 }
             }
         }
-        if(Mathf.Abs(before_x-transform.localPosition.x)<0.005&&Mathf.Abs(before_y-transform.localPosition.y)<0.005){
+        if(move_flag && Mathf.Abs(before_x-transform.localPosition.x)<0.0005&&Mathf.Abs(before_y-transform.localPosition.y)<0.0005){
             Clear();
             roleRender.SetIdle(true);
         }

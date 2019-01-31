@@ -73,13 +73,13 @@ public class NetWork {
 			string error_text = tmp.AsStringUtf8();
 			if(error_text.Equals("notoken"))
 			{
-				ErrorInfo.CreateUI("跟村子丢失连接啦",()=>{
+				ErrorInfo.CreateUI("跟村子丢失连接啦"+error_text,()=>{
 					Login.ReLoginOut();
 				});
 			}
 			else
 			{
-				ErrorInfo.CreateUI("跟村子丢失连接啦",()=>{
+				ErrorInfo.CreateUI("跟村子丢失连接啦"+error_text,()=>{
 					Login.ReLoginOut();
 				});
 			}
@@ -123,8 +123,13 @@ public class NetWork {
 		UdpClient udp_client = data as UdpClient;
 		while(si_loop){
 			IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
-			Byte[] receiveBytes = udp_client.Receive(ref RemoteIpEndPoint);
-			receive_queue.Enqueue(receiveBytes);
+			try{
+				Byte[] receiveBytes = udp_client.Receive(ref RemoteIpEndPoint);
+				receive_queue.Enqueue(receiveBytes);
+			}catch(System.Exception)
+			{
+			}
+			
 		}
 	}
 	// Update is called once per frame
