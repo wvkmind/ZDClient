@@ -45,7 +45,7 @@ public class SendAction : MonoBehaviour
         Dictionary<string, object> dic = NetWork.getSendStart();
         int ac_data = page*4+i;
 		dic.Add("ac_data",actions_related[ac_data]);
-		dic.Add("name", "cp");
+		dic.Add("name", "ac");
 		NetWork.Push(dic);
     }
     void FlushActionIcon(){

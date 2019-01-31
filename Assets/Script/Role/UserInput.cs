@@ -34,6 +34,9 @@ public class UserInput : MonoBehaviour
         rolePos.ToPosImmediately(x,y);
         rolePos.WorkTo(tox,toy);
     }
+    public void Exp(int i){
+        roleRender.SetExp(i);
+    }
     //这个Action是网络进来调用
     public void Action(float x,float y,int direction,int i)
     {

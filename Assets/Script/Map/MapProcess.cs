@@ -23,23 +23,23 @@ public class MapProcess : MonoBehaviour
         NetEventDispatch.RegisterEvent("cp",data =>{
 			UpdatePos(data);
 		});
-        NetEventDispatch.RegisterEvent("ca",data =>{
-			UpdateActions(data);
+        NetEventDispatch.RegisterEvent("exp",data =>{
+			UpdateExp(data);
 		});
     }
-    private static void UpdateActions(Dictionary<string, MsgPack.MessagePackObject> dic){
+    private static void UpdateExp(Dictionary<string, MsgPack.MessagePackObject> dic){
 		MsgPack.MessagePackObject tmp;
 		dic.TryGetValue("id",out tmp);
         int id = tmp.AsInt32();
-        dic.TryGetValue("ca_data",out tmp);
+        dic.TryGetValue("ac_data",out tmp);
         int action = tmp.AsInt32();
         if(id==Init.userInfo.id)
-            Init.me.GetComponent<UserInput>().Action(action);
+            Init.me.GetComponent<UserInput>().Exp(action);
         else
         {
             UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
             if(other!=null)
-                other.GetComponent<UserInput>().Action(action);
+                other.GetComponent<UserInput>().Exp(action);
         }
 	}
     private static void UpdatePos(Dictionary<string, MsgPack.MessagePackObject> dic){
@@ -110,5 +110,6 @@ public class MapProcess : MonoBehaviour
     }
     private void OnDestroy() {
         NetEventDispatch.UnRegisterEvent("cp");
+        NetEventDispatch.UnRegisterEvent("exp");
     }
 }
