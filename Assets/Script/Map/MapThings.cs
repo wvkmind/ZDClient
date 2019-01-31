@@ -97,6 +97,11 @@ public class MapThings : MonoBehaviour
         MsgPack.MessagePackObject tmp;
         dic.TryGetValue("out_one", out tmp);
         User newone = (new User()).UnPack(tmp);
+        UnityEngine.GameObject del_obj = Init.GetRoleObjecWithId(newone.id);
+        if(del_obj!=null)
+        {
+            Destroy(del_obj);
+        }
         Init.RemoveRoleObjectWithId(newone.id);
     }
     void Update()
