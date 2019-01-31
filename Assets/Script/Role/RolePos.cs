@@ -29,7 +29,7 @@ public class RolePos : MonoBehaviour
         before_y = transform.localPosition.y;
         move_flag = false;
         aready_routing = false;
-        if(me)
+        if(me&&!is_exp)
         MapProcess.SendMyTouch(before_x,before_y,roleRender.GetDirection(),before_x,before_y);
     }
     public void WorkTo(float x,float y){

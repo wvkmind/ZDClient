@@ -38,6 +38,12 @@ public class UserInput : MonoBehaviour
         rolePos.Clear(true);
         roleRender.SetExp(i);
     }
+    public void Exp(float x,float y,int direction,int i){
+        rolePos.Clear(true);
+        roleRender.SetDirection(direction);
+        rolePos.ToPosImmediately(x,y);
+        roleRender.SetExp(i);
+    }
     //这个Action是网络进来调用
     public void Action(float x,float y,int direction,int i)
     {

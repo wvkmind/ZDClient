@@ -32,14 +32,17 @@ public class MapProcess : MonoBehaviour
 		dic.TryGetValue("id",out tmp);
         int id = tmp.AsInt32();
         dic.TryGetValue("ac_data",out tmp);
-        int action = tmp.AsInt32();
+        float cur_x = (float)tmp.AsList()[0].AsDouble();
+        float cur_y = (float)tmp.AsList()[1].AsDouble();
+        int direction = (int)tmp.AsList()[2].AsDouble();
+        int action = (int)tmp.AsList()[3].AsDouble();
         if(id==Init.userInfo.id)
             Init.me.GetComponent<UserInput>().Exp(action);
         else
         {
             UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
             if(other!=null)
-                other.GetComponent<UserInput>().Exp(action);
+                other.GetComponent<UserInput>().Exp(cur_x,cur_y,direction,action);
         }
 	}
     private static void UpdatePos(Dictionary<string, MsgPack.MessagePackObject> dic){

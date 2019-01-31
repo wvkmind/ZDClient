@@ -12,6 +12,7 @@ public class SendAction : MonoBehaviour
     public UnityEngine.UI.Button ac4;
     private int page = 0;
     private int [] actions_related = {7,2,3,4,5,14,8,9,10,1,15,16,17,18,19};
+    
     void Start()
     {
         up.onClick.AddListener(()=>{
@@ -44,7 +45,8 @@ public class SendAction : MonoBehaviour
     void SendActionToOther(int i ){
         Dictionary<string, object> dic = NetWork.getSendStart();
         int ac_data = page*4+i;
-		dic.Add("ac_data",actions_related[ac_data]);
+        float [] data = {Init.me.transform.localPosition.x,Init.me.transform.localPosition.y,Init.me.GetComponent<RoleRender>().GetDirection(),actions_related[ac_data]};
+		dic.Add("ac_data",data);
 		dic.Add("name", "exp");
 		NetWork.Push(dic);
     }
