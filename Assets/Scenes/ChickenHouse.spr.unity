@@ -2453,6 +2453,7 @@ GameObject:
   - component: {fileID: 1969373640}
   - component: {fileID: 1969373642}
   - component: {fileID: 1969373641}
+  - component: {fileID: 1969373643}
   m_Layer: 5
   m_Name: SkillBk
   m_TagString: Untagged
@@ -2522,6 +2523,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969373639}
   m_CullTransparentMesh: 0
+--- !u!114 &1969373643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969373639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72d0716c2ff640a6bb952528db8264f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: {fileID: 1408605619}
+  down: {fileID: 300909175}
+  ac1: {fileID: 601877336}
+  ac2: {fileID: 1738072164}
+  ac3: {fileID: 2008838854}
+  ac4: {fileID: 484794880}
 --- !u!1 &2008838852
 GameObject:
   m_ObjectHideFlags: 0

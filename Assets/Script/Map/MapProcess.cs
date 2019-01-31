@@ -23,7 +23,25 @@ public class MapProcess : MonoBehaviour
         NetEventDispatch.RegisterEvent("cp",data =>{
 			UpdatePos(data);
 		});
+        NetEventDispatch.RegisterEvent("ca",data =>{
+			UpdateActions(data);
+		});
     }
+    private static void UpdateActions(Dictionary<string, MsgPack.MessagePackObject> dic){
+		MsgPack.MessagePackObject tmp;
+		dic.TryGetValue("id",out tmp);
+        int id = tmp.AsInt32();
+        dic.TryGetValue("ca_data",out tmp);
+        int action = tmp.AsInt32();
+        if(id==Init.userInfo.id)
+            Init.me.GetComponent<UserInput>().Action(action);
+        else
+        {
+            UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
+            if(other!=null)
+                other.GetComponent<UserInput>().Action(action);
+        }
+	}
     private static void UpdatePos(Dictionary<string, MsgPack.MessagePackObject> dic){
 		MsgPack.MessagePackObject tmp;
 		dic.TryGetValue("id",out tmp);

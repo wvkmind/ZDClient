@@ -71,6 +71,7 @@
      <Compile Include="Assets\Script\Map\MapProcess.cs" />
      <Compile Include="Assets\Script\Map\MapThings.cs" />
      <Compile Include="Assets\Script\Map\OpenChatBox.cs" />
+     <Compile Include="Assets\Script\Map\SendAction.cs" />
      <Compile Include="Assets\Script\Net\NetEventDispatch.cs" />
      <Compile Include="Assets\Script\Net\NetWork.cs" />
      <Compile Include="Assets\Script\Register\Register.cs" />
