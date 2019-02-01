@@ -40,6 +40,7 @@ public class RolePos : MonoBehaviour
         }
         else
         {
+            aready_routing = false;
             move_flag = true;
             end_position = new Vector3(x,y,UpdateZ(y));
             roleRender.SetWalk();
