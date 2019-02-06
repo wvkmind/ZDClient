@@ -67,6 +67,7 @@
      <Compile Include="Assets\Script\Login\Login.cs" />
      <Compile Include="Assets\Script\Login\LoginUI.cs" />
      <Compile Include="Assets\Script\Map\ChatInput.cs" />
+     <Compile Include="Assets\Script\Map\MapAni.cs" />
      <Compile Include="Assets\Script\Map\MapInit.cs" />
      <Compile Include="Assets\Script\Map\MapProcess.cs" />
      <Compile Include="Assets\Script\Map\MapThings.cs" />
@@ -110,6 +111,7 @@
      <None Include="Assets\Resources\Image\Map\七星堂\任务\KoongyaAlSelect.spr\17-34：0.31.0.txt" />
      <None Include="Assets\Resources\Image\Map\七星堂\任务\QuestListSelect.spr\51：31.0.31.txt" />
      <None Include="Assets\Resources\Image\角色动作\角色特效effect\Leaf.spr\0.0.0.txt" />
+     <None Include="Assets\Resources\Image\物品\特殊物品\说明.txt" />
      <None Include="Assets\Resources\Image\角色动作\魔法表情\31.0.31.txt" />
      <None Include="Assets\Resources\Image\角色动作\角色特效effect\EctEffect.spr\0.0.0.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">

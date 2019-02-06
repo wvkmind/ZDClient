@@ -6,6 +6,7 @@ public class MapThings : MonoBehaviour
 {
     public UnityEngine.GameObject UserSpwanPos;
     public UnityEngine.GameObject prefab;
+    public UnityEngine.GameObject [] ItemPos;
     private static float timer = 0;
     void InitRoles(){
         for(int i =0;i<Init.otherUsersInCurMap.Count;i++){
@@ -73,8 +74,20 @@ public class MapThings : MonoBehaviour
 		NetWork.Push(dic);
     }
     void Awake() {
+        InitItemPos();
         InitRoles();
     }    
+    float UpdateZ(float y)
+    {
+        return -2+(y+3)/20.0f;
+    }
+    void InitItemPos(){
+        foreach (var item in ItemPos)
+        {
+            Vector3 pos = item.gameObject.transform.position;
+            item.gameObject.transform.position = new Vector3(pos.x,pos.y,UpdateZ(pos.y));
+        }
+    }
     void Start()
     {
         NetEventDispatch.RegisterEvent("new_one",data =>{
