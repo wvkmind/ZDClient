@@ -28,7 +28,7 @@ public class MapThings : MonoBehaviour
             item_entities[i] = (UnityEngine.GameObject)Instantiate(item_prefab, new Vector3(
                     ItemPos[i].gameObject.transform.position.x,
                     ItemPos[i].gameObject.transform.position.y,
-                    ItemPos[i].gameObject.transform.position.z
+                    PositionTransform.UpdateZ(ItemPos[i].gameObject.transform.position.y)
                 ), 
                 Quaternion.identity,
                 this.transform
@@ -113,18 +113,10 @@ public class MapThings : MonoBehaviour
 		NetWork.Push(dic);
     }
     void Awake() {
-        InitItemPosZ();//处理一下物品目标点的z轴
         InitItems();//初始化物品
         InitRoles();//初始化玩家
     }    
     
-    void InitItemPosZ(){
-        foreach (var item in ItemPos)
-        {
-            Vector3 pos = item.gameObject.transform.position;
-            item.gameObject.transform.position = new Vector3(pos.x,pos.y,PositionTransform.UpdateZ(pos.y));
-        }
-    }
     void Start()
     {
         NetEventDispatch.RegisterEvent("new_one",data =>{

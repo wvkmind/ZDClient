@@ -19,7 +19,7 @@ public class NetWork {
 	public static bool si_loop = true;
 	public static string token = null;
 	//public static string gete_ip = "xn--cheryl-802jv55g.qicp.io";
-	public static string gete_ip = "127.0.0.1";
+	public static string gete_ip = "192.168.93.161";
 	private static float timer = 0;
 	private static bool heartbeat = false;
 
