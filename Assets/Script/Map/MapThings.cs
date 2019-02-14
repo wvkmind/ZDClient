@@ -25,10 +25,10 @@ public class MapThings : MonoBehaviour
     }
     void InitItems(){
         for(var i = 0;i<10;i++){
-            item_entities[0] = (UnityEngine.GameObject)Instantiate(item_prefab, new Vector3(
-                    ItemPos[i].gameObject.transform.localRotation.x,
-                    ItemPos[i].gameObject.transform.localRotation.y,
-                    ItemPos[i].gameObject.transform.localRotation.z
+            item_entities[i] = (UnityEngine.GameObject)Instantiate(item_prefab, new Vector3(
+                    ItemPos[i].gameObject.transform.position.x,
+                    ItemPos[i].gameObject.transform.position.y,
+                    ItemPos[i].gameObject.transform.position.z
                 ), 
                 Quaternion.identity,
                 this.transform
@@ -80,11 +80,15 @@ public class MapThings : MonoBehaviour
         for(var i = 0;i<10;i++){
             item_entities[i].GetComponent<ItemRender>().SetNull();
         }
+        if(!tmp.IsNil)
         foreach (var item in tmp.AsList())
         {
-            Item cur_item = (new Item()).UnPack(item);
-            ItemRender item_entity = item_entities[cur_item.pos].GetComponent<ItemRender>();
-            item_entity.Set(cur_item.id,cur_item.type);
+            if(!item.IsNil)
+            {
+                Item cur_item = (new Item()).UnPack(item);
+                ItemRender item_entity = item_entities[cur_item.pos].GetComponent<ItemRender>();
+                item_entity.Set(cur_item.id,cur_item.type);
+            }
         }
     }
     void FlushRoom(){
