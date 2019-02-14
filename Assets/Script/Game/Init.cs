@@ -11,6 +11,7 @@ public class Init : MonoBehaviour {
 	public static UnityEngine.GameObject me = null;//房间里我的角色
 	public static Dictionary<int, UnityEngine.GameObject> other = new Dictionary<int, UnityEngine.GameObject>();//房间里别人的角色
 	public static UnityEngine.GameObject map = null;
+	public static Dictionary<string, MsgPack.MessagePackObject> temp_data = new Dictionary<string, MsgPack.MessagePackObject>();//切换场景的时候的临时数据 (这是个傻逼方案)
 	void Start () {
 		instance = this;
 		NetWork.ConnectGate();
@@ -37,5 +38,16 @@ public class Init : MonoBehaviour {
 	}
 	public static void RemoveAllRoleObject(){
 		other.Clear();
+	}
+
+	public static void PushData(string key,MsgPack.MessagePackObject value){
+		temp_data.Remove(key);
+		temp_data.Add(key,value);
+	}
+	public static MsgPack.MessagePackObject GetData(string key)
+	{
+		MsgPack.MessagePackObject ret;
+		temp_data.TryGetValue(key,out ret);
+		return ret;
 	}
 }

@@ -14,13 +14,9 @@ public class RolePos : MonoBehaviour
     public float speed;
     private RoleRender roleRender;
     private bool me = false;
-    float UpdateZ(float y)
-    {
-        return -2+(y+3)/20.0f;
-    }
     void Awake() {
         roleRender = gameObject.GetComponent<RoleRender>();
-        transform.localPosition = new Vector3(transform.localPosition.x,transform.localPosition.y,UpdateZ(transform.localPosition.y));
+        transform.localPosition = new Vector3(transform.localPosition.x,transform.localPosition.y,PositionTransform.UpdateZ(transform.localPosition.y));
         Clear();
     }
     public void Clear(bool is_exp = false)
@@ -42,12 +38,12 @@ public class RolePos : MonoBehaviour
         {
             aready_routing = false;
             move_flag = true;
-            end_position = new Vector3(x,y,UpdateZ(y));
+            end_position = new Vector3(x,y,PositionTransform.UpdateZ(y));
             roleRender.SetWalk();
         }
     }
     public void ToPosImmediately(float x,float y){
-        transform.localPosition = new Vector3(x,y,UpdateZ(y));
+        transform.localPosition = new Vector3(x,y,PositionTransform.UpdateZ(y));
     }
     void Start()
     {

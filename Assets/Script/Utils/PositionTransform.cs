@@ -15,5 +15,9 @@ namespace Utils
             Vector3 worldpos = Camera.main.ScreenToWorldPoint(new Vector3(mousepos.x, mousepos.y, normardir.magnitude));
             return worldpos;
         }
+        public static float UpdateZ(float y)
+        {
+            return -2+(y+3)/20.0f;
+        }
     }
 }

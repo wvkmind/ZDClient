@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DataModel;
+using Utils;
 public class MapThings : MonoBehaviour
 {
     public UnityEngine.GameObject UserSpwanPos;
-    public UnityEngine.GameObject prefab;
+    public UnityEngine.GameObject prefab; //role
+    public UnityEngine.GameObject item_prefab;
     public UnityEngine.GameObject [] ItemPos;
+    private UnityEngine.GameObject [] item_entities = new UnityEngine.GameObject[10];
     private static float timer = 0;
     void InitRoles(){
         for(int i =0;i<Init.otherUsersInCurMap.Count;i++){
@@ -18,6 +21,22 @@ public class MapThings : MonoBehaviour
                 break;
             }
         }
+        NewMe();
+    }
+    void InitItems(){
+        for(var i = 0;i<10;i++){
+            item_entities[0] = (UnityEngine.GameObject)Instantiate(item_prefab, new Vector3(
+                    ItemPos[i].gameObject.transform.localRotation.x,
+                    ItemPos[i].gameObject.transform.localRotation.y,
+                    ItemPos[i].gameObject.transform.localRotation.z
+                ), 
+                Quaternion.identity,
+                this.transform
+            );
+        }
+        FlushItem(Init.GetData("item_list"));
+    }
+    void NewMe(){
         Init.me = (UnityEngine.GameObject)Instantiate(prefab, new Vector3(UserSpwanPos.transform.localRotation.x,UserSpwanPos.transform.localRotation.y , 0), Quaternion.identity,this.transform);
         Init.me.transform.localScale = new Vector3(1,1,1);
         Init.me.GetComponent<RoleData>().data = Init.userInfo;
@@ -33,36 +52,52 @@ public class MapThings : MonoBehaviour
         user.GetComponent<UserInput>().WorkTo(u.cur_x,u.cur_y,u.direction,u.target_x,u.target_y);
         Init.PutRoleObjectWithId(u.id,user);
     }
-    void FlushOther(){
+    void FlushOther(MsgPack.MessagePackObject tmp){
+        ArrayList have_ids = new ArrayList();
+        foreach (var item in tmp.AsList())
+        {
+            User other_user = (new User()).UnPack(item);
+            if(Init.GetRoleObjecWithId(other_user.id)==null)
+            {
+                NewOhter(other_user);
+            }
+            have_ids.Add(other_user.id);
+        }
+        ArrayList del_ids = new ArrayList();
+        foreach (int id in Init.other.Keys)
+        {
+            if(have_ids.IndexOf(id)==-1)
+            {
+                del_ids.Add(id);
+            }
+        }
+        foreach (int id in del_ids)
+        {
+            Init.RemoveRoleObjectWithId(id);
+        }
+    }
+    void FlushItem(MsgPack.MessagePackObject tmp){
+        for(var i = 0;i<10;i++){
+            item_entities[i].GetComponent<ItemRender>().SetNull();
+        }
+        foreach (var item in tmp.AsList())
+        {
+            Item cur_item = (new Item()).UnPack(item);
+            ItemRender item_entity = item_entities[cur_item.pos].GetComponent<ItemRender>();
+            item_entity.Set(cur_item.id,cur_item.type);
+        }
+    }
+    void FlushRoom(){
         NetEventDispatch.RegisterEvent("flush_room",data =>{
             NetEventDispatch.UnRegisterEvent("flush_room");
 			MsgPack.MessagePackObject tmp;
             data.TryGetValue("status", out tmp);
             int status = tmp.AsInt32();
             if(status == 0){
+                data.TryGetValue("item_list", out tmp);
+                FlushItem(tmp);
                 data.TryGetValue("other_user", out tmp);
-                ArrayList have_ids = new ArrayList();
-                foreach (var item in tmp.AsList())
-                {
-                    User other_user = (new User()).UnPack(item);
-                    if(Init.GetRoleObjecWithId(other_user.id)==null)
-                    {
-                        NewOhter(other_user);
-                    }
-                    have_ids.Add(other_user.id);
-                }
-                ArrayList del_ids = new ArrayList();
-                foreach (int id in Init.other.Keys)
-                {
-                    if(have_ids.IndexOf(id)==-1)
-                    {
-                        del_ids.Add(id);
-                    }
-                }
-                foreach (int id in del_ids)
-                {
-                    Init.RemoveRoleObjectWithId(id);
-                }
+                FlushOther(tmp);
             }else{
                 data.TryGetValue("error", out tmp);
                 string error = tmp.AsStringUtf8();
@@ -74,18 +109,16 @@ public class MapThings : MonoBehaviour
 		NetWork.Push(dic);
     }
     void Awake() {
-        InitItemPos();
-        InitRoles();
+        InitItemPosZ();//处理一下物品目标点的z轴
+        InitItems();//初始化物品
+        InitRoles();//初始化玩家
     }    
-    float UpdateZ(float y)
-    {
-        return -2+(y+3)/20.0f;
-    }
-    void InitItemPos(){
+    
+    void InitItemPosZ(){
         foreach (var item in ItemPos)
         {
             Vector3 pos = item.gameObject.transform.position;
-            item.gameObject.transform.position = new Vector3(pos.x,pos.y,UpdateZ(pos.y));
+            item.gameObject.transform.position = new Vector3(pos.x,pos.y,PositionTransform.UpdateZ(pos.y));
         }
     }
     void Start()
@@ -96,6 +129,12 @@ public class MapThings : MonoBehaviour
         NetEventDispatch.RegisterEvent("out_one",data =>{
 			OutOne(data);
 		});
+        NetEventDispatch.RegisterEvent("change_item",data =>{
+            MsgPack.MessagePackObject tmp;
+            data.TryGetValue("item_list", out tmp);
+			FlushItem(tmp);
+		});
+        
     }
     void NewOne(Dictionary<string, MsgPack.MessagePackObject> dic){
         MsgPack.MessagePackObject tmp;
@@ -122,12 +161,13 @@ public class MapThings : MonoBehaviour
         timer += Time.deltaTime;
 		if(timer>=20){
 			timer = 0;
-			FlushOther();
+			FlushRoom();
 		}
     }
 
     private void OnDestroy() {
         NetEventDispatch.UnRegisterEvent("new_one");
         NetEventDispatch.UnRegisterEvent("out_one");
+        NetEventDispatch.UnRegisterEvent("change_item");
     }
 }

@@ -69,6 +69,12 @@ public class ChatHallUI : MonoBehaviour
             data.TryGetValue("status", out tmp);
             int status = tmp.AsInt32();
             if(status == 0){
+                data.TryGetValue("map_id",out tmp);
+                Init.PushData("map_id",tmp.AsInt32());
+                data.TryGetValue("talk_list",out tmp);
+                Init.PushData("talk_list",tmp);
+                data.TryGetValue("item_list",out tmp);
+                Init.PushData("item_list",tmp);
                 Init.otherUsersInCurMap.Clear();
                 data.TryGetValue("other_user", out tmp);
                 foreach (var item in tmp.AsList())
