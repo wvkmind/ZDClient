@@ -129,6 +129,7 @@ public class NetWork {
 				receive_queue.Enqueue(receiveBytes);
 			}catch(System.Exception)
 			{
+				return;
 			}
 			
 		}

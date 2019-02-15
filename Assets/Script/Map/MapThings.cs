@@ -28,11 +28,12 @@ public class MapThings : MonoBehaviour
             item_entities[i] = (UnityEngine.GameObject)Instantiate(item_prefab, new Vector3(
                     ItemPos[i].gameObject.transform.position.x,
                     ItemPos[i].gameObject.transform.position.y,
-                    PositionTransform.UpdateZ(ItemPos[i].gameObject.transform.position.y)
+                    0.0f
                 ), 
                 Quaternion.identity,
                 this.transform
             );
+            item_entities[i].transform.localPosition = new Vector3(item_entities[i].transform.localPosition.x,item_entities[i].transform.localPosition.y,PositionTransform.UpdateZ(ItemPos[i].gameObject.transform.localPosition.y));
         }
         FlushItem(Init.GetData("item_list"));
     }

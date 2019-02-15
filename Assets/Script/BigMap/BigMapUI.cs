@@ -12,6 +12,7 @@ public class BigMapUI : MonoBehaviour
     private int page = 0;
     private float time = 0.0f;
     private float per_page = -(800.0f*3.2f*Screen.height/1920.0f-Screen.width)/2.0f;
+    private bool flag = false;
     void Start()
     {
         exit.onClick.AddListener(ExitToInit);
@@ -30,11 +31,13 @@ public class BigMapUI : MonoBehaviour
     {
         if(page!=2)page = page + 1;
         FlushPage();
+        flag = true;
     }
     void _BeforePage()
     {
         if(page!=0)page = page - 1;
         FlushPage();
+        flag = true;
     }
     void OpenChatHall()
     {
@@ -47,13 +50,17 @@ public class BigMapUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time = time + Time.deltaTime;
-        float s = page*per_page-node.transform.position.x;
-        if(s == 0 )time = 0.0f;
-        float cur_speed = 0.0f;
-        if(s != 0 )
-            cur_speed = s / time*(0.1f);
-        node.transform.position = new Vector3(node.transform.position.x+time*cur_speed,node.transform.position.y,node.transform.position.z);
-
+        if(flag)
+        {
+            time = time + Time.deltaTime;
+            float s = page*per_page-node.transform.position.x;
+            if(s == 0 )time = 0.0f;
+            float cur_speed = 0.0f;
+            if(s != 0 )
+                cur_speed = s / time*(0.1f);
+            node.transform.position = new Vector3(node.transform.position.x+time*cur_speed,node.transform.position.y,node.transform.position.z);
+            if(Mathf.Abs(node.transform.position.x - node.transform.position.x+time*cur_speed)<0.01f)flag=false;
+        }
+        
     }
 }
