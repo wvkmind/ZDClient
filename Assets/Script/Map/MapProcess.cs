@@ -26,6 +26,12 @@ public class MapProcess : MonoBehaviour
         NetEventDispatch.RegisterEvent("exp",data =>{
 			UpdateExp(data);
 		});
+        NetEventDispatch.RegisterEvent("pick",data =>{
+			UpdatePick(data);
+		});
+        NetEventDispatch.RegisterEvent("eat",data =>{
+			UpdateEat(data);
+		});
     }
     private static void UpdateExp(Dictionary<string, MsgPack.MessagePackObject> dic){
 		MsgPack.MessagePackObject tmp;
@@ -94,15 +100,6 @@ public class MapProcess : MonoBehaviour
                 }
             }
         }
-        //for pc test
-        // if(Input.GetMouseButtonDown(0)){
-        //     float real_screen_x = Input.mousePosition.x;
-        //     float real_screen_y = Input.mousePosition.y;
-        //     float design_x = (real_screen_x-Screen.width/2.0f)/proportion/100.0f;
-        //     float design_y = (real_screen_y-Screen.height/2.0f)/proportion/100.0f;
-        //     Vector3 pos = new Vector3(design_x,design_y,1.0f) - gameObject.transform.localPosition/3.2f;
-        //     SendMyTouch(Init.me.transform.localPosition.x,Init.me.transform.localPosition.y,Init.me.GetComponent<RoleRender>().GetDirection(),pos.x,pos.y);
-        // }
     }
     public static void SendMyTouch(float cur_x,float cur_y,int direction,float target_x,float tartge_y){
         Dictionary<string, object> dic = NetWork.getSendStart();
@@ -111,8 +108,40 @@ public class MapProcess : MonoBehaviour
 		dic.Add("name", "cp");
 		NetWork.Push(dic);
     }
+    private void UpdatePick(Dictionary<string, MsgPack.MessagePackObject> dic){
+        MsgPack.MessagePackObject tmp;
+		dic.TryGetValue("items",out tmp);
+        GetComponent<MapThings>().FlushItem(tmp);
+        dic.TryGetValue("user_id",out tmp);
+        int id = tmp.AsInt32();
+        if(id==Init.userInfo.id)
+            Init.me.GetComponent<RoleRender>().SetPick();
+        else
+        {
+            UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
+            if(other!=null)
+                other.GetComponent<RoleRender>().SetPick();
+        }
+    }
+    private void UpdateEat(Dictionary<string, MsgPack.MessagePackObject> dic){
+        MsgPack.MessagePackObject tmp;
+		dic.TryGetValue("items",out tmp);
+        GetComponent<MapThings>().FlushItem(tmp);
+        dic.TryGetValue("user_id",out tmp);
+        int id = tmp.AsInt32();
+        if(id==Init.userInfo.id)
+            Init.me.GetComponent<RoleRender>().SetEat();
+        else
+        {
+            UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
+            if(other!=null)
+                other.GetComponent<RoleRender>().SetEat();
+        }
+    }
     private void OnDestroy() {
         NetEventDispatch.UnRegisterEvent("cp");
         NetEventDispatch.UnRegisterEvent("exp");
+        NetEventDispatch.UnRegisterEvent("pick");
+        NetEventDispatch.UnRegisterEvent("eat");
     }
 }

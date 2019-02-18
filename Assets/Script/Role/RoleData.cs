@@ -6,6 +6,7 @@ using DataModel;
 public class RoleData : MonoBehaviour
 {
     public User data;
+    public bool isMe(){return data.id==Init.userInfo.id;}
     void Start()
     {
         

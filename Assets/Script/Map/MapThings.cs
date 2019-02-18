@@ -77,7 +77,7 @@ public class MapThings : MonoBehaviour
             Init.RemoveRoleObjectWithId(id);
         }
     }
-    void FlushItem(MsgPack.MessagePackObject tmp){
+    public void FlushItem(MsgPack.MessagePackObject tmp){
         for(var i = 0;i<10;i++){
             item_entities[i].GetComponent<ItemRender>().SetNull();
         }
@@ -88,7 +88,9 @@ public class MapThings : MonoBehaviour
             {
                 Item cur_item = (new Item()).UnPack(item);
                 ItemRender item_entity = item_entities[cur_item.pos].GetComponent<ItemRender>();
+                ItemProcess item_proc = item_entities[cur_item.pos].GetComponent<ItemProcess>();
                 item_entity.Set(cur_item.id,cur_item.type);
+                item_proc.Set(cur_item.pos,cur_item.type);
             }
         }
     }

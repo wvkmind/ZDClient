@@ -5,8 +5,9 @@ using UnityEngine;
 public class ItemRender : MonoBehaviour
 {
     private SpriteRenderer item_pic;
-    private int type;
-    private int id;
+    public UnityEngine.UI.Button button ;
+    public int type;
+    public int id;
     void Awake(){
         item_pic = GetComponent<SpriteRenderer>();
     }
@@ -22,6 +23,7 @@ public class ItemRender : MonoBehaviour
     public void SetId(int n){
         id = n;
     }
+    
     public void Fresh(){
         string path ;
         if(type == 0)
@@ -37,6 +39,10 @@ public class ItemRender : MonoBehaviour
         SetId(i);
         SetType(t);
         Fresh();
+        string str = "Pick";
+        if(t==1) str = "Eat";
+        UnityEngine.Sprite sprite  = UnityEngine.Resources.Load("GUI/Map/"+str, typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
+		button.GetComponent<UnityEngine.UI.Image>().sprite = sprite;
         gameObject.SetActive(true);
     }
 }
