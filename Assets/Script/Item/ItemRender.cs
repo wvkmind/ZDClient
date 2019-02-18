@@ -15,7 +15,7 @@ public class ItemRender : MonoBehaviour
         gameObject.SetActive(false);
     }
     public void SetType(int n){
-        type = id;
+        type = n;
     }
     public bool IsFood(){
         return type == 1;

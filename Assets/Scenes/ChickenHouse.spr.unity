@@ -4058,6 +4058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b6b41c996397468fa1df4dad6b7b8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapThings: {fileID: 707559462}
 --- !u!114 &2020667508
 MonoBehaviour:
   m_ObjectHideFlags: 0

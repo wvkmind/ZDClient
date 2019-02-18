@@ -11,9 +11,9 @@ public class MapProcess : MonoBehaviour
     private float limit;
     private float unit; 
     private float proportion;
-    private MapThings mapThings;
+    public MapThings mapThings;
     void Awake() {
-        mapThings = gameObject.GetComponent<MapThings>();
+        
     }
     void Start()
     {
@@ -33,6 +33,7 @@ public class MapProcess : MonoBehaviour
         NetEventDispatch.RegisterEvent("eat",data =>{
 			UpdateEat(data);
 		});
+        
     }
     private static void UpdateExp(Dictionary<string, MsgPack.MessagePackObject> dic){
 		MsgPack.MessagePackObject tmp;
@@ -111,37 +112,45 @@ public class MapProcess : MonoBehaviour
     }
     private void UpdatePick(Dictionary<string, MsgPack.MessagePackObject> dic){
         MsgPack.MessagePackObject tmp;
-		dic.TryGetValue("items",out tmp);
-        mapThings.FlushItem(tmp);
-        dic.TryGetValue("user_id",out tmp);
-        int id = tmp.AsInt32();
-        if(id==Init.userInfo.id)
-            Init.me.GetComponent<RoleRender>().SetPick();
-        else
-        {
-            UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
-            if(other!=null)
-                other.GetComponent<RoleRender>().SetPick();
+        dic.TryGetValue("status", out tmp);
+		int status = tmp.AsInt32();
+		if(status == 0){
+            dic.TryGetValue("items",out tmp);
+            mapThings.FlushItem(tmp);
+            dic.TryGetValue("user_id",out tmp);
+            int id = tmp.AsInt32();
+            if(id==Init.userInfo.id)
+                Init.me.GetComponent<RoleRender>().SetPick();
+            else
+            {
+                UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
+                if(other!=null)
+                    other.GetComponent<RoleRender>().SetPick();
+            }
+            dic.TryGetValue("pick_pos",out tmp);
+            int pos = tmp.AsInt32();
+            dic.TryGetValue("id",out tmp);
+            int item_id = tmp.AsInt32();
+            mapThings.FakeItemUp(item_id,pos);
         }
-        dic.TryGetValue("pick_pos",out tmp);
-        int pos = tmp.AsInt32();
-        dic.TryGetValue("id",out tmp);
-        int item_id = tmp.AsInt32();
-        mapThings.FakeItemUp(item_id,pos);
     }
     private void UpdateEat(Dictionary<string, MsgPack.MessagePackObject> dic){
         MsgPack.MessagePackObject tmp;
-		dic.TryGetValue("items",out tmp);
-        mapThings.FlushItem(tmp);
-        dic.TryGetValue("user_id",out tmp);
-        int id = tmp.AsInt32();
-        if(id==Init.userInfo.id)
-            Init.me.GetComponent<RoleRender>().SetEat();
-        else
-        {
-            UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
-            if(other!=null)
-                other.GetComponent<RoleRender>().SetEat();
+        dic.TryGetValue("status", out tmp);
+		int status = tmp.AsInt32();
+		if(status == 0){
+            dic.TryGetValue("items",out tmp);
+            mapThings.FlushItem(tmp);
+            dic.TryGetValue("user_id",out tmp);
+            int id = tmp.AsInt32();
+            if(id==Init.userInfo.id)
+                Init.me.GetComponent<RoleRender>().SetEat();
+            else
+            {
+                UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
+                if(other!=null)
+                    other.GetComponent<RoleRender>().SetEat();
+            }
         }
     }
     private void OnDestroy() {
