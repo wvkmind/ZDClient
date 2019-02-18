@@ -63,6 +63,7 @@
      <Compile Include="Assets\Script\DataModel\Room.cs" />
      <Compile Include="Assets\Script\DataModel\User.cs" />
      <Compile Include="Assets\Script\Game\Init.cs" />
+     <Compile Include="Assets\Script\Item\ItemProcess.cs" />
      <Compile Include="Assets\Script\Item\ItemRender.cs" />
      <Compile Include="Assets\Script\Labby\ChatHallUI.cs" />
      <Compile Include="Assets\Script\Labby\CreateRoomUI.cs" />

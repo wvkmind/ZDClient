@@ -76,8 +76,6 @@ public class MapProcess : MonoBehaviour
                 {
                     if(touchEnd&&Input.touches[0].tapCount == 2)//双击走路
                     {
-                        //TODO 捡垃圾
-                        //TODO 捡食物
                         touchEnd = false;
                         float real_screen_x = Input.touches[0].position.x;
                         float real_screen_y = Input.touches[0].position.y;

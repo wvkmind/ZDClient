@@ -92,4 +92,19 @@ public class RolePos : MonoBehaviour
         before_x = transform.localPosition.x;
         before_y = transform.localPosition.y;
     }
+
+    public bool FrontMyFace(Vector3 other_item){
+        bool flag = false;
+        int dir = roleRender.GetDirection();
+        if(dir==0){
+            flag = other_item.y >= transform.localPosition.y;
+        }else if(dir==1){
+            flag = other_item.y <= transform.localPosition.y;
+        }else if(dir==2){
+            flag = other_item.x <= transform.localPosition.x;
+        }else if(dir==3){
+            flag = other_item.x >= transform.localPosition.x;
+        }
+        return flag;
+    }
 }
