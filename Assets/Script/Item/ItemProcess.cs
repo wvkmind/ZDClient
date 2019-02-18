@@ -11,7 +11,7 @@ public class ItemProcess : MonoBehaviour
     public bool delete = false;
     void Awake() {
         button.onClick.AddListener(()=>{
-            SendPick();
+            SendPick(type);
         });
         button.gameObject.SetActive(false);
     }
@@ -22,9 +22,9 @@ public class ItemProcess : MonoBehaviour
     public void Delete(){
         Destroy(this);
     }
-    void SendPick(){
+    void SendPick(int _type){
         string name = "pick";
-        if(type == 1)name = "eat";
+        if(_type == 1)name = "eat";
         Dictionary<string, object> dic = NetWork.getSendStart();
 		dic.Add("pos",pos);
 		dic.Add("name", name);
@@ -40,7 +40,7 @@ public class ItemProcess : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(!is_show&&col.gameObject.name == "RoleShow"){
+        if(!is_show&&col.gameObject.tag == "Role"){
             RoleData role = col.gameObject.GetComponent<RoleData>();
             if(role.isMe())
             {
@@ -55,7 +55,7 @@ public class ItemProcess : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D col)
     {
-        if(is_show&&col.gameObject.name == "RoleShow"){
+        if(is_show&&col.gameObject.tag == "Role"){
             RoleData role = col.gameObject.GetComponent<RoleData>();
             if(role.isMe())
             {

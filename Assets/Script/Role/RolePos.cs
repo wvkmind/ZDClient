@@ -97,9 +97,9 @@ public class RolePos : MonoBehaviour
         bool flag = false;
         int dir = roleRender.GetDirection();
         if(dir==0){
-            flag = other_item.y >= transform.localPosition.y;
-        }else if(dir==1){
             flag = other_item.y <= transform.localPosition.y;
+        }else if(dir==1){
+            flag = other_item.y >= transform.localPosition.y;
         }else if(dir==2){
             flag = other_item.x <= transform.localPosition.x;
         }else if(dir==3){

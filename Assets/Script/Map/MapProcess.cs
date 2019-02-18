@@ -11,8 +11,9 @@ public class MapProcess : MonoBehaviour
     private float limit;
     private float unit; 
     private float proportion;
+    private MapThings mapThings;
     void Awake() {
-        
+        mapThings = GetComponent<MapThings>();
     }
     void Start()
     {
@@ -111,7 +112,7 @@ public class MapProcess : MonoBehaviour
     private void UpdatePick(Dictionary<string, MsgPack.MessagePackObject> dic){
         MsgPack.MessagePackObject tmp;
 		dic.TryGetValue("items",out tmp);
-        GetComponent<MapThings>().FlushItem(tmp);
+        mapThings.FlushItem(tmp);
         dic.TryGetValue("user_id",out tmp);
         int id = tmp.AsInt32();
         if(id==Init.userInfo.id)
@@ -126,12 +127,12 @@ public class MapProcess : MonoBehaviour
         int pos = tmp.AsInt32();
         dic.TryGetValue("id",out tmp);
         int item_id = tmp.AsInt32();
-        GetComponent<MapThings>().FakeItemUp(item_id,pos);
+        mapThings.FakeItemUp(item_id,pos);
     }
     private void UpdateEat(Dictionary<string, MsgPack.MessagePackObject> dic){
         MsgPack.MessagePackObject tmp;
 		dic.TryGetValue("items",out tmp);
-        GetComponent<MapThings>().FlushItem(tmp);
+        mapThings.FlushItem(tmp);
         dic.TryGetValue("user_id",out tmp);
         int id = tmp.AsInt32();
         if(id==Init.userInfo.id)
