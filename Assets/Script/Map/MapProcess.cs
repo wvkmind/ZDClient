@@ -13,7 +13,7 @@ public class MapProcess : MonoBehaviour
     private float proportion;
     private MapThings mapThings;
     void Awake() {
-        mapThings = GetComponent<MapThings>();
+        mapThings = gameObject.GetComponent<MapThings>();
     }
     void Start()
     {
