@@ -122,6 +122,11 @@ public class MapProcess : MonoBehaviour
             if(other!=null)
                 other.GetComponent<RoleRender>().SetPick();
         }
+        dic.TryGetValue("pick_pos",out tmp);
+        int pos = tmp.AsInt32();
+        dic.TryGetValue("id",out tmp);
+        int item_id = tmp.AsInt32();
+        GetComponent<MapThings>().FakeItemUp(item_id,pos);
     }
     private void UpdateEat(Dictionary<string, MsgPack.MessagePackObject> dic){
         MsgPack.MessagePackObject tmp;

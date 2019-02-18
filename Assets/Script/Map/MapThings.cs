@@ -37,6 +37,17 @@ public class MapThings : MonoBehaviour
         }
         FlushItem(Init.GetData("item_list"));
     }
+    public void FakeItemUp(int id,int pos){
+        UnityEngine.GameObject fake_item = (UnityEngine.GameObject)Instantiate(item_prefab, new Vector3(
+                    ItemPos[pos].gameObject.transform.position.x,
+                    ItemPos[pos].gameObject.transform.position.y,
+                    -3.0f
+                ), 
+                Quaternion.identity,
+                this.transform
+        );
+        fake_item.GetComponent<Animator>().Play("Pick");
+    }
     void NewMe(){
         Init.me = (UnityEngine.GameObject)Instantiate(prefab, new Vector3(UserSpwanPos.transform.localRotation.x,UserSpwanPos.transform.localRotation.y , 0), Quaternion.identity,this.transform);
         Init.me.transform.localScale = new Vector3(1,1,1);

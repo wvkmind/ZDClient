@@ -8,6 +8,7 @@ public class ItemProcess : MonoBehaviour
     private int pos;
     private int type;
     private bool is_show = false;
+    public bool delete = false;
     void Awake() {
         button.onClick.AddListener(()=>{
             SendPick();
@@ -17,6 +18,9 @@ public class ItemProcess : MonoBehaviour
     void Start()
     {
         
+    }
+    public void Delete(){
+        Destroy(this);
     }
     void SendPick(){
         string name = "pick";
@@ -32,7 +36,7 @@ public class ItemProcess : MonoBehaviour
     }
     void Update()
     {
-        
+        if(delete)Delete();
     }
     void OnTriggerEnter2D(Collider2D col)
     {
