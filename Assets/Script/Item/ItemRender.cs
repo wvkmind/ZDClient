@@ -44,6 +44,7 @@ public class ItemRender : MonoBehaviour
         if(t==1) str = "Eat";
         UnityEngine.Sprite sprite  = UnityEngine.Resources.Load("GUI/Map/"+str, typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
 		button.GetComponent<UnityEngine.UI.Image>().sprite = sprite;
+        button.gameObject.SetActive(false);
         gameObject.SetActive(true);
     }
     void Update()
