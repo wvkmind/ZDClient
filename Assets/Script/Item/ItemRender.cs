@@ -8,6 +8,7 @@ public class ItemRender : MonoBehaviour
     public UnityEngine.UI.Button button ;
     public int type;
     public int id;
+    public bool pick_action = false;
     void Awake(){
         item_pic = GetComponent<SpriteRenderer>();
     }
@@ -44,5 +45,17 @@ public class ItemRender : MonoBehaviour
         UnityEngine.Sprite sprite  = UnityEngine.Resources.Load("GUI/Map/"+str, typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
 		button.GetComponent<UnityEngine.UI.Image>().sprite = sprite;
         gameObject.SetActive(true);
+    }
+    void Update()
+    {
+        if(pick_action){
+            PickAction();
+            pick_action = false;
+        }
+    }
+
+    public void PickAction()
+    {
+        gameObject.transform.localPosition  = Vector3.MoveTowards(gameObject.transform.localPosition,new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+1,gameObject.transform.localPosition.z),Time.deltaTime);
     }
 }

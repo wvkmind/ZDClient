@@ -131,7 +131,9 @@ public class MapProcess : MonoBehaviour
             int pos = tmp.AsInt32();
             dic.TryGetValue("id",out tmp);
             int item_id = tmp.AsInt32();
-            mapThings.FakeItemUp(item_id,pos);
+            dic.TryGetValue("type",out tmp);
+            int item_type = tmp.AsInt32();
+            mapThings.FakeItemUp(item_id,item_type,pos);
         }
     }
     private void UpdateEat(Dictionary<string, MsgPack.MessagePackObject> dic){

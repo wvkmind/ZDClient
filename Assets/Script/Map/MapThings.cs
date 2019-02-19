@@ -37,7 +37,7 @@ public class MapThings : MonoBehaviour
         }
         FlushItem(Init.GetData("item_list"));
     }
-    public void FakeItemUp(int id,int pos){
+    public void FakeItemUp(int id,int type,int pos){
         UnityEngine.GameObject fake_item = (UnityEngine.GameObject)Instantiate(item_prefab, new Vector3(
                     ItemPos[pos].gameObject.transform.position.x,
                     ItemPos[pos].gameObject.transform.position.y,
@@ -46,6 +46,8 @@ public class MapThings : MonoBehaviour
                 Quaternion.identity,
                 this.transform
         );
+        fake_item.transform.localPosition = new Vector3(ItemPos[pos].gameObject.transform.localPosition.x,ItemPos[pos].gameObject.transform.localPosition.y,PositionTransform.UpdateZ(ItemPos[pos].gameObject.transform.transform.localPosition.y));
+        fake_item.GetComponent<ItemRender>().Set(id,type);
         fake_item.GetComponent<Animator>().Play("Pick");
     }
     void NewMe(){

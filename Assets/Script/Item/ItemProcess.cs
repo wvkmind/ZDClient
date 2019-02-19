@@ -20,7 +20,7 @@ public class ItemProcess : MonoBehaviour
         
     }
     public void Delete(){
-        Destroy(this);
+        Destroy(this.gameObject);
     }
     void SendPick(int _type){
         string name = "pick";
