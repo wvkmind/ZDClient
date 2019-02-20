@@ -20,21 +20,24 @@ public class RoleData : MonoBehaviour
     }
     void AddTiLiZhi()
     {
-        timer += Time.deltaTime;
-		if(timer>=1){
-			timer = 0;
-            if(data.tilizhi!=100)
-            {
-                int n = data.phy_str_rate/10;
-                if(n<1)n=1;
-                    data.tilizhi = data.tilizhi + n;
-                if(isMe()){
-                    Dictionary<string, object> dic = NetWork.getSendStart();
-                    dic.Add("name", "atlz");
-                    dic.Add("n", data.tilizhi);
-                    NetWork.Push(dic,false);
+        if(Init.me.GetComponent<RolePos>().IsStop())
+        {
+            timer += Time.deltaTime;
+            if(timer>=1){
+                timer = 0;
+                if(data.tilizhi!=100)
+                {
+                    int n = data.phy_str_rate/10;
+                    if(n<1)n=1;
+                        data.tilizhi = data.tilizhi + n;
+                    if(isMe()){
+                        Dictionary<string, object> dic = NetWork.getSendStart();
+                        dic.Add("name", "atlz");
+                        dic.Add("n", data.tilizhi);
+                        NetWork.Push(dic,false);
+                    }
                 }
             }
-		}
+        }
     }
 }
