@@ -57,6 +57,10 @@ public class RolePos : MonoBehaviour
     {
         if(move_flag&& (transform.localPosition.x!=end_position.x||transform.localPosition.y!=end_position.y))
         {
+            if(roleData.data.tilizhi == 0)
+                speed = 0.05f;
+            else 
+                speed = 0.2f;
             float t = speed*Time.deltaTime;
             Vector3 pos = Vector3.MoveTowards(transform.localPosition,end_position,t);
 
@@ -91,7 +95,6 @@ public class RolePos : MonoBehaviour
         if(move_flag && Mathf.Abs(before_x-transform.localPosition.x)<0.0005&&Mathf.Abs(before_y-transform.localPosition.y)<0.0005){
             Clear();
             roleRender.SetIdle(roleData.data.tilizhi != 0);
-            Debug.Log("roleData.data.tilizhi"+roleData.data.tilizhi);
         }
         before_x = transform.localPosition.x;
         before_y = transform.localPosition.y;
