@@ -153,9 +153,9 @@ public class NetWork {
 		return dic;
 	}
 	
-	public static void Push(Dictionary<string, object> dic){
+	public static void Push(Dictionary<string, object> dic,bool ttlflag = true){
 		object name = null;
-		if(dic.TryGetValue("name",out name))
+		if(ttlflag&&dic.TryGetValue("name",out name))
 		{
 			NetEventDispatch.TTL.Remove(name as string);
 			NetEventDispatch.TTL.Add(name as string,0);

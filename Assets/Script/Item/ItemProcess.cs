@@ -9,6 +9,8 @@ public class ItemProcess : MonoBehaviour
     private int type;
     private bool is_show = false;
     public bool delete = false;
+    private RolePos mePos ;
+    bool _in = false;
     void Awake() {
         button.onClick.AddListener(()=>{
             SendPick(type);
@@ -17,7 +19,7 @@ public class ItemProcess : MonoBehaviour
     }
     void Start()
     {
-        
+        mePos = Init.me.GetComponent<RolePos>();
     }
     public void Delete(){
         Destroy(this.gameObject);
@@ -37,6 +39,11 @@ public class ItemProcess : MonoBehaviour
     void Update()
     {
         if(delete)Delete();
+        if(!is_show&&_in&&Init.me.GetComponent<RolePos>().IsStop())
+        {
+            is_show = true;
+            button.gameObject.SetActive(true);
+        }
     }
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -47,8 +54,7 @@ public class ItemProcess : MonoBehaviour
                 RolePos pos = col.gameObject.GetComponent<RolePos>();
                 if(pos.FrontMyFace(gameObject.transform.localPosition))
                 {
-                    is_show = true;
-                    button.gameObject.SetActive(true);
+                    _in= true;
                 }
             }
         }
@@ -59,6 +65,7 @@ public class ItemProcess : MonoBehaviour
             RoleData role = col.gameObject.GetComponent<RoleData>();
             if(role.isMe())
             {
+                _in= false;
                 is_show = false;
                 button.gameObject.SetActive(false);
             }

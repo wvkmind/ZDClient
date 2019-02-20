@@ -4059,6 +4059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapThings: {fileID: 707559462}
+  hUD: {fileID: 2060511904}
 --- !u!114 &2020667508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4157,6 +4158,7 @@ GameObject:
   - component: {fileID: 2060511902}
   - component: {fileID: 2060511901}
   - component: {fileID: 2060511900}
+  - component: {fileID: 2060511904}
   m_Layer: 5
   m_Name: GUI
   m_TagString: Untagged
@@ -4246,6 +4248,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2060511904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060511899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6c431fc5c0b4ba98829f3ba9091de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilizhi: {fileID: 302227453}
+  exp: {fileID: 1204123097}
 --- !u!1 &2145209954
 GameObject:
   m_ObjectHideFlags: 0

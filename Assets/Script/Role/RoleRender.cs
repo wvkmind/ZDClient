@@ -22,6 +22,8 @@ public class RoleRender : MonoBehaviour {
     public int GetDirection(){return direction;}
     public TextMesh user_name;
     public GameObject user_level;
+    private RoleData role_data;
+    
     public void SetAction(int i){
         action_id = direction*Role.RHAL+i;
         real_action_id = i;
@@ -47,6 +49,19 @@ public class RoleRender : MonoBehaviour {
         _ani.SetInteger("next_action",0);
         _ani.SetBool("sleep",false);
         SetAction(7);
+    }
+    void Start(){
+        role_data = gameObject.GetComponent<RoleData>();
+    }
+    public void SetGo(){
+        if(role_data.data.tilizhi < 30)
+        {
+            SetWalk();
+        }
+        else
+        {
+            SetRun();
+        }
     }
     public void SetWalk(){
         _ani.SetInteger("next_action",1);

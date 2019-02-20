@@ -13,7 +13,9 @@ public class RolePos : MonoBehaviour
     private float before_y;
     public float speed;
     private RoleRender roleRender;
+    private RoleData roleData;
     private bool me = false;
+    private static float timer = 0;
     void Awake() {
         roleRender = gameObject.GetComponent<RoleRender>();
         transform.localPosition = new Vector3(transform.localPosition.x,transform.localPosition.y,PositionTransform.UpdateZ(transform.localPosition.y));
@@ -39,7 +41,7 @@ public class RolePos : MonoBehaviour
             aready_routing = false;
             move_flag = true;
             end_position = new Vector3(x,y,PositionTransform.UpdateZ(y));
-            roleRender.SetWalk();
+            roleRender.SetGo();
         }
     }
     public void ToPosImmediately(float x,float y){
@@ -47,8 +49,9 @@ public class RolePos : MonoBehaviour
     }
     void Start()
     {
-        User data = gameObject.GetComponent<RoleData>().data;
-        me = data.id == Init.userInfo.id;
+        roleData = gameObject.GetComponent<RoleData>();
+        me = roleData.data.id == Init.userInfo.id;
+
     }
     void Update()
     {
@@ -87,10 +90,24 @@ public class RolePos : MonoBehaviour
         }
         if(move_flag && Mathf.Abs(before_x-transform.localPosition.x)<0.0005&&Mathf.Abs(before_y-transform.localPosition.y)<0.0005){
             Clear();
-            roleRender.SetIdle(true);
+            roleRender.SetIdle(roleData.data.tilizhi != 0);
+            Debug.Log("roleData.data.tilizhi"+roleData.data.tilizhi);
         }
         before_x = transform.localPosition.x;
         before_y = transform.localPosition.y;
+
+        timer += Time.deltaTime;
+		if(timer>=0.2){
+			timer = 0;
+            if(move_flag)
+            {
+                roleData.data.tilizhi = roleData.data.tilizhi-1;
+                if(roleData.data.tilizhi<0)
+                {
+                    roleData.data.tilizhi = 0;
+                }
+            }
+		}
     }
 
     public bool FrontMyFace(Vector3 other_item){
@@ -106,5 +123,9 @@ public class RolePos : MonoBehaviour
             flag = other_item.x >= transform.localPosition.x;
         }
         return flag;
+    }
+
+    public bool IsStop(){
+        return !move_flag;
     }
 }

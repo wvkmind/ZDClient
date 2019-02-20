@@ -14,6 +14,7 @@ public class MapProcess : MonoBehaviour
     private float proportion;
     public MapThings mapThings;
     private Vector3 touchPositon;
+    public HUD hUD;
     void Awake() {
         
     }
@@ -35,9 +36,65 @@ public class MapProcess : MonoBehaviour
         NetEventDispatch.RegisterEvent("eat",data =>{
 			UpdateEat(data);
 		});
-        
+        NetEventDispatch.RegisterEvent("ptlz",data =>{
+			UpdateTilizhi(data);
+		});
+        NetEventDispatch.RegisterEvent("plu",data =>{
+			UpdateLevel(data);
+		});
+        NetEventDispatch.RegisterEvent("ce",data =>{
+			UpdateUexp(data);//经验值
+		});
+        hUD.FreshHUD();
     }
-    private static void UpdateExp(Dictionary<string, MsgPack.MessagePackObject> dic){
+    
+    private void UpdateUexp(Dictionary<string, MsgPack.MessagePackObject> dic){
+        MsgPack.MessagePackObject tmp;
+		dic.TryGetValue("exp",out tmp);
+        int exp = tmp.AsInt32();
+        Init.me.GetComponent<RoleData>().data.exp = exp;
+    }
+    private void UpdateLevel(Dictionary<string, MsgPack.MessagePackObject> dic){
+        //TODO 升级特效
+		MsgPack.MessagePackObject tmp;
+		dic.TryGetValue("id",out tmp);
+        int id = tmp.AsInt32();
+        dic.TryGetValue("level",out tmp);
+        int level = tmp.AsInt32();
+        if(id==Init.userInfo.id)
+        {    
+            Init.me.GetComponent<RoleData>().data.level = level;
+            Init.me.GetComponent<RoleRender>().SetLevel(level);
+        }
+        else
+        {
+            UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
+            if(other!=null)
+            {    
+                other.GetComponent<RoleData>().data.level = level;
+                other.GetComponent<RoleRender>().SetLevel(level);
+            }
+        }
+	}
+    private void UpdateTilizhi(Dictionary<string, MsgPack.MessagePackObject> dic){
+		MsgPack.MessagePackObject tmp;
+		dic.TryGetValue("id",out tmp);
+        int id = tmp.AsInt32();
+        dic.TryGetValue("tilizhi",out tmp);
+        int tilizhi = tmp.AsInt32();
+        if(id==Init.userInfo.id)
+        {    
+            Init.me.GetComponent<RoleData>().data.tilizhi = tilizhi;
+            hUD.FreshHUD();
+        }
+        else
+        {
+            UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
+            if(other!=null)
+                other.GetComponent<RoleData>().data.tilizhi = tilizhi;
+        }
+	}
+    private void UpdateExp(Dictionary<string, MsgPack.MessagePackObject> dic){
 		MsgPack.MessagePackObject tmp;
 		dic.TryGetValue("id",out tmp);
         int id = tmp.AsInt32();
@@ -55,10 +112,12 @@ public class MapProcess : MonoBehaviour
                 other.GetComponent<UserInput>().Exp(cur_x,cur_y,direction,action);
         }
 	}
-    private static void UpdatePos(Dictionary<string, MsgPack.MessagePackObject> dic){
+    private void UpdatePos(Dictionary<string, MsgPack.MessagePackObject> dic){
 		MsgPack.MessagePackObject tmp;
 		dic.TryGetValue("id",out tmp);
         int id = tmp.AsInt32();
+        dic.TryGetValue("tl",out tmp);
+        int tilizhi = tmp.AsInt32();
         dic.TryGetValue("cp_data",out tmp);
         float cur_x = (float)tmp.AsList()[0].AsDouble();
         float cur_y = (float)tmp.AsList()[1].AsDouble();
@@ -66,12 +125,19 @@ public class MapProcess : MonoBehaviour
         float target_x = (float)tmp.AsList()[3].AsDouble();
         float target_y = (float)tmp.AsList()[4].AsDouble();
         if(id==Init.userInfo.id)
+        {
             Init.me.GetComponent<UserInput>().WorkTo(target_x,target_y);
+            Init.me.GetComponent<RoleData>().data.tilizhi = tilizhi;
+            hUD.FreshHUD();
+        }
         else
         {
             UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
             if(other!=null)
+            {
                 other.GetComponent<UserInput>().WorkTo(cur_x,cur_y,direction,target_x,target_y);
+                other.GetComponent<RoleData>().data.tilizhi = tilizhi;
+            }
         }
 	}
     void Update()
@@ -120,11 +186,13 @@ public class MapProcess : MonoBehaviour
             }
             
         }
+        hUD.FreshHUD();
     }
     public static void SendMyTouch(float cur_x,float cur_y,int direction,float target_x,float tartge_y){
         Dictionary<string, object> dic = NetWork.getSendStart();
         float [] cp_data = {cur_x,cur_y,direction,target_x,tartge_y};
 		dic.Add("cp_data",cp_data);
+        dic.Add("tl",Init.me.GetComponent<RoleData>().data.tilizhi);
 		dic.Add("name", "cp");
 		NetWork.Push(dic);
     }

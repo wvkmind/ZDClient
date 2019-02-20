@@ -17,6 +17,8 @@
         public int direction;
         public float target_x;
         public float target_y;
+        public int tilizhi;
+        public int exp;
         public  User UnPack(MsgPack.MessagePackObject net_user){
             MsgPack.MessagePackObjectDictionary user_dic= net_user.AsDictionary();
             MsgPack.MessagePackObject temp;
@@ -46,6 +48,10 @@
             direction = (int)temp.AsList()[2].AsDouble();
             target_x = (float)temp.AsList()[3].AsDouble();
             target_y = (float)temp.AsList()[4].AsDouble();
+            user_dic.TryGetValue("tilizhi",out temp);  
+            tilizhi = temp.AsInt32();
+            user_dic.TryGetValue("exp",out temp);  
+            exp = temp.AsInt32();
             return this;
         }
     }
