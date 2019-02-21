@@ -126,7 +126,7 @@ public class MapThings : MonoBehaviour
 		});
 		Dictionary<string, object> dic = NetWork.getSendStart();
 		dic.Add("name", "flush_room");
-		NetWork.Push(dic);
+		NetWork.Push(dic,false);
     }
     void Awake() {
         InitItems();//初始化物品

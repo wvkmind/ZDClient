@@ -89,6 +89,8 @@
      <Compile Include="Assets\Script\Role\RoleRender.cs" />
      <Compile Include="Assets\Script\Role\UserInput.cs" />
      <Compile Include="Assets\Script\Scene\SwitchScene.cs" />
+     <Compile Include="Assets\Script\Utils\Back.cs" />
+     <Compile Include="Assets\Script\Utils\DeviceInfo.cs" />
      <Compile Include="Assets\Script\Utils\ErrorInfo.cs" />
      <Compile Include="Assets\Script\Utils\GameCamera.cs" />
      <Compile Include="Assets\Script\Utils\Md5.cs" />

@@ -10,6 +10,8 @@ public class Login {
 		string passwrodHash = Md5.GetMd5Hash(password);
 		_account = account;
 		_password = password;
+		PlayerPrefs.SetString("user.account",_account);
+		PlayerPrefs.SetString("user.password",_password);
         NetEventDispatch.RegisterEvent("login",data =>{
 			NetEventDispatch.UnRegisterEvent("login");
 			Logined(data,f);

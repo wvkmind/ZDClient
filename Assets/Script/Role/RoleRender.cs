@@ -54,7 +54,7 @@ public class RoleRender : MonoBehaviour {
         role_data = gameObject.GetComponent<RoleData>();
     }
     public void SetGo(){
-        if(role_data.data.tilizhi <= 10)
+        if(gameObject.GetComponent<RoleData>().data.tilizhi <= 10)
         {
             SetWalk();
         }
@@ -121,20 +121,13 @@ public class RoleRender : MonoBehaviour {
         user_level.GetComponent<SpriteRenderer>().size = new Vector2(i,1);
     }
     public void SetIdle(bool full_of_energy){
-        if(role_data.data.tilizhi > 10)
+        if(gameObject.GetComponent<RoleData>().data.tilizhi > 10)
             this.SetIdle();
         else 
             this.SetSnoring();
-        _ani.SetBool("is_tired",role_data.data.tilizhi < 10);
+        _ani.SetBool("is_tired",gameObject.GetComponent<RoleData>().data.tilizhi < 10);
     }
 	void Update () {
-        if(role_data.data.tilizhi < 10)
-        {
-            _ani.SetBool("is_tired",false);
-        }
-        else
-        {
-            _ani.SetBool("is_tired",true);
-        }
+        
 	}
 }
