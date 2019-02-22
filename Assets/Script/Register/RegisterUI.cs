@@ -13,13 +13,14 @@ public class RegisterUI : MonoBehaviour {
 	public UnityEngine.UI.Image line1;
 	public UnityEngine.UI.Image line2;
 	public UnityEngine.UI.Image line3;
-	public UnityEngine.UI.Button bTOpenPropertyUI;
-	public UnityEngine.Canvas propertyUI;
-	public UnityEngine.UI.Button btSettingOk;
 	public UnityEngine.UI.InputField account;
 	public UnityEngine.UI.InputField password;
 	public UnityEngine.UI.InputField userName;
-	public UnityEngine.UI.Button btOk;
+	public UnityEngine.Canvas selectRoleUI;
+	public UnityEngine.Canvas infoUI;
+	public UnityEngine.UI.Button BACK;
+	public UnityEngine.UI.Button NEXT;
+	private int page = 0;
 	public SelectRole role;
 	private int num = 5;
 	private int tra_rate = 0;
@@ -40,10 +41,35 @@ public class RegisterUI : MonoBehaviour {
 		bt4.onClick.AddListener(Bt2Down);
 		bt5.onClick.AddListener(Bt3Up);
 		bt6.onClick.AddListener(Bt3Down);
-		bTOpenPropertyUI.onClick.AddListener(OpenProperty); 
-		btSettingOk.onClick.AddListener(CloseProperty);
-		btOk.onClick.AddListener(onRegister);
+		BACK.onClick.AddListener(onBack);
+		NEXT.onClick.AddListener(onNext);
 		FlashLine();
+	}
+	void onNext(){
+		if(page==1)
+		{
+			onRegister();
+			BACK.enabled = false;
+			NEXT.enabled = false;
+		}
+		else
+		{
+			selectRoleUI.gameObject.SetActive(false);
+			infoUI.gameObject.SetActive(true);
+			page = page + 1;
+		}
+	}
+	void onBack(){
+		if(page==0)
+		{
+			SwitchScene.NextScene("Login");
+		}
+		else
+		{
+			selectRoleUI.gameObject.SetActive(true);
+			infoUI.gameObject.SetActive(false);
+			page = page - 1;
+		}
 	}
 	void onRegister(){
 		if(account.text.Equals("") || password.text.Equals("")||userName.text.Equals(""))
@@ -51,23 +77,36 @@ public class RegisterUI : MonoBehaviour {
 			ErrorInfo.CreateUI("你是否输入的信息有问题呢");
 		}
 		else
-			Register.In(account.text,password.text,userName.text,role.RoleType(),tra_rate,phy_str_rate,exp_rate,(status,error) =>{
+		{
+			Register.In(account.text,password.text,userName.text,7,tra_rate,phy_str_rate,exp_rate,(status,error) =>{
 				if(!status)
 					ErrorInfo.CreateUI(error,()=>{
 						account.text = "";
 						password.text = "";
+						BACK.enabled = true;
+						NEXT.enabled = true;
 					});
 				else
-					ErrorInfo.CreateUI("注册成功，用户名密码已加密无法找回，请牢记。",()=>{
+				{
+					PlayerPrefs.SetString("user.account",account.text);
+					PlayerPrefs.SetString("user.password",password.text);
+					ErrorInfo.CreateUI("注册成功",()=>{
 						SwitchScene.NextScene("Login");
 					});
+				}
 			});
-	}
-	void CloseProperty(){
-		propertyUI.gameObject.SetActive(false);
-	}
-	void OpenProperty(){
-		propertyUI.gameObject.SetActive(true);
+		}
+			// Register.In(account.text,password.text,userName.text,role.RoleType(),tra_rate,phy_str_rate,exp_rate,(status,error) =>{
+			// 	if(!status)
+			// 		ErrorInfo.CreateUI(error,()=>{
+			// 			account.text = "";
+			// 			password.text = "";
+			// 		});
+			// 	else
+			// 	{
+					
+			// 	}
+			// });
 	}
 	void Bt1Up(){
 		ChangeTra(true);
