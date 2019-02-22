@@ -74,37 +74,34 @@ public class LoginUI : MonoBehaviour {
 		SwitchScene.NextScene("Register");
 	}
 	void LoginFunction(){
-		if(AccountInputField.text.Equals("") || PasswordInputField.text.Equals(""))
+		string a ;
+		string p ;
+		if(directLoginFlag)
 		{
-			ErrorInfo.CreateUI("你是否输入的信息有问题呢");
+			a = PlayerPrefs.GetString("user.account","");
+			p = PlayerPrefs.GetString("user.password","");
 		}
 		else
 		{
-			string a ;
-			string p ;
-			if(directLoginFlag)
-			{
-				a = PlayerPrefs.GetString("user.account","");
-				p = PlayerPrefs.GetString("user.password","");
-			}
-			else
-			{
-				a = AccountInputField.text;
-				p = PasswordInputField.text;
-			}
-			Login.In(a,p,(data,error) =>{
-				if(error!=null&&!error.Equals(""))
+			a = AccountInputField.text;
+			p = PasswordInputField.text;
+		}
+		BTN_LOGIN.enabled = false;
+		BTN_CREATEACCOUNT.enabled = false;
+		BTN_CREATEACCOUNT2.enabled = false;
+		BTN_CHANGEACCOUNT.enabled = false;
+		Login.In(a,p,(data,error) =>{
+			if(error!=null&&!error.Equals(""))
 				ErrorInfo.CreateUI(error,()=>{
 					AccountInputField.text = "";
 					PasswordInputField.text = "";
 					SwitchScene.NextScene("Login");
 				});
-				else
-				{
-					SwitchScene.NextScene("BigMap");
-				}
-			});
-		}
+			else
+			{
+				SwitchScene.NextScene("BigMap");
+			}
+		});
 	}
 	
 	// Update is called once per frame

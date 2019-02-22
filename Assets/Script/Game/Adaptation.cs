@@ -15,6 +15,7 @@ public class Adaptation : MonoBehaviour
         camera.backgroundColor = Color.black;
         PhoneDevice phone = new PhoneDevice();
         camera.rect = new Rect(0.0f, phone.notch.bottom/Screen.height, 1, (Screen.height-(phone.notch.bottom+phone.notch.top))/Screen.height);
+        Debug.Log(Screen.height);
         camera.clearFlags = CameraClearFlags.SolidColor;
         camera.Render();
     }

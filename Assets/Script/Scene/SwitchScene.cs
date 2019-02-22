@@ -19,12 +19,14 @@ public class SwitchScene : MonoBehaviour {
 		}
 		next_scene = str;
 		next_scene_copy = str;
+		instance.gameObject.GetComponent<Canvas>().worldCamera=Camera.main;
 		instance.gameObject.SetActive(true);
 	}
 	void Start() {
 		instance = this;
 		DontDestroyOnLoad(this);
 		instance.gameObject.SetActive(false);
+		
 	}
 	IEnumerator LoadScene()
     {
@@ -48,6 +50,7 @@ public class SwitchScene : MonoBehaviour {
 			async = null;
 			if(next_scene_copy=="Login")Destroy(this.gameObject);
 			next_scene_copy = null;
+			
 			this.gameObject.SetActive(false);
 		}
 	}
