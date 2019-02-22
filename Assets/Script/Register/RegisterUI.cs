@@ -59,7 +59,7 @@ public class RegisterUI : MonoBehaviour {
 					});
 				else
 					ErrorInfo.CreateUI("注册成功，用户名密码已加密无法找回，请牢记。",()=>{
-						SwitchScene.NextScene("Init");
+						SwitchScene.NextScene("Login");
 					});
 			});
 	}

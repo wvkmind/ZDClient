@@ -45,7 +45,7 @@ public class BigMapUI : MonoBehaviour
     }
     void ExitToInit()
     {
-        SwitchScene.NextScene("Init");
+        SwitchScene.NextScene("Login");
     }
     // Update is called once per frame
     void Update()

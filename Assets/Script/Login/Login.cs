@@ -33,7 +33,7 @@ public class Login {
 		Login.In(_account,_password,(data,error) =>{
 			if(error!=null&&!error.Equals(""))
 			ErrorInfo.CreateUI(error,()=>{
-				SwitchScene.NextScene("Init");
+				SwitchScene.NextScene("Login");
 			});
 			else
 			{

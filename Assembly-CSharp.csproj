@@ -57,11 +57,14 @@
      <Compile Include="Assets\Script\2D\Sprite.cs" />
      <Compile Include="Assets\Script\2D\View.cs" />
      <Compile Include="Assets\Script\BaseData\Map.cs" />
+     <Compile Include="Assets\Script\BaseData\Notch.cs" />
+     <Compile Include="Assets\Script\BaseData\PhoneDevice.cs" />
      <Compile Include="Assets\Script\BaseData\Role.cs" />
      <Compile Include="Assets\Script\BigMap\BigMapUI.cs" />
      <Compile Include="Assets\Script\DataModel\Item.cs" />
      <Compile Include="Assets\Script\DataModel\Room.cs" />
      <Compile Include="Assets\Script\DataModel\User.cs" />
+     <Compile Include="Assets\Script\Game\Adaptation.cs" />
      <Compile Include="Assets\Script\Game\HUD.cs" />
      <Compile Include="Assets\Script\Game\Init.cs" />
      <Compile Include="Assets\Script\Item\ItemProcess.cs" />

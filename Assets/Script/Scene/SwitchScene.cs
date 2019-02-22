@@ -12,7 +12,7 @@ public class SwitchScene : MonoBehaviour {
 	private static float timer = 0;
 	public static SwitchScene instance = null;
 	public static void NextScene(string str){
-		if(str == "Init")
+		if(str == "Login")
 		{
 			Destroy(Init.instance.gameObject);
 			NetWork.ClosePing();
@@ -46,7 +46,7 @@ public class SwitchScene : MonoBehaviour {
 		else if (async != null && async.isDone == true)
 		{
 			async = null;
-			if(next_scene_copy=="Init")Destroy(this.gameObject);
+			if(next_scene_copy=="Login")Destroy(this.gameObject);
 			next_scene_copy = null;
 			this.gameObject.SetActive(false);
 		}
