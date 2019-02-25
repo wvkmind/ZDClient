@@ -11,7 +11,7 @@ public class BigMapUI : MonoBehaviour
     public UnityEngine.GameObject node;
     private int page = 0;
     private float time = 0.0f;
-    private float per_page = -(800.0f*3.2f*Screen.height/1920.0f-Screen.width)/2.0f;
+    private float per_page = 0.0f;
     private bool flag = false;
     void Start()
     {
@@ -19,6 +19,8 @@ public class BigMapUI : MonoBehaviour
         chatMap.onClick.AddListener(OpenChatHall);
         nextPage.onClick.AddListener(_NextPage);
         beforePage.onClick.AddListener(_BeforePage);
+        node.transform.localScale = node.transform.localScale*Camera.main.rect.height;
+        per_page =  -(800.0f/3.0f*Camera.main.rect.height);
         FlushPage();
     }
     void FlushPage()
@@ -53,13 +55,13 @@ public class BigMapUI : MonoBehaviour
         if(flag)
         {
             time = time + Time.deltaTime;
-            float s = page*per_page-node.transform.position.x;
+            float s = page*per_page-node.GetComponent<RectTransform>().anchoredPosition.x;
             if(s == 0 )time = 0.0f;
             float cur_speed = 0.0f;
             if(s != 0 )
                 cur_speed = s / time*(0.1f);
-            node.transform.position = new Vector3(node.transform.position.x+time*cur_speed,node.transform.position.y,node.transform.position.z);
-            if(Mathf.Abs(node.transform.position.x - node.transform.position.x+time*cur_speed)<0.01f)flag=false;
+            node.GetComponent<RectTransform>().anchoredPosition = new Vector2(node.GetComponent<RectTransform>().anchoredPosition.x+time*cur_speed,node.GetComponent<RectTransform>().anchoredPosition.y);
+            if(Mathf.Abs(node.GetComponent<RectTransform>().anchoredPosition.x - node.GetComponent<RectTransform>().anchoredPosition.x+time*cur_speed)<0.001f)flag=false;
         }
         
     }
