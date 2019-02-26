@@ -23,7 +23,7 @@ public class MapProcess : MonoBehaviour
         proportion = Screen.height/600.0f;
         unit = Screen.height/2.0f/Camera.main.orthographicSize;
         sc = unit;
-        limit = (400.0f-Screen.width/(Screen.height/600.0f)/2.0f)*3.2f/100.0f;
+        limit = (400.0f-Screen.width/(Screen.height*Camera.main.rect.height/600.0f)/2.0f)*3.2f/100.0f;
         NetEventDispatch.RegisterEvent("cp",data =>{
 			UpdatePos(data);
 		});

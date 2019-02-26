@@ -20,7 +20,7 @@ public class RoleData : MonoBehaviour
     }
     void AddTiLiZhi()
     {
-        if(Init.me!=null&&Init.me.GetComponent<RolePos>().IsStop())
+        if(Init.me.GetComponent<RolePos>()!=null&&Init.me.GetComponent<RolePos>().IsStop())
         {
             timer += Time.deltaTime;
             if(timer>=1){

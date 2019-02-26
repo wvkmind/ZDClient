@@ -51,11 +51,15 @@ public class MapThings : MonoBehaviour
         fake_item.GetComponent<Animator>().Play("Pick");
     }
     void NewMe(){
+        
         Init.me = (UnityEngine.GameObject)Instantiate(prefab, new Vector3(UserSpwanPos.transform.localRotation.x,UserSpwanPos.transform.localRotation.y , 0), Quaternion.identity,this.transform);
         Init.me.transform.localScale = new Vector3(1,1,1);
-        Init.me.GetComponent<RoleData>().data = Init.userInfo;
-        Init.me.GetComponent<RoleRender>().SetName(Init.userInfo.name);
-        Init.me.GetComponent<RoleRender>().SetLevel(Init.userInfo.level);
+        if(Init.userInfo!=null)
+        {
+            Init.me.GetComponent<RoleData>().data = Init.userInfo;
+            Init.me.GetComponent<RoleRender>().SetName(Init.userInfo.name);
+            Init.me.GetComponent<RoleRender>().SetLevel(Init.userInfo.level);
+        }        
     }
     void NewOhter(User u){
         UnityEngine.GameObject user = (UnityEngine.GameObject) Instantiate(prefab, new Vector3(u.cur_x, u.cur_y, 0), Quaternion.identity,this.transform);

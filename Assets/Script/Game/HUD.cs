@@ -17,17 +17,20 @@ public class HUD : MonoBehaviour
     }
     public void FreshHUD()
     {
-        if(oldt!=Init.me.GetComponent<RoleData>().data.tilizhi)
+        if(Init.me.GetComponent<RoleData>().data!=null)
         {
-            oldt = Init.me.GetComponent<RoleData>().data.tilizhi;
-            RectTransform tilizhi_rect = tilizhi.gameObject.GetComponent<RectTransform>();
-		    tilizhi_rect.sizeDelta = new Vector2((Init.me.GetComponent<RoleData>().data.tilizhi/100.0f)*tilizhi_img_width,tilizhi_rect.rect.height);
-        }
-        if(olde!=Init.me.GetComponent<RoleData>().data.exp)
-        {
-            olde = Init.me.GetComponent<RoleData>().data.exp;
-            RectTransform exp_rect = exp.gameObject.GetComponent<RectTransform>();
-		    exp_rect.sizeDelta = new Vector2((Init.me.GetComponent<RoleData>().data.exp/100.0f)*exp_img_width,exp_rect.rect.height);
+            if(oldt!=Init.me.GetComponent<RoleData>().data.tilizhi)
+            {
+                oldt = Init.me.GetComponent<RoleData>().data.tilizhi;
+                RectTransform tilizhi_rect = tilizhi.gameObject.GetComponent<RectTransform>();
+                tilizhi_rect.sizeDelta = new Vector2((Init.me.GetComponent<RoleData>().data.tilizhi/100.0f)*tilizhi_img_width,tilizhi_rect.rect.height);
+            }
+            if(olde!=Init.me.GetComponent<RoleData>().data.exp)
+            {
+                olde = Init.me.GetComponent<RoleData>().data.exp;
+                RectTransform exp_rect = exp.gameObject.GetComponent<RectTransform>();
+                exp_rect.sizeDelta = new Vector2((Init.me.GetComponent<RoleData>().data.exp/100.0f)*exp_img_width,exp_rect.rect.height);
+            }
         }
     }
 }
