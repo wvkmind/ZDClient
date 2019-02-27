@@ -23,6 +23,7 @@ public class Login {
 		NetWork.Push(dic);
 	}
 	public static void LoginOut(){
+		Init.RemoveAllRoleObject();
 		NetEventDispatch.Clear();
 		NetWork.ClosePing();
 		NetWork.ClearQueue();

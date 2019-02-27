@@ -37,6 +37,8 @@ public class Init : MonoBehaviour {
 		other.Remove(id);
 	}
 	public static void RemoveAllRoleObject(){
+		otherUsersInCurMap.Clear();
+		temp_data.Clear();
 		other.Clear();
 	}
 
