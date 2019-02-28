@@ -21,7 +21,7 @@ public class RoleRender : MonoBehaviour {
     public void SetDirection(int d){direction = d;}
     public int GetDirection(){return direction;}
     public TextMesh user_name;
-    public GameObject user_level;
+    public SpriteRenderer user_level;
     private RoleData role_data;
     
     public void SetAction(int i){
@@ -129,8 +129,8 @@ public class RoleRender : MonoBehaviour {
     }
     public void SetLevel(int i)
     {
-        UnityEngine.Sprite _sprite  = UnityEngine.Resources.Load("Image/Level/Level_0_"+i, typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
-        user_level.GetComponent<SpriteRenderer>().sprite = _sprite;
+        Object [] t =  UnityEngine.Resources.LoadAll("Image/Level/Level_0");
+        user_level.sprite = t[i]  as  UnityEngine.Sprite;
     }
     public void SetIdle(){
         if(_ani.GetBool("have_food"))

@@ -65,7 +65,7 @@ public class MapThings : MonoBehaviour
         UnityEngine.GameObject user = (UnityEngine.GameObject) Instantiate(prefab, new Vector3(u.cur_x, u.cur_y, 0), Quaternion.identity,this.transform);
         user.transform.localScale = new Vector3(1,1,1);
         user.GetComponent<RoleData>().data = u;
-        user.GetComponent<RoleRender>().SetName("Lv"+u.level+u.name);
+        user.GetComponent<RoleRender>().SetName(u.name);
         user.GetComponent<RoleRender>().SetLevel(u.level);
         user.GetComponent<UserInput>().WorkTo(u.cur_x,u.cur_y,u.direction,u.target_x,u.target_y);
         Init.PutRoleObjectWithId(u.id,user);
