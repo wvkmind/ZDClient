@@ -8,6 +8,7 @@ public class RolePos : MonoBehaviour
     private Vector3 start_position;
     private Vector3 end_position;
     private bool move_flag = false;
+    private bool old_move_flag = false;
     private bool aready_routing = false;
     private float before_x;
     private float before_y;
@@ -111,6 +112,11 @@ public class RolePos : MonoBehaviour
                 }
             }
 		}
+        if(old_move_flag!=move_flag){
+            old_move_flag = move_flag;
+            roleRender.SetMove(move_flag);
+        }
+        
     }
 
     public bool FrontMyFace(Vector3 other_item){

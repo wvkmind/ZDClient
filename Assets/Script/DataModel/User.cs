@@ -54,5 +54,15 @@
             exp = temp.AsInt32();
             return this;
         }
+        public static UnityEngine.GameObject GetUser(int id)
+        {
+            if(Init.userInfo!=null&&id == Init.userInfo.id)
+            {   
+                return Init.me;
+            }else if(Init.other.Count!=0){
+                return Init.GetRoleObjecWithId(id);
+            }
+            return null;
+        }
     }
 }

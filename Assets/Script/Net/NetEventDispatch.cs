@@ -44,7 +44,7 @@ public class NetEventDispatch {
 			if(TTL.TryGetValue(key,out ttl))
 			{
 				ttl = ttl + Time.deltaTime;
-				if(ttl>10){
+				if(ttl>5){
 					is_timeout = true;
 					ErrorInfo.CreateUI("跟村子丢失连接啦"+key,()=>{
 						Login.ReLoginOut();

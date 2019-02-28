@@ -108,7 +108,7 @@ public class NetWork {
 				timer = 0;
 				Dictionary<string, object> dic = NetWork.getSendStart();
 				dic.Add("name", "ping");
-				NetWork.Push(dic);
+				NetWork.Push(dic,false);
 
 			}
 		}

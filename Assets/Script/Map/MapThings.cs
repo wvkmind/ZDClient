@@ -107,7 +107,9 @@ public class MapThings : MonoBehaviour
                 ItemRender item_entity = item_entities[cur_item.pos].GetComponent<ItemRender>();
                 ItemProcess item_proc = item_entities[cur_item.pos].GetComponent<ItemProcess>();
                 item_entity.Set(cur_item.id,cur_item.type);
-                item_proc.Set(cur_item.pos,cur_item.type);
+                item_proc.Set(cur_item.pos,cur_item.type,cur_item.owner);
+                Debug.Log("cur_item.energy"+cur_item.energy);
+                if(cur_item.energy!=-1)item_entity.SetEnergy(cur_item.energy);
             }
         }
     }

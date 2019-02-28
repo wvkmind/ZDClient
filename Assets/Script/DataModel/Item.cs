@@ -8,7 +8,7 @@ namespace DataModel
         public int type;
         public int pos;
         public int owner;
-        public int energy;
+        public float energy;
         public ArrayList type_list = new ArrayList();
         public  Item UnPack(MsgPack.MessagePackObject net_info){
             MsgPack.MessagePackObjectDictionary item_dic= net_info.AsDictionary();
@@ -22,7 +22,7 @@ namespace DataModel
             item_dic.TryGetValue("owner",out temp);
             owner = temp.AsInt32();
             item_dic.TryGetValue("energy",out temp);
-            energy = temp.AsInt32();
+            energy = (float)temp.AsDouble();
             return this;
         }
     }

@@ -6,6 +6,8 @@ public class ItemRender : MonoBehaviour
 {
     private SpriteRenderer item_pic;
     public UnityEngine.UI.Button button ;
+    public UnityEngine.UI.Image food_lave_bk;
+    public UnityEngine.UI.Image food_lave;
     public int type;
     public int id;
     public bool pick_action = false;
@@ -46,6 +48,12 @@ public class ItemRender : MonoBehaviour
 		button.GetComponent<UnityEngine.UI.Image>().sprite = sprite;
         button.gameObject.SetActive(false);
         gameObject.SetActive(true);
+        food_lave_bk.gameObject.SetActive(t==1);
+        food_lave.gameObject.SetActive(t==1);
+    }
+    public void SetEnergy(float scale){
+        Debug.Log("0.4946f*scale"+0.4946f*scale);
+        food_lave.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(0.4946f*scale,0.0325f);
     }
     void Update()
     {

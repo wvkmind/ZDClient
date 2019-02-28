@@ -17,6 +17,7 @@ public class SwitchScene : MonoBehaviour {
 			Destroy(Init.instance.gameObject);
 			NetWork.ClosePing();
 		}
+		NetEventDispatch.Clear();
 		next_scene = str;
 		next_scene_copy = str;
 		instance.gameObject.GetComponent<Canvas>().worldCamera=Camera.main;

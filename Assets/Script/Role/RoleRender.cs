@@ -12,7 +12,7 @@ public class RoleRender : MonoBehaviour {
     private string cur_role = "BanGye";
     private int _ani_layer_index = 0;
     private int action_id = 0;
-    private int real_action_id = 0;
+    public int real_action_id = 0;
     private int direction = 0;// * 面向前后左右
     public void SetFront(){direction=0;_ani.SetInteger("direction",direction);SetAction(real_action_id);}
     public void SetBack(){direction=1;_ani.SetInteger("direction",direction);SetAction(real_action_id);}
@@ -54,13 +54,20 @@ public class RoleRender : MonoBehaviour {
         role_data = gameObject.GetComponent<RoleData>();
     }
     public void SetGo(){
-        if(gameObject.GetComponent<RoleData>().data.tilizhi <= 10)
+        if(_ani.GetBool("have_food"))
         {
-            SetWalk();
+            SetRaiseHands();
         }
         else
         {
-            SetRun();
+            if(gameObject.GetComponent<RoleData>().data.tilizhi <= 10)
+            {
+                SetWalk();
+            }
+            else
+            {
+                SetRun();
+            }
         }
     }
     public void SetWalk(){
@@ -79,6 +86,7 @@ public class RoleRender : MonoBehaviour {
         SetAction(3);
     }
     public void SetEat(){
+        _ani.SetBool("have_food",true);
         _ani.SetInteger("next_action",4);
         _ani.SetBool("sleep",false);
         SetAction(4);
@@ -128,6 +136,23 @@ public class RoleRender : MonoBehaviour {
         _ani.SetBool("is_tired",gameObject.GetComponent<RoleData>().data.tilizhi < 10);
     }
 	void Update () {
-        
+
 	}
+    public bool IsSetGoing()
+    {
+        return action_id == direction*Role.RHAL+1 || action_id == direction*Role.RHAL+3;
+    }
+    public bool IsEatting()
+    {
+        return real_action_id == 4;
+    }
+
+    public void SetMove(bool f)
+    {
+        _ani.SetBool("move",f);
+    }
+    public void CancelEat(){
+        _ani.SetBool("have_food",false);
+        SetIdle();
+    }
 }
