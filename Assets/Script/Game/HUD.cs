@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using BaseData;
 public class HUD : MonoBehaviour
 {
     public UnityEngine.UI.Image tilizhi;
@@ -29,7 +29,7 @@ public class HUD : MonoBehaviour
             {
                 olde = Init.me.GetComponent<RoleData>().data.exp;
                 RectTransform exp_rect = exp.gameObject.GetComponent<RectTransform>();
-                exp_rect.sizeDelta = new Vector2((Init.me.GetComponent<RoleData>().data.exp/100.0f)*exp_img_width,exp_rect.rect.height);
+                exp_rect.sizeDelta = new Vector2((Init.me.GetComponent<RoleData>().data.exp/Role.LevelExp[Init.me.GetComponent<RoleData>().data.level])*exp_img_width,exp_rect.rect.height);
             }
         }
     }
