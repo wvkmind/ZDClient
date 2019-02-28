@@ -129,7 +129,8 @@ public class RoleRender : MonoBehaviour {
     }
     public void SetLevel(int i)
     {
-        user_level.GetComponent<SpriteRenderer>().size = new Vector2(i,1);
+        UnityEngine.Sprite _sprite  = UnityEngine.Resources.Load("Image/Level/Level_0_"+i, typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
+        user_level.GetComponent<SpriteRenderer>().sprite = _sprite;
     }
     public void SetIdle(){
         if(_ani.GetBool("have_food"))

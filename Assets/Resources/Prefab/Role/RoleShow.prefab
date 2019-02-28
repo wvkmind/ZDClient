@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 0.5
+  real_action_id: 0
   user_name: {fileID: 4559762462291505623}
   user_level: {fileID: 6737374744501224258}
 --- !u!114 &8869555360612874564

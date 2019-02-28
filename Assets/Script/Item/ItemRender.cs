@@ -53,6 +53,7 @@ public class ItemRender : MonoBehaviour
     }
     public void SetEnergy(float scale){
         food_lave.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(0.4946f*scale,0.0325f);
+        food_lave.GetComponent<Sprite>().transform.localScale = new Vector2(scale,1);
     }
     void Update()
     {
