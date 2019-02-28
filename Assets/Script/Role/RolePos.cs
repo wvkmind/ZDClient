@@ -95,7 +95,7 @@ public class RolePos : MonoBehaviour
         }
         if(move_flag && Mathf.Abs(before_x-transform.localPosition.x)<0.0005&&Mathf.Abs(before_y-transform.localPosition.y)<0.0005){
             Clear();
-            roleRender.SetIdle(roleData.data.tilizhi != 0);
+            roleRender.SetIdle();
         }
         before_x = transform.localPosition.x;
         before_y = transform.localPosition.y;

@@ -13,6 +13,7 @@ public class ItemProcess : MonoBehaviour
     bool _in = false;
     public int owner = -1;
     private RoleRender user_r = null;
+    private RoleData user_d = null;
     private float timer =0.0f;
     void Awake() {
         button.onClick.AddListener(()=>{
@@ -44,6 +45,7 @@ public class ItemProcess : MonoBehaviour
         {
             UnityEngine.GameObject user =  User.GetUser(_owner);
             user_r = user.GetComponent<RoleRender>();
+            user_d = user.GetComponent<RoleData>();
         }
     }
     void Update()
@@ -59,21 +61,25 @@ public class ItemProcess : MonoBehaviour
             float d_x = 0.0f;
             float d_y = 0.0f;
             float d_z = 0.0f;
-            Debug.Log("user_r.IsEatting()"+user_r.real_action_id);
-            if(User.GetUser(owner).GetComponent<RoleRender>().IsEatting())
+            if(user_r.IsEatting())
             {
-                d_y = -0.6f;
-                if(this.owner==Init.userInfo.id)
-                {
+                d_y = 0.0f;
+                
                     timer += Time.deltaTime;
                     if(timer>=1){
                         timer = 0;
-                        Dictionary<string, object> dic = NetWork.getSendStart();
-                        dic.Add("pos",pos);
-                        dic.Add("name", "eat");
-                        NetWork.Push(dic);
+                        if(this.owner==Init.userInfo.id)
+                        {
+                            Dictionary<string, object> dic = NetWork.getSendStart();
+                            dic.Add("pos",pos);
+                            dic.Add("name", "eat");
+                            NetWork.Push(dic);
+                        }
+                        int step = (user_d.data.phy_str_rate+1)*user_d.data.id;
+                        if(step<1)
+		                    step = 1;
+                        user_d.AddTL(step);
                     }
-                }
                 if(user_r.GetDirection()==0)
                 {
                     d_x = 0.0f;

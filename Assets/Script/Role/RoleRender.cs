@@ -40,7 +40,7 @@ public class RoleRender : MonoBehaviour {
         }
     }  
     //!next_action == 0的时候是idle状态，不过累的的时候idle是Snoring
-    private void SetIdle(){
+    private void SetIdleAction(){
         _ani.SetInteger("next_action",0);
         _ani.SetBool("sleep",false);
         SetAction(0);
@@ -128,12 +128,19 @@ public class RoleRender : MonoBehaviour {
     {
         user_level.GetComponent<SpriteRenderer>().size = new Vector2(i,1);
     }
-    public void SetIdle(bool full_of_energy){
-        if(gameObject.GetComponent<RoleData>().data.tilizhi > 10)
-            this.SetIdle();
-        else 
-            this.SetSnoring();
-        _ani.SetBool("is_tired",gameObject.GetComponent<RoleData>().data.tilizhi < 10);
+    public void SetIdle(){
+        if(_ani.GetBool("have_food"))
+        {
+            SetEat();
+        }
+        else
+        {
+            if(gameObject.GetComponent<RoleData>().data.tilizhi > 10)
+                this.SetIdleAction();
+            else 
+                this.SetSnoring();
+            _ani.SetBool("is_tired",gameObject.GetComponent<RoleData>().data.tilizhi < 10);
+        }
     }
 	void Update () {
 
@@ -144,7 +151,7 @@ public class RoleRender : MonoBehaviour {
     }
     public bool IsEatting()
     {
-        return real_action_id == 4;
+        return _ani.GetBool("have_food")&&!_ani.GetBool("move");
     }
 
     public void SetMove(bool f)

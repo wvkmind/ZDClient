@@ -52,7 +52,6 @@ public class ItemRender : MonoBehaviour
         food_lave.gameObject.SetActive(t==1);
     }
     public void SetEnergy(float scale){
-        Debug.Log("0.4946f*scale"+0.4946f*scale);
         food_lave.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(0.4946f*scale,0.0325f);
     }
     void Update()
