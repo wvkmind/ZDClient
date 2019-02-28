@@ -6,8 +6,8 @@ public class ItemRender : MonoBehaviour
 {
     private SpriteRenderer item_pic;
     public UnityEngine.UI.Button button ;
-    public UnityEngine.UI.Image food_lave_bk;
-    public UnityEngine.UI.Image food_lave;
+    public UnityEngine.GameObject food_lave_bk;
+    public UnityEngine.GameObject food_lave;
     public int type;
     public int id;
     public bool pick_action = false;

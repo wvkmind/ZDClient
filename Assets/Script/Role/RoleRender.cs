@@ -87,6 +87,9 @@ public class RoleRender : MonoBehaviour {
     }
     public void SetEat(){
         _ani.SetBool("have_food",true);
+        SetEatAction();
+    }
+    public void SetEatAction(){
         _ani.SetInteger("next_action",4);
         _ani.SetBool("sleep",false);
         SetAction(4);
@@ -131,7 +134,7 @@ public class RoleRender : MonoBehaviour {
     public void SetIdle(){
         if(_ani.GetBool("have_food"))
         {
-            SetEat();
+            SetEatAction();
         }
         else
         {

@@ -97,6 +97,7 @@ public class MapThings : MonoBehaviour
     public void FlushItem(MsgPack.MessagePackObject tmp){
         for(var i = 0;i<10;i++){
             item_entities[i].GetComponent<ItemRender>().SetNull();
+            item_entities[i].GetComponent<ItemProcess>().SetNull();
         }
         if(!tmp.IsNil)
         foreach (var item in tmp.AsList())

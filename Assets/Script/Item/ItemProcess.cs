@@ -8,7 +8,6 @@ public class ItemProcess : MonoBehaviour
     private int pos;
     private int type;
     private bool is_show = false;
-    public bool delete = false;
     private RolePos mePos ;
     bool _in = false;
     public int owner = -1;
@@ -25,10 +24,6 @@ public class ItemProcess : MonoBehaviour
     {
         mePos = Init.me.GetComponent<RolePos>();
     }
-    public void Delete(){
-        if(user_r!=null)user_r.CancelEat();
-        Destroy(this.gameObject);
-    }
     void SendPick(int _type){
         string name = "pick";
         if(_type == 1)name = "eat";
@@ -38,6 +33,12 @@ public class ItemProcess : MonoBehaviour
 		NetWork.Push(dic);
     }
     public void Set(int _pos,int _type,int _owner){
+        if(this.owner!=-1&&_owner==-1)
+        {
+            if(user_r!=null)user_r.CancelEat();
+            user_r = null;
+            user_d =null;
+        }
         this.pos = _pos;
         this.type = _type;
         this.owner = _owner;
@@ -50,7 +51,6 @@ public class ItemProcess : MonoBehaviour
     }
     void Update()
     {
-        if(delete){Delete();return;}
         if(!is_show&&_in&&Init.me.GetComponent<RolePos>().IsStop()&&owner==-1)
         {
             is_show = true;
@@ -83,11 +83,11 @@ public class ItemProcess : MonoBehaviour
                 if(user_r.GetDirection()==0)
                 {
                     d_x = 0.0f;
-                    d_z = -0.1f;
+                    d_z = -0.2f;
                 }else if(user_r.GetDirection()==1)
                 {
                     d_x = 0.0f;
-                    d_z =  0.1f;
+                    d_z =  0.2f;
                 }else if(user_r.GetDirection()==2)
                 {
                     d_x = -0.3f;
