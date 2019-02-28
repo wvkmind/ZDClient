@@ -18,7 +18,7 @@
 		//角色所拥有的一个方向的动作数
 		public static int RHAL = 28;
 		//经验值
-		public static int [] LevelExp = {
+		public static float [] LevelExp = {
 			0,
 			50,
 			100,
