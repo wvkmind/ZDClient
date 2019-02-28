@@ -29,7 +29,7 @@ public class HUD : MonoBehaviour
             {
                 olde = Init.me.GetComponent<RoleData>().data.exp;
                 RectTransform exp_rect = exp.gameObject.GetComponent<RectTransform>();
-                exp_rect.sizeDelta = new Vector2(( (float)Init.me.GetComponent<RoleData>().data.exp/Role.LevelExp[Init.me.GetComponent<RoleData>().data.level])*exp_img_width,exp_rect.rect.height);
+                exp_rect.sizeDelta = new Vector2(( (float)Init.me.GetComponent<RoleData>().data.exp/Role.LevelExp[Init.me.GetComponent<RoleData>().data.level+1])*exp_img_width,exp_rect.rect.height);
             }
         }
     }
