@@ -22,6 +22,14 @@ public class Login {
 		dic.Add("name", "login");
 		NetWork.Push(dic);
 	}
+	public static void Out(){
+		LoginOut();
+		Dictionary<string, object> dic = NetWork.getSendStart();
+		dic.Add("account",PlayerPrefs.GetString("user.account",""));
+		dic.Add("password",PlayerPrefs.GetString("user.password",""));
+		dic.Add("name", "login_out");
+		NetWork.Push(dic);
+	}
 	public static void LoginOut(){
 		Init.RemoveAllRoleObject();
 		NetEventDispatch.Clear();

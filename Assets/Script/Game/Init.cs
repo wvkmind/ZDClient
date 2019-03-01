@@ -52,4 +52,15 @@ public class Init : MonoBehaviour {
 		temp_data.TryGetValue(key,out ret);
 		return ret;
 	}
+	void OnApplicationFocus( bool  isFocus )
+	{
+		if( isFocus )
+		{
+			Login.ReLoginOut();   
+		}
+		else
+		{
+			Login.Out();
+		}
+	}
 }

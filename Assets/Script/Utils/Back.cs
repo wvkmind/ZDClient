@@ -15,21 +15,6 @@ public class Back : MonoBehaviour
     {
         
     }
-    void OnApplicationFocus( bool  isFocus )
-	{
- 
- 
-		if( isFocus )
-		{
-			 
-			Debug.Log("返回到游戏 刷新用户数据");  //  返回游戏的时候触发     执行顺序 2      
- 
-		}
-		else
-		{
-			 
-			Debug.Log("离开游戏 激活推送");  //  返回游戏的时候触发     执行顺序 1
-		}
-	}
+    
 
 }
