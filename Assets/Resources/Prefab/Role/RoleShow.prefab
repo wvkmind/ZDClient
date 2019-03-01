@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728b269f42a31434a8a838cebee39061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 1
+  m_speed: 0.5
   real_action_id: 0
   user_name: {fileID: 4559762462291505623}
   user_level: {fileID: 9202901491692011394}
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26edcc99d65fc4802b014250e1855a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.2
+  speed: 1
 --- !u!114 &6260820578051161001
 MonoBehaviour:
   m_ObjectHideFlags: 0

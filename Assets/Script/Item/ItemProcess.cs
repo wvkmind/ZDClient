@@ -87,7 +87,7 @@ public class ItemProcess : MonoBehaviour
                             dic.Add("name", "eat");
                             NetWork.Push(dic);
                         }
-                        int step = (int)((float)user_d.data.phy_str_rate/1.0f+1.0f)*10*gameObject.GetComponent<ItemRender>().id;
+                        int step = (int)((float)user_d.data.phy_str_rate/1.0f+1.0f)*gameObject.GetComponent<ItemRender>().id;
                         if(step<1)
 		                    step = 1;
                         user_d.AddTL(step);
