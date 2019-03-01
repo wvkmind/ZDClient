@@ -123,13 +123,13 @@ public class RolePos : MonoBehaviour
         bool flag = false;
         int dir = roleRender.GetDirection();
         if(dir==0){
-            flag = other_item.y <= transform.localPosition.y-0.2f;
+            flag = other_item.y <= transform.localPosition.y-0.2f&&other_item.y >= transform.localPosition.y-0.2f-0.8f;
         }else if(dir==1){
-            flag = other_item.y >= transform.localPosition.y-0.2f;
+            flag = other_item.y >= transform.localPosition.y-0.2f&&other_item.y <= transform.localPosition.y-0.2f+0.8f;
         }else if(dir==2){
-            flag = other_item.x <= transform.localPosition.x;
+            flag = other_item.x <= transform.localPosition.x&&other_item.x >= transform.localPosition.x-0.6f;
         }else if(dir==3){
-            flag = other_item.x >= transform.localPosition.x;
+            flag = other_item.x >= transform.localPosition.x&&other_item.x <= transform.localPosition.x+0.6f;
         }
         return flag;
     }
