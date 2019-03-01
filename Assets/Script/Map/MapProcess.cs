@@ -114,7 +114,7 @@ public class MapProcess : MonoBehaviour
             {
                 other.GetComponent<UserInput>().Exp(cur_x,cur_y,direction,action);
                 if(action==10){
-                    if(other.GetComponent<RolePos>().FrontMyFace(Init.me.gameObject.transform.localPosition))
+                    if(other.GetComponent<RolePos>().FrontMyFaceAndNear(Init.me.gameObject.transform.localPosition))
                     {
                         Dictionary<string, object> send_dic = NetWork.getSendStart();
                         float [] data = {Init.me.transform.localPosition.x,Init.me.transform.localPosition.y,Init.me.GetComponent<RoleRender>().GetDirection(),11};

@@ -35,6 +35,7 @@ public class UserInput : MonoBehaviour
         rolePos.WorkTo(tox,toy);
     }
     public void Exp(int i){
+        roleRender.CancelEat();
         rolePos.Clear(true);
         roleRender.SetExp(i);
     }

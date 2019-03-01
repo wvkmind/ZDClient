@@ -109,6 +109,8 @@ public class MapThings : MonoBehaviour
                 item_entity.Set(cur_item.id,cur_item.type);
                 item_proc.Set(cur_item.pos,cur_item.type,cur_item.owner);
                 if(cur_item.energy!=-1)item_entity.SetEnergy(cur_item.energy);
+                if(cur_item.x!=-10000)
+                item_entities[cur_item.pos].transform.localPosition = new Vector3(cur_item.x,cur_item.y,PositionTransform.UpdateZ(cur_item.y));
             }
         }
         for(var i = 0;i<10;i++){
@@ -118,6 +120,7 @@ public class MapThings : MonoBehaviour
             }
             else
             {
+                item_entities[i].transform.localPosition = new Vector3(ItemPos[i].transform.localPosition.x,ItemPos[i].transform.localPosition.y,PositionTransform.UpdateZ(ItemPos[i].gameObject.transform.localPosition.y));
                 item_entities[i].GetComponent<ItemRender>().SetNull();
                 item_entities[i].GetComponent<ItemProcess>().SetNull();
             }

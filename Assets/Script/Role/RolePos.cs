@@ -59,9 +59,9 @@ public class RolePos : MonoBehaviour
         if(move_flag&& (transform.localPosition.x!=end_position.x||transform.localPosition.y!=end_position.y))
         {
             if(roleData.data.tilizhi == 0)
-                speed = 0.1f;
+                speed = 0.4f;
             else 
-                speed = 0.5f;
+                speed = 0.6f;
             float t = speed*Time.deltaTime;
             Vector3 pos = Vector3.MoveTowards(transform.localPosition,end_position,t);
 
@@ -123,13 +123,28 @@ public class RolePos : MonoBehaviour
         bool flag = false;
         int dir = roleRender.GetDirection();
         if(dir==0){
-            flag = other_item.y <= transform.localPosition.y-0.2f&&other_item.y >= transform.localPosition.y-0.2f-0.8f;
+            flag = other_item.y <= transform.localPosition.y-0.2f;
         }else if(dir==1){
-            flag = other_item.y >= transform.localPosition.y-0.2f&&other_item.y <= transform.localPosition.y-0.2f+0.8f;
+            flag = other_item.y >= transform.localPosition.y-0.2f;
         }else if(dir==2){
-            flag = other_item.x <= transform.localPosition.x&&other_item.x >= transform.localPosition.x-0.6f;
+            flag = other_item.x <= transform.localPosition.x;
         }else if(dir==3){
-            flag = other_item.x >= transform.localPosition.x&&other_item.x <= transform.localPosition.x+0.6f;
+            flag = other_item.x >= transform.localPosition.x;
+        }
+        return flag;
+    }
+
+    public bool FrontMyFaceAndNear(Vector3 other_item){
+        bool flag = false;
+        int dir = roleRender.GetDirection();
+        if(dir==0){
+            flag = other_item.y <= transform.localPosition.y-0.2f&&other_item.y >= transform.localPosition.y-0.2f-0.8f&&other_item.x <= transform.localPosition.x+0.3f&&other_item.x >= transform.localPosition.x-0.3f;
+        }else if(dir==1){
+            flag = other_item.y >= transform.localPosition.y-0.2f&&other_item.y <= transform.localPosition.y-0.2f+0.8f&&other_item.x <= transform.localPosition.x+0.3f&&other_item.x >= transform.localPosition.x-0.3f;
+        }else if(dir==2){
+            flag = other_item.x <= transform.localPosition.x&&other_item.x >= transform.localPosition.x-0.8f&&other_item.y <= transform.localPosition.y+0.2f&&other_item.y >= transform.localPosition.y-0.2f;
+        }else if(dir==3){
+            flag = other_item.x >= transform.localPosition.x&&other_item.x <= transform.localPosition.x+0.8f&&other_item.y <= transform.localPosition.y+0.2f&&other_item.y >= transform.localPosition.y-0.2f;
         }
         return flag;
     }

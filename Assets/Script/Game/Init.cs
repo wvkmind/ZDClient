@@ -54,13 +54,13 @@ public class Init : MonoBehaviour {
 	}
 	void OnApplicationFocus( bool  isFocus )
 	{
-		if( isFocus )
-		{
-			Login.ReLoginOut();   
-		}
-		else
-		{
-			Login.Out();
-		}
+		// if( isFocus )
+		// {
+		// 	Login.ReLoginOut();   
+		// }
+		// else
+		// {
+		// 	Login.Out();
+		// }
 	}
 }
