@@ -226,18 +226,26 @@ public class MapProcess : MonoBehaviour
         MsgPack.MessagePackObject tmp;
         dic.TryGetValue("status", out tmp);
 		int status = tmp.AsInt32();
-		if(status == 0){
+		if(status == 0||status == 2){
             dic.TryGetValue("items",out tmp);
             mapThings.FlushItem(tmp);
             dic.TryGetValue("user_id",out tmp);
             int id = tmp.AsInt32();
             if(id==Init.userInfo.id)
-                Init.me.GetComponent<RoleRender>().SetEat();
+            {
+                if(status == 0)
+                    Init.me.GetComponent<RoleRender>().SetEat();
+                else
+                    Init.me.GetComponent<RoleRender>().CancelEat();
+            }   
             else
             {
                 UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
                 if(other!=null)
-                    other.GetComponent<RoleRender>().SetEat();
+                    if(status == 0)
+                        other.GetComponent<RoleRender>().SetEat();
+                    else
+                        other.GetComponent<RoleRender>().CancelEat();
             }
         }
     }

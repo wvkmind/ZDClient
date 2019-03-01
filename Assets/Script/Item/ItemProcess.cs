@@ -14,6 +14,7 @@ public class ItemProcess : MonoBehaviour
     private RoleRender user_r = null;
     private RoleData user_d = null;
     private float timer =0.0f;
+    public bool is_clear = false;
     void Awake() {
         button.onClick.AddListener(()=>{
             SendPick(type);
@@ -32,16 +33,24 @@ public class ItemProcess : MonoBehaviour
 		dic.Add("name", name);
 		NetWork.Push(dic);
     }
-    public void Set(int _pos,int _type,int _owner){
-        if(this.owner!=-1&&_owner==-1)
-        {
-            if(user_r!=null)user_r.CancelEat();
+    public void SetNull(){
+        this.pos = -1;
+        this.type = -1;
+        this.owner = -1;
+        if(user_r!=null)
+            user_r.CancelEat();
             user_r = null;
             user_d =null;
+    }
+    public void Set(int _pos,int _type,int _owner){
+        if(_pos==this.pos&&_type==this.type&&_owner==this.owner)
+        {
+            return;
         }
         this.pos = _pos;
         this.type = _type;
         this.owner = _owner;
+        is_clear = false;
         if(_owner!=-1)
         {
             UnityEngine.GameObject user =  User.GetUser(_owner);
@@ -51,6 +60,9 @@ public class ItemProcess : MonoBehaviour
     }
     void Update()
     {
+        if(is_clear){
+            gameObject.GetComponent<ItemRender>().SetNull();
+        }
         if(!is_show&&_in&&Init.me.GetComponent<RolePos>().IsStop()&&owner==-1)
         {
             is_show = true;

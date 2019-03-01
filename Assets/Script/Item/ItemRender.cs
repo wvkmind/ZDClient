@@ -15,6 +15,8 @@ public class ItemRender : MonoBehaviour
         item_pic = GetComponent<SpriteRenderer>();
     }
     public void SetNull(){
+        type = -1;
+        id = -1;
         gameObject.SetActive(false);
     }
     public void SetType(int n){
@@ -39,6 +41,7 @@ public class ItemRender : MonoBehaviour
         item_pic.sprite = _sprite;
     }
     public void Set(int i,int t){
+        if(i==this.id&&t==this.type)return;
         SetId(i);
         SetType(t);
         Fresh();

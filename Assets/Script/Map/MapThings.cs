@@ -95,9 +95,8 @@ public class MapThings : MonoBehaviour
         }
     }
     public void FlushItem(MsgPack.MessagePackObject tmp){
-        for(var i = 0;i<10;i++){
-            item_entities[i].GetComponent<ItemRender>().SetNull();
-        }
+       
+        ArrayList have = new ArrayList();
         if(!tmp.IsNil)
         foreach (var item in tmp.AsList())
         {
@@ -106,9 +105,21 @@ public class MapThings : MonoBehaviour
                 Item cur_item = (new Item()).UnPack(item);
                 ItemRender item_entity = item_entities[cur_item.pos].GetComponent<ItemRender>();
                 ItemProcess item_proc = item_entities[cur_item.pos].GetComponent<ItemProcess>();
+                have.Add(cur_item.pos);
                 item_entity.Set(cur_item.id,cur_item.type);
                 item_proc.Set(cur_item.pos,cur_item.type,cur_item.owner);
                 if(cur_item.energy!=-1)item_entity.SetEnergy(cur_item.energy);
+            }
+        }
+        for(var i = 0;i<10;i++){
+            if(have.Contains(i))
+            {
+
+            }
+            else
+            {
+                item_entities[i].GetComponent<ItemRender>().SetNull();
+                item_entities[i].GetComponent<ItemProcess>().SetNull();
             }
         }
     }
