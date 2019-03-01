@@ -59,9 +59,9 @@ public class RolePos : MonoBehaviour
         if(move_flag&& (transform.localPosition.x!=end_position.x||transform.localPosition.y!=end_position.y))
         {
             if(roleData.data.tilizhi == 0)
-                speed = 0.05f;
+                speed = 0.1f;
             else 
-                speed = 0.2f;
+                speed = 0.5f;
             float t = speed*Time.deltaTime;
             Vector3 pos = Vector3.MoveTowards(transform.localPosition,end_position,t);
 
