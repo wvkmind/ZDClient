@@ -104,12 +104,26 @@ public class MapProcess : MonoBehaviour
         int direction = (int)tmp.AsList()[2].AsDouble();
         int action = (int)tmp.AsList()[3].AsDouble();
         if(id==Init.userInfo.id)
+        {
             Init.me.GetComponent<UserInput>().Exp(action);
+        }
         else
         {
             UnityEngine.GameObject other = Init.GetRoleObjecWithId(id);
             if(other!=null)
+            {
                 other.GetComponent<UserInput>().Exp(cur_x,cur_y,direction,action);
+                if(action==10){
+                    if(other.GetComponent<RolePos>().FrontMyFace(Init.me.gameObject.transform.localPosition))
+                    {
+                        Dictionary<string, object> send_dic = NetWork.getSendStart();
+                        float [] data = {Init.me.transform.localPosition.x,Init.me.transform.localPosition.y,Init.me.GetComponent<RoleRender>().GetDirection(),11};
+                        send_dic.Add("ac_data",data);
+                        send_dic.Add("name", "exp");
+                        NetWork.Push(send_dic,false);
+                    }
+                }
+            }
         }
 	}
     private void UpdatePos(Dictionary<string, MsgPack.MessagePackObject> dic){
