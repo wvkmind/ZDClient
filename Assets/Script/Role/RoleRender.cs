@@ -9,7 +9,7 @@ public class RoleRender : MonoBehaviour {
 
 	Animator _ani;
     public float m_speed = 0.5f;
-    private string cur_role = "BanGye";
+    private string cur_role = "7";
     private int _ani_layer_index = 0;
     private int action_id = 0;
     public int real_action_id = 0;

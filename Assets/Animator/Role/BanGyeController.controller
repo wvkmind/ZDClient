@@ -47,7 +47,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
-    m_Name: BanGye
+    m_Name: 7
     m_StateMachine: {fileID: 1107284886744907580}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -59,7 +59,7 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
-    m_Name: Doobu
+    m_Name: 4
     m_StateMachine: {fileID: 1107995504579477180}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -3897,7 +3897,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BanGye
+  m_Name: 7
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102927865929411482}
@@ -4268,7 +4268,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Doobu
+  m_Name: 4
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102874701846489458}

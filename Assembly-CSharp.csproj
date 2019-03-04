@@ -86,7 +86,6 @@
      <Compile Include="Assets\Script\Net\NetWork.cs" />
      <Compile Include="Assets\Script\Register\Register.cs" />
      <Compile Include="Assets\Script\Register\RegisterUI.cs" />
-     <Compile Include="Assets\Script\Register\SelectRole.cs" />
      <Compile Include="Assets\Script\Role\RoleData.cs" />
      <Compile Include="Assets\Script\Role\RolePos.cs" />
      <Compile Include="Assets\Script\Role\RoleRender.cs" />

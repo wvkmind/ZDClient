@@ -17,6 +17,8 @@
 		};
 		//角色所拥有的一个方向的动作数
 		public static int RHAL = 28;
+		//人物类型和初始属性点的关系
+		public static int [] PropertyDefault = {6,7,5,6,5,7,6,7,5,7,5,6,5,7,6,5,7,6,6,7,5,6,6,6,7,5,6,5,7,6,6,5,7,5,6,7}; 
 		//经验值
 		public static float [] LevelExp = {
 			0,

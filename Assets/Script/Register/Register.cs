@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Register  {
-	public static void In(string account,string password,string name,int type,int tra,int phy,int exp,System.Action<bool ,string> f){
+	public static void In(string account,string password,string name,int type,float tra,float phy,float exp,System.Action<bool ,string> f){
 		string accountHash = Md5.GetMd5Hash(account);
 		string passwrodHash = Md5.GetMd5Hash(password);
         NetEventDispatch.RegisterEvent("register",data =>{
