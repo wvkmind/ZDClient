@@ -42,6 +42,7 @@ public class RegisterUI : MonoBehaviour {
 	public AudioSource audio_source;
 	private int role_type = 0;
 	private int before_role_type = 0;
+	public UnityEngine.UI.Image profile;
 	public int RoleType(){
 		return role_type;
 	}
@@ -57,11 +58,15 @@ public class RegisterUI : MonoBehaviour {
 		text_exp_rate.text = (exp_rate+rate3*0.2).ToString("#0.0");
 	}
 	void OnSelect(int i){
-		role_type = i;
-		show(i);
-		playAudio(i.ToString());
-		hide(before_role_type);
-		before_role_type = i;
+		if(i!=before_role_type)
+		{
+			InitDefaultProperty();
+			role_type = i;
+			show(i);
+			playAudio(i.ToString());
+			hide(before_role_type);
+			before_role_type = i;
+		}
 	}
 	void playAudio(string index){
 		UnityEngine.AudioClip clip =(UnityEngine.AudioClip)Resources.Load("Sound/AvatarSelect/"+index, typeof(UnityEngine.AudioClip));
@@ -81,6 +86,9 @@ public class RegisterUI : MonoBehaviour {
         }
         role_show.SetLayerWeight(_ani_layer_index,1);
         role_show.Play(Role.Actions[0],_ani_layer_index);
+
+		UnityEngine.Sprite profile_sprite  = UnityEngine.Resources.Load("Image/Register/koongyaProfile/KoongyaProfile_"+i, typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
+		profile.GetComponent<UnityEngine.UI.Image>().sprite = profile_sprite;
 	}
 	void hide(int i){
 		UnityEngine.Sprite sprite  = UnityEngine.Resources.Load("Image/RegisterUI/Role/Koongya_"+(i*2), typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
