@@ -71,6 +71,7 @@ public class RegisterUI : MonoBehaviour {
 	void show(int i){
 		UnityEngine.Sprite sprite  = UnityEngine.Resources.Load("Image/RegisterUI/Role/Koongya_"+(i*2+1), typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
 		roles[i].GetComponent<UnityEngine.UI.Image>().sprite = sprite;
+		roles_sel[i].gameObject.SetActive(true);
 		int _ani_layer_index = role_show.GetLayerIndex(i.ToString());
         role_show.SetLayerWeight(_ani_layer_index,1);
         for(int a = 0;a<role_show.layerCount;a++){
@@ -84,6 +85,7 @@ public class RegisterUI : MonoBehaviour {
 	void hide(int i){
 		UnityEngine.Sprite sprite  = UnityEngine.Resources.Load("Image/RegisterUI/Role/Koongya_"+(i*2), typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
 		roles[i].GetComponent<UnityEngine.UI.Image>().sprite = sprite;
+		roles_sel[i].gameObject.SetActive(false);
 	}
 	void InitBtn(){
 		for (int i = 0;i<roles.Length;i++)
