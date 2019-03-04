@@ -8,8 +8,8 @@ public class HUD : MonoBehaviour
     public UnityEngine.UI.Image exp;
     private float tilizhi_img_width = 198.0f;
     private float exp_img_width = 198.0f;
-    int oldt=-1;
-    int olde=-1;
+    float oldt=-1;
+    float olde=-1;
     void Awake()
     {
         tilizhi_img_width = tilizhi.gameObject.GetComponent<RectTransform>().sizeDelta.x;
@@ -29,7 +29,7 @@ public class HUD : MonoBehaviour
             {
                 olde = Init.me.GetComponent<RoleData>().data.exp;
                 RectTransform exp_rect = exp.gameObject.GetComponent<RectTransform>();
-                float e = ( (float)(Init.me.GetComponent<RoleData>().data.exp-Role.LevelExp[Init.me.GetComponent<RoleData>().data.level-1])/Role.LevelExp[Init.me.GetComponent<RoleData>().data.level+1]);
+                float e = ( (float)(Init.me.GetComponent<RoleData>().data.exp-Role.LevelExp[Init.me.GetComponent<RoleData>().data.level-1])/Role.LevelExp[Init.me.GetComponent<RoleData>().data.level+1]-Role.LevelExp[Init.me.GetComponent<RoleData>().data.level-1]);
                 exp_rect.sizeDelta = new Vector2(e*exp_img_width,exp_rect.rect.height);
             }
         }

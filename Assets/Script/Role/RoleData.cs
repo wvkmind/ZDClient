@@ -18,7 +18,7 @@ public class RoleData : MonoBehaviour
     {   
         AddTiLiZhi();
     }
-    public void AddTL(int step)
+    public void AddTL(float step)
     {
         if(step<1)step=1;
             data.tilizhi = data.tilizhi + step;
@@ -39,7 +39,7 @@ public class RoleData : MonoBehaviour
                 timer = 0;
                 if(data.tilizhi!=100)
                 {
-                    int n = data.phy_str_rate/10;
+                    float n = data.phy_str_rate/10;
                     AddTL(n);
                 }
             }

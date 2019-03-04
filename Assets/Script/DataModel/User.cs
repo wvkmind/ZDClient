@@ -6,9 +6,9 @@
         public int id;
         public string name;
         public int type;
-        public int tra_rate;
-        public int phy_str_rate;
-        public int exp_rate;
+        public float tra_rate;
+        public float phy_str_rate;
+        public float exp_rate;
         public int level;
         public int zhanyang;
         public int buliang;
@@ -17,8 +17,8 @@
         public int direction;
         public float target_x;
         public float target_y;
-        public int tilizhi;
-        public int exp;
+        public float tilizhi;
+        public float exp;
         public  User UnPack(MsgPack.MessagePackObject net_user){
             MsgPack.MessagePackObjectDictionary user_dic= net_user.AsDictionary();
             MsgPack.MessagePackObject temp;
@@ -31,11 +31,11 @@
             user_dic.TryGetValue("type",out temp);
             type = temp.AsInt32();
             user_dic.TryGetValue("tra_rate",out temp);
-            tra_rate = temp.AsInt32();
+            tra_rate = (float)temp.AsDouble();
             user_dic.TryGetValue("phy_str_rate",out temp);
-            phy_str_rate = temp.AsInt32();
+            phy_str_rate = (float)temp.AsDouble();
             user_dic.TryGetValue("exp_rate",out temp);
-            exp_rate = temp.AsInt32();
+            exp_rate = (float)temp.AsDouble();
             user_dic.TryGetValue("level",out temp);
             level = temp.AsInt32();
             user_dic.TryGetValue("zhanyang",out temp);
@@ -49,9 +49,9 @@
             target_x = (float)temp.AsList()[3].AsDouble();
             target_y = (float)temp.AsList()[4].AsDouble();
             user_dic.TryGetValue("tilizhi",out temp);  
-            tilizhi = temp.AsInt32();
+            tilizhi = (float)temp.AsDouble();
             user_dic.TryGetValue("exp",out temp);  
-            exp = temp.AsInt32();
+            exp = (float)temp.AsDouble();
             return this;
         }
         public static UnityEngine.GameObject GetUser(int id)
