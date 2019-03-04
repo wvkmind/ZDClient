@@ -19,12 +19,13 @@ public class RegisterUI : MonoBehaviour {
 	public UnityEngine.UI.InputField userName;
 	public UnityEngine.Canvas selectRoleUI;
 	public UnityEngine.Canvas infoUI;
-	public UnityEngine.UI.Button BACK;
-	public UnityEngine.UI.Button NEXT;
+	public UnityEngine.UI.Button BACK1;
+	public UnityEngine.UI.Button NEXT1;
+	public UnityEngine.UI.Button BACK2;
+	public UnityEngine.UI.Button NEXT2;
 	public UnityEngine.UI.Text text_tra_rate;
 	public UnityEngine.UI.Text text_phy_str_rate;
 	public UnityEngine.UI.Text text_exp_rate;
-	private int page = 0;
 	private int num = 5;
 	private float tra_rate = 0;
 	private float phy_str_rate = 0;
@@ -108,36 +109,28 @@ public class RegisterUI : MonoBehaviour {
 		bt4.onClick.AddListener(Bt2Down);
 		bt5.onClick.AddListener(Bt3Up);
 		bt6.onClick.AddListener(Bt3Down);
-		BACK.onClick.AddListener(onBack);
-		NEXT.onClick.AddListener(onNext);
+		BACK1.onClick.AddListener(onBack1);
+		NEXT1.onClick.AddListener(onNext1);
+		BACK2.onClick.AddListener(onBack2);
+		NEXT2.onClick.AddListener(onNext2);
 		FlashLine();
 		InitDefaultProperty();
 	}
-	void onNext(){
-		if(page==1)
-		{
-			onRegister();
-			BACK.enabled = false;
-			NEXT.enabled = false;
-		}
-		else
-		{
-			selectRoleUI.gameObject.SetActive(false);
-			infoUI.gameObject.SetActive(true);
-			page = page + 1;
-		}
+	void onNext1(){
+		selectRoleUI.gameObject.SetActive(false);
+		infoUI.gameObject.SetActive(true);
 	}
-	void onBack(){
-		if(page==0)
-		{
-			SwitchScene.NextScene("Login");
-		}
-		else
-		{
-			selectRoleUI.gameObject.SetActive(true);
-			infoUI.gameObject.SetActive(false);
-			page = page - 1;
-		}
+	void onBack1(){
+		SwitchScene.NextScene("Login");
+	}
+	void onNext2(){
+		BACK2.enabled = false;
+		NEXT2.enabled = false;
+		onRegister();
+	}
+	void onBack2(){
+		selectRoleUI.gameObject.SetActive(true);
+		infoUI.gameObject.SetActive(false);
 	}
 	void onRegister(){
 		if(account.text.Equals("") || password.text.Equals("")||userName.text.Equals(""))
@@ -146,23 +139,35 @@ public class RegisterUI : MonoBehaviour {
 		}
 		else
 		{
-			Register.In(account.text,password.text,userName.text,role_type,tra_rate,phy_str_rate,exp_rate,(status,error) =>{
-				if(!status)
-					ErrorInfo.CreateUI(error,()=>{
-						account.text = "";
-						password.text = "";
-						BACK.enabled = true;
-						NEXT.enabled = true;
-					});
-				else
-				{
-					PlayerPrefs.SetString("user.account",account.text);
-					PlayerPrefs.SetString("user.password",password.text);
-					ErrorInfo.CreateUI("注册成功",()=>{
-						SwitchScene.NextScene("Login");
-					});
-				}
-			});
+			if(account.text.Length<2)
+			{
+				ErrorInfo.CreateUI("账号少于两个字符");
+			}else if(userName.text.Length<2)
+			{
+				ErrorInfo.CreateUI("角色名少于两个字符");
+			}else if(password.text.Length<2)
+			{	
+				ErrorInfo.CreateUI("密码少于两个字符");
+			}else
+			{
+				Register.In(account.text,password.text,userName.text,role_type,tra_rate,phy_str_rate,exp_rate,(status,error) =>{
+					if(!status)
+						ErrorInfo.CreateUI(error,()=>{
+							account.text = "";
+							password.text = "";
+							BACK2.enabled = true;
+							NEXT2.enabled = true;
+						});
+					else
+					{
+						PlayerPrefs.SetString("user.account",account.text);
+						PlayerPrefs.SetString("user.password",password.text);
+						ErrorInfo.CreateUI("注册成功",()=>{
+							SwitchScene.NextScene("Login");
+						});
+					}
+				});
+			}	
 		}
 	}
 	void Bt1Up(){
