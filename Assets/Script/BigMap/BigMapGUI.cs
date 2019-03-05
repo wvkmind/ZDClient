@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class BigMapGUI : MonoBehaviour
 {
     public UnityEngine.UI.Button [] btnEntrancies;
-    public UnityEngine.Animator [] aniDynamics;
+    public UnityEngine.UI.Image [] imgOpens;
     public UnityEngine.UI.Button btnExit;
     private int beforeClick = -1;
     public UnityEngine.UI.Image imgBigMap;
@@ -17,7 +17,15 @@ public class BigMapGUI : MonoBehaviour
     private float sc ;
     private Vector2 end_position;
     public UnityEngine.UI.Text texWarn;
-    private static string [] temp_text = {"商店，但不卖菜","村子，来吃饭了","垃圾站，来换点什么吗","七星堂，你有任务吗","游乐场，这个不会开放吧","警察局，站住！","狩猎场，今晚，猎个痛快！"};
+    private static string [] temp_text = {
+        "空雅百货店\n这里出售饰品，魔法药水，特殊功能物品的地方",
+        "空雅村庄\n游览各个神奇又有趣的地方，成为童话里的主人公",
+        "垃圾站\n用收集的垃圾换区赞扬指数的地方",
+        "七星堂\n申请任务或用赞扬指数购买特殊物品的地方",
+        "空雅游乐场\n这里可以享受多种休闲小游戏哦",
+        "警察署/劳教所\n不良用户再次接受教育♂",
+        "空雅狩猎场\n居住着各种怪物的神秘狩猎场"
+    };
     void Start()
     {
         for(int i =0;i<btnEntrancies.Length;i++){
@@ -25,7 +33,7 @@ public class BigMapGUI : MonoBehaviour
             btnEntrancies[_i].onClick.AddListener(()=>{
                 Entry(_i);
             });
-            aniDynamics[_i].enabled = false;
+           
         }
         btnExit.onClick.AddListener(()=>{
             SwitchScene.NextScene("Login");
@@ -36,16 +44,16 @@ public class BigMapGUI : MonoBehaviour
     }
     void Entry(int i){
         if(moved)return;
-        if(beforeClick!=i&&aniDynamics[i].enabled==false){
+        if(beforeClick!=i&&imgOpens[i].IsActive()==false){
             if(beforeClick!=-1)
             {
-                aniDynamics[beforeClick].enabled = false;
+                imgOpens[beforeClick].gameObject.SetActive(false);
             }
-            aniDynamics[i].enabled = true;
+            imgOpens[i].gameObject.SetActive(true);
             
             texWarn.text = temp_text[i];
         }
-        else if(beforeClick==i&&aniDynamics[i].enabled==true)
+        else if(beforeClick==i&&imgOpens[i].IsActive()==true)
         {
             switch (i)
             {
