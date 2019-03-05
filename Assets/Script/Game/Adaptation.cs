@@ -17,6 +17,7 @@ public class Adaptation : MonoBehaviour
         camera.rect = new Rect(0.0f, phone.notch.bottom/Screen.height, 1, (Screen.height-(phone.notch.bottom+phone.notch.top))/Screen.height);
         camera.clearFlags = CameraClearFlags.SolidColor;
         camera.Render();
+        AudioListener.volume = 0.0f;
     }
 
     // Update is called once per frame
