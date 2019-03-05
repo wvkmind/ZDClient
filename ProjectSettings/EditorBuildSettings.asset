@@ -12,12 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Register.unity
     guid: b3bd15ca1e8704a65ab6fb38901d3a8e
   - enabled: 1
-    path: Assets/Scenes/BigMap.unity
-    guid: a1ac061ac125147e98f0f2068f638e40
-  - enabled: 1
     path: Assets/Scenes/ChatHall.unity
     guid: 56365cf34d49c4348a87e1a4282907eb
   - enabled: 1
     path: Assets/Scenes/ChickenHouse.spr.unity
     guid: b23122f7d5e8144eca3acde8594c07c6
+  - enabled: 1
+    path: Assets/Scenes/BigMap.unity
+    guid: b92642a37e95448fca1836845ae0254f
   m_configObjects: {}
