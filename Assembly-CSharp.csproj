@@ -60,6 +60,7 @@
      <Compile Include="Assets\Script\BaseData\Notch.cs" />
      <Compile Include="Assets\Script\BaseData\PhoneDevice.cs" />
      <Compile Include="Assets\Script\BaseData\Role.cs" />
+     <Compile Include="Assets\Script\BigMap\BigMapGUI.cs" />
      <Compile Include="Assets\Script\BigMap\BigMapUI.cs" />
      <Compile Include="Assets\Script\DataModel\Item.cs" />
      <Compile Include="Assets\Script\DataModel\Room.cs" />

@@ -86,7 +86,6 @@ public class RegisterUI : MonoBehaviour {
         }
         role_show.SetLayerWeight(_ani_layer_index,1);
         role_show.Play(Role.Actions[0],_ani_layer_index);
-
 		UnityEngine.Sprite profile_sprite  = UnityEngine.Resources.Load("GUI/Register/koongyaProfile/KoongyaProfile_"+i, typeof(UnityEngine.Sprite)) as UnityEngine.Sprite;
 		profile.GetComponent<UnityEngine.UI.Image>().sprite = profile_sprite;
 	}

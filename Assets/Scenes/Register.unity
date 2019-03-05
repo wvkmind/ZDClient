@@ -1607,7 +1607,7 @@ MonoBehaviour:
   - {fileID: 249020033}
   role_show: {fileID: 196595264}
   audio_source: {fileID: 632496992}
-  profile: {fileID: 0}
+  profile: {fileID: 596610615}
 --- !u!4 &446799253
 Transform:
   m_ObjectHideFlags: 0
