@@ -7,7 +7,7 @@ public class Adaptation : MonoBehaviour
 {
     private Camera camera;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         camera = gameObject.GetComponent<Camera>();
         camera.orthographic = true;

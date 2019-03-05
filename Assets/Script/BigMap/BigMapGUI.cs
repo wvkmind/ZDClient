@@ -15,7 +15,7 @@ public class BigMapGUI : MonoBehaviour
     private bool moved = false;
     private float limit;
     private float sc ;
-    private float unit;
+    private Vector2 end_position;
     void Start()
     {
         for(int i =0;i<btnEntrancies.Length;i++){
@@ -28,12 +28,12 @@ public class BigMapGUI : MonoBehaviour
         btnExit.onClick.AddListener(()=>{
             SwitchScene.NextScene("Login");
         });
-        unit = Screen.height/2.0f/Camera.main.orthographicSize;
-        sc = unit;
-        limit = (400.0f-Screen.width/(Screen.height*Camera.main.rect.height/600.0f)/2.0f)*3.2f/100.0f;
+        sc = Screen.width/375.0f;
+        limit = 400.0f*0.9566666f-375.0f/2.0f;
+        end_position = imgBigMap.GetComponent<RectTransform>().anchoredPosition;
     }
     void Entry(int i){
-        Debug.Log(i);
+        if(moved)return;
         if(beforeClick!=i&&aniDynamics[i].enabled==false){
             if(beforeClick!=-1)
             {
@@ -64,28 +64,24 @@ public class BigMapGUI : MonoBehaviour
         {
             if(Input.touches[0].phase == TouchPhase.Began)
             {
-                if(EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
-                {
-                    
-                }
-                else{
-                    touchPositon = Input.touches[0].position;
-                    touchEnd = false;
-                }
+                touchPositon = Input.touches[0].position;
+                touchEnd = false;
             }else if(Input.touches[0].phase == TouchPhase.Moved){
-                if(EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                if(Mathf.Abs(touchPositon.x-Input.touches[0].position.x)>15&&Mathf.Abs(touchPositon.y-Input.touches[0].position.y)>15||moved)
                 {
-                    
-                }
-                else
-                {
-                    if(Mathf.Abs(touchPositon.x-Input.touches[0].position.x)>15&&Mathf.Abs(touchPositon.y-Input.touches[0].position.y)>15||moved)
+                    moved = true;
+                    Vector3 delta_pos =  Input.touches[0].deltaPosition;
+                    float diff = imgBigMap.GetComponent<RectTransform>().anchoredPosition.x+delta_pos.x/sc*3;
+                    if(Mathf.Abs(diff)<limit)
                     {
-                        moved = true;
-                        Vector3 delta_pos =  Input.touches[0].deltaPosition;
-                        if(Mathf.Abs(imgBigMap.transform.position.x+delta_pos.x/sc)<limit)
-                            imgBigMap.transform.position = new Vector3(imgBigMap.transform.position.x+delta_pos.x/sc,imgBigMap.transform.position.y,imgBigMap.transform.position.z);
+                        end_position = new Vector2(diff,imgBigMap.GetComponent<RectTransform>().anchoredPosition.y);
                     }
+                    else
+                    {
+                        end_position = new Vector2((diff/Mathf.Abs(diff))*limit,imgBigMap.GetComponent<RectTransform>().anchoredPosition.y);
+                    }
+                    Debug.Log("imgBigMap.GetComponent<RectTransform>().anchoredPositin"+imgBigMap.GetComponent<RectTransform>().anchoredPosition);
+                    Debug.Log("end_position"+end_position);
                 }
             }
             else if(Input.touches[0].phase == TouchPhase.Ended||Input.touches[0].phase == TouchPhase.Canceled){
@@ -94,5 +90,16 @@ public class BigMapGUI : MonoBehaviour
             }
             
         }
+        float dx = Mathf.Abs(imgBigMap.GetComponent<RectTransform>().anchoredPosition.x-end_position.x);
+        if(dx<0.001f)
+        {
+
+        }
+        else
+        {
+            float t = dx*50.0f*Time.deltaTime;
+            imgBigMap.GetComponent<RectTransform>().anchoredPosition = Vector2.MoveTowards(imgBigMap.GetComponent<RectTransform>().anchoredPosition,end_position,t);
+        }
+        
     }
 }
