@@ -16,6 +16,8 @@ public class BigMapGUI : MonoBehaviour
     private float limit;
     private float sc ;
     private Vector2 end_position;
+    public UnityEngine.UI.Text texWarn;
+    private static string [] temp_text = {"商店，但不卖菜","村子，来吃饭了","垃圾站，来换点什么吗","七星堂，你有任务吗","游乐场，这个不会开放吧","警察局，站住！","狩猎场，今晚，猎个痛快！"};
     void Start()
     {
         for(int i =0;i<btnEntrancies.Length;i++){
@@ -40,6 +42,8 @@ public class BigMapGUI : MonoBehaviour
                 aniDynamics[beforeClick].enabled = false;
             }
             aniDynamics[i].enabled = true;
+            
+            texWarn.text = temp_text[i];
         }
         else if(beforeClick==i&&aniDynamics[i].enabled==true)
         {
@@ -71,7 +75,7 @@ public class BigMapGUI : MonoBehaviour
                 {
                     moved = true;
                     Vector3 delta_pos =  Input.touches[0].deltaPosition;
-                    float diff = imgBigMap.GetComponent<RectTransform>().anchoredPosition.x+delta_pos.x/sc*3;
+                    float diff = imgBigMap.GetComponent<RectTransform>().anchoredPosition.x+delta_pos.x/sc*5;
                     if(Mathf.Abs(diff)<limit)
                     {
                         end_position = new Vector2(diff,imgBigMap.GetComponent<RectTransform>().anchoredPosition.y);
@@ -97,7 +101,7 @@ public class BigMapGUI : MonoBehaviour
         }
         else
         {
-            float t = dx*50.0f*Time.deltaTime;
+            float t = dx*2*Time.deltaTime;
             imgBigMap.GetComponent<RectTransform>().anchoredPosition = Vector2.MoveTowards(imgBigMap.GetComponent<RectTransform>().anchoredPosition,end_position,t);
         }
         

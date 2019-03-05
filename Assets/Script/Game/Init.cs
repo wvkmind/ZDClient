@@ -13,6 +13,7 @@ public class Init : MonoBehaviour {
 	public static UnityEngine.GameObject map = null;
 	public static Dictionary<string, MsgPack.MessagePackObject> temp_data = new Dictionary<string, MsgPack.MessagePackObject>();//切换场景的时候的临时数据 (这是个傻逼方案)
 	void Start () {
+		Application.targetFrameRate = 60;
 		instance = this;
 		NetWork.ConnectGate();
 		DontDestroyOnLoad(this);
