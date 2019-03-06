@@ -133,8 +133,6 @@ public class RegisterUI : MonoBehaviour {
 		SwitchScene.NextScene("Login");
 	}
 	void onNext2(){
-		BACK2.enabled = false;
-		NEXT2.enabled = false;
 		onRegister();
 	}
 	void onBack2(){
@@ -159,6 +157,8 @@ public class RegisterUI : MonoBehaviour {
 				ErrorInfo.CreateUI("密码少于两个字符");
 			}else
 			{
+				BACK2.enabled = false;
+				NEXT2.enabled = false;
 				Register.In(account.text,password.text,userName.text,role_type,tra_rate,phy_str_rate,exp_rate,(status,error) =>{
 					if(!status)
 						ErrorInfo.CreateUI(error,()=>{
