@@ -17,6 +17,7 @@ public class LoginUI : MonoBehaviour {
 	public UnityEngine.UI.InputField AccountInputField;
 	public UnityEngine.UI.InputField PasswordInputField;
 	public UnityEngine.UI.Toggle Volume;
+	public UnityEngine.UI.Button BTN_TEST;
 	private bool directLoginFlag = false;
 	void PageChangAccount(){
 		BTN_CREATEACCOUNT2.gameObject.SetActive(true);
@@ -69,15 +70,20 @@ public class LoginUI : MonoBehaviour {
 		BTN_CREATEACCOUNT2.onClick.AddListener(()=>{
 			RegisterFunction();
 		});
+		BTN_TEST.onClick.AddListener(()=>{
+			SwitchScene.NextScene("Test1");
+		});
 		BTN_LOGIN.onClick.AddListener(LoginFunction);
 		Volume.isOn = PlayerPrefs.GetInt("volume",1)==0;
 		Volume.onValueChanged.AddListener(delegate {
             ToggleValueChanged(Volume);
         });
+		AudioListener.volume = PlayerPrefs.GetInt("volume",1);
 	}
 	 void ToggleValueChanged(UnityEngine.UI.Toggle change)
     {
         PlayerPrefs.SetInt("volume",change.isOn?0:1);
+		AudioListener.volume = PlayerPrefs.GetInt("volume",1);
     }
 	void RegisterFunction(){
 		SwitchScene.NextScene("Register");

@@ -6,30 +6,27 @@ public class Test1 : MonoBehaviour
 {
     public UnityEngine.Canvas a ;
     public UnityEngine.Canvas b ;
+    public UnityEngine.Canvas c ;
     public UnityEngine.UI.Button ba;
     public UnityEngine.UI.Button bb;
-    public UnityEngine.UI.Button c;
-    public UnityEngine.UI.InputField d;
-    public UnityEngine.UI.Image e;
+    public UnityEngine.UI.Button bc;
     // Start is called before the first frame update
     void Start()
     {
         ba.onClick.AddListener(()=>{
-            a.gameObject.SetActive(false);
-            b.gameObject.SetActive(true);
-        });
-        bb.onClick.AddListener(()=>{
             a.gameObject.SetActive(true);
             b.gameObject.SetActive(false);
+            c.gameObject.SetActive(false);
         });
-        c.onClick.AddListener(()=>{
-            e.GetComponent<RectTransform>().sizeDelta = new Vector2(float.Parse(d.text), 20.0f);
+        bb.onClick.AddListener(()=>{
+            a.gameObject.SetActive(false);
+            b.gameObject.SetActive(true);
+            c.gameObject.SetActive(false);
         });
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        bc.onClick.AddListener(()=>{
+            a.gameObject.SetActive(false);
+            b.gameObject.SetActive(false);
+            c.gameObject.SetActive(true);
+        });
     }
 }
