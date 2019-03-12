@@ -59,6 +59,7 @@ public class MapThings : MonoBehaviour
             Init.me.GetComponent<RoleData>().data = Init.userInfo;
             Init.me.GetComponent<RoleRender>().SetName(Init.userInfo.name);
             Init.me.GetComponent<RoleRender>().SetLevel(Init.userInfo.level);
+            Init.me.GetComponent<RoleRender>().SetRoleType(Init.userInfo.type.ToString());
         }        
     }
     void NewOhter(User u){
@@ -68,6 +69,7 @@ public class MapThings : MonoBehaviour
         user.GetComponent<RoleRender>().SetName(u.name);
         user.GetComponent<RoleRender>().SetLevel(u.level);
         user.GetComponent<UserInput>().WorkTo(u.cur_x,u.cur_y,u.direction,u.target_x,u.target_y);
+        user.GetComponent<RoleRender>().SetRoleType(u.type.ToString());
         Init.PutRoleObjectWithId(u.id,user);
     }
     void FlushOther(MsgPack.MessagePackObject tmp){
